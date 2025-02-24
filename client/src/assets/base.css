@@ -1,3 +1,6 @@
+/* Import fonts */
+@import url('./fonts/fonts.css');
+
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
   --vt-c-white: #ffffff;
@@ -23,7 +26,9 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
+  --primary-color: #5250a4;
+  --secondary-color: #ff92cb;
+  --color-background: var(--primary-color);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
 
@@ -38,15 +43,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --primary-color: #5250a4;
+    --secondary-color: #ff92cb;
+    --color-background-mute: var(--primary-color);
 
     --color-border: var(--vt-c-divider-dark-2);
     --color-border-hover: var(--vt-c-divider-dark-1);
 
     --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-text: #ffffff;
   }
 }
 
@@ -60,6 +65,7 @@
 
 body {
   min-height: 100vh;
+  height: 200vh;
   color: var(--color-text);
   background: var(--color-background);
   transition:
@@ -67,6 +73,7 @@ body {
     background-color 0.5s;
   line-height: 1.6;
   font-family:
+    Poppins,
     Inter,
     -apple-system,
     BlinkMacSystemFont,
