@@ -3,6 +3,9 @@
 /* --- Import Tailwind --- */
 @import 'tailwindcss';
 
+/* --- Import PrimeVue Tailwind Plugin --- */
+@import 'tailwindcss-primeui';
+
 /* --- Custom Tailwind --- */
 @theme {
    --color-*: initial;
