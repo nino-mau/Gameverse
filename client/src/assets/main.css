@@ -1,7 +1,49 @@
 @import './base.css';
 
+/* --- General --- */
+
+/* - Contains the entire site - */
 #app {
-  width: 100%;
-  min-height: 100vh;
-  height: 200vh;
+   width: 100%;
+   min-height: 100vh;
+   height: 200vh;
+}
+
+/* --- Shadow Effects --- */
+
+/* - Custom shadow effect for small size svg icons - */
+.shadow-effect-svg {
+   filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.4));
+}
+/* - Custom shadow effect for text */
+.shadow-effect-txt {
+   filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.4));
+}
+
+/* --- Hover Effects --- */
+
+/* - Text hover underline effect (the text element need to have position relative for this to work) - */
+.hover-effect-text-underline::after {
+   position: absolute;
+   top: 100%;
+   left: 0;
+   width: 100%;
+   height: 3px;
+   background: var(--primary-color);
+   /* background: white; */
+   content: '';
+   opacity: 0;
+   transition:
+      opacity 0.3s,
+      transform 0.3s;
+   transform: translateY(10px);
+}
+.hover-effect-text-underline:hover::after {
+   opacity: 1;
+   transform: translateY(0px);
+}
+
+/* - Svg hover color effect - */
+.hover-effect-svg-white:hover path {
+   fill: #eb8ad2 !important;
 }

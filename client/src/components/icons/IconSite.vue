@@ -4,16 +4,20 @@ import { defineProps } from 'vue';
 defineProps({
    svgColor: String,
    svgWidth: [String, Number],
+   svgClass: {
+      type: [String, Number],
+      required: false,
+   },
 });
 </script>
 
 <template>
    <svg
+      role="img"
       :width="svgWidth"
-      class="site-icon-svg"
+      :class="svgClass"
       viewBox="0 0 32 32"
       version="1.1"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
    >
       <path
@@ -24,7 +28,7 @@ defineProps({
 </template>
 
 <style scoped>
-.site-icon-svg {
+svg {
    display: inline-block;
 }
 </style>

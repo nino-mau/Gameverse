@@ -14,16 +14,14 @@ defineProps({
 <template>
    <svg
       role="img"
+      xmlns="http://www.w3.org/2000/svg"
       :width="svgWidth"
       :class="svgClass"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
+      viewBox="0 0 32 42"
    >
       <path
          :fill="svgColor"
-         fill-rule="evenodd"
-         d="m16.436 15.085 3.94 4.01a1 1 0 0 1-1.425 1.402l-3.938-4.006a7.5 7.5 0 1 1 1.423-1.406ZM10.5 16a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"
-         clip-rule="evenodd"
+         d="M10.748 0v7.54c7.424 0 13.465 6.038 13.465 13.46 0 7.422-6.041 13.46-13.465 13.46V42c11.58 0 21-9.42 21-21s-9.42-21-21-21Zm0 10.52c-5.798 0-10.5 4.702-10.496 10.5a10.499 10.499 0 1 0 10.496-10.5Z"
       />
    </svg>
 </template>

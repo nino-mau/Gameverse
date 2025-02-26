@@ -4,11 +4,21 @@ import { defineProps } from 'vue';
 defineProps({
    svgColor: String,
    svgWidth: [String, Number],
+   svgClass: {
+      type: [String, Number],
+      required: false,
+   },
 });
 </script>
 
 <template>
-   <svg :width="svgWidth" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+   <svg
+      role="img"
+      :width="svgWidth"
+      :class="svgClass"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+   >
       <path
          :fill="svgColor"
          fill-rule="evenodd"
