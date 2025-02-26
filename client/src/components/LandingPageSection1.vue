@@ -12,12 +12,12 @@ import Button from 'primevue/button';
 <template>
    <div class="lp-section1-container">
       <div class="headline-container">
-         <h1 class="title">
-            Discover & <span class="text-span">Challenge</span><br />
+         <h1 class="title text-5xl/[1.6] font-bold">
+            Discover & <span class="text-span text-primary">Challenge</span><br />
             Yourself or Your<br />
             Friends !
          </h1>
-         <p class="paragraph">
+         <p class="paragraph text-base">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br />
             do eiusmod tempor incididunt.
          </p>
@@ -42,16 +42,8 @@ import Button from 'primevue/button';
    /* LP = landing page */
    /* -- Contains the title and buttons of this section of the landing page -- */
    > .headline-container {
-      > .title {
-         font-weight: 700;
-         font-size: 3rem;
-         > .text-span {
-            color: var(--primary-color);
-         }
-      }
       > .paragraph {
          margin-top: 2rem;
-         font-size: 1rem;
       }
       > .button1 {
          font-size: 1rem;

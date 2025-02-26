@@ -1,5 +1,20 @@
 @import './base.css';
 
+/* --- Import Tailwind --- */
+@import 'tailwindcss';
+
+/* --- Custom Tailwind --- */
+@theme {
+   --color-*: initial;
+   --color-white: #ffffff;
+   --color-black: #000000;
+   --color-primary: var(--primary-color);
+   --color-secondary: var(--secondary-color);
+   --color-bg1: var(--secondary-color);
+   --color-bg2: var(--secondary-bg-color);
+   --color-bg3: #39317d;
+}
+
 /* --- General --- */
 
 /* - Contains the entire site - */

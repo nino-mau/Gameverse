@@ -36,17 +36,17 @@ const toggle = (event) => {
 </script>
 
 <template>
-   <nav class="navbar">
+   <nav class="navbar bg-bg2">
       <div class="site-logo-container">
          <IconSite svg-class="shadow-effect-svg" svg-color="#FF92CB" svg-width="51px" />
-         <h4 class="site-title">GameVerse</h4>
+         <h4 class="site-title text-lg font-bold">GameVerse</h4>
       </div>
       <div class="link-container">
-         <ul class="list">
-            <li class="hover-effect-text-underline">Home</li>
-            <li class="hover-effect-text-underline">
+         <ul class="list text-sm font-normal">
+            <li class="hover-effect-text-underline text-sm font-normal">Home</li>
+            <li class="hover-effect-text-underline text-sm font-normal">
                <span
-                  class="games-link"
+                  class="games-link text-sm font-normal"
                   @click="toggle"
                   aria-haspopup="true"
                   aria-controls="overlay_tmenu"
@@ -56,27 +56,27 @@ const toggle = (event) => {
                </span>
                <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
             </li>
-            <li class="hover-effect-text-underline">About</li>
-            <li class="hover-effect-text-underline">Contact</li>
+            <li class="hover-effect-text-underline text-sm font-normal">About</li>
+            <li class="hover-effect-text-underline text-sm font-normal">Contact</li>
          </ul>
       </div>
       <div class="account-menu-container">
          <IconSearch
             svg-class="hover-effect-svg-white shadow-effect-svg"
-            svg-color="#e3e0fc"
+            svg-color="#ffffff"
             svg-width="24px"
          />
          <IconNotifBell
             svg-class="hover-effect-svg-white shadow-effect-svg"
-            svg-color="#e3e0fc"
+            svg-color="#ffffff"
             svg-width="24px"
          />
          <IconCircleUserProfile
             svg-class="hover-effect-svg-white shadow-effect-svg"
-            svg-color="#e3e0fc"
+            svg-color="#ffffff"
             svg-width="35px"
          />
-         <p class="username shadow-effect-txt">Username</p>
+         <p class="username shadow-effect-txt text-sm">Username</p>
       </div>
    </nav>
 </template>
@@ -87,7 +87,6 @@ const toggle = (event) => {
    grid-template-columns: auto auto min-content;
    width: 100%;
    height: clamp(3rem, 6.7vh, 4.25rem);
-   background-color: #393273;
 }
 
 /* -- Contains the site logo and the site name -- */
@@ -99,10 +98,6 @@ const toggle = (event) => {
    height: 100%;
    width: fit-content;
    margin-left: 4.5rem;
-   > .site-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-   }
 }
 
 /* -- Contains the link to other pages -- */
@@ -120,23 +115,16 @@ const toggle = (event) => {
       list-style-type: none;
       > li {
          position: relative;
-         color: #ffffff;
          font-size: 0.87rem;
          font-weight: 400;
-      }
-      > li:hover {
-         color: #ffffff;
       }
    }
    /* Contains the games link which is a dropdown menu */
    & .games-link {
       display: flex;
       cursor: pointer;
-      font-size: 0.87rem;
-      font-weight: 400;
       background: none;
       border: none;
-      color: #ffffff;
    }
 }
 
@@ -150,8 +138,5 @@ const toggle = (event) => {
    width: fit-content;
    height: 100%;
    margin-right: 4.5rem;
-   > .username {
-      font-size: 14px;
-   }
 }
 </style>

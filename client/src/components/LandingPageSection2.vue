@@ -8,30 +8,30 @@ import IconTrophy from './icons/IconTrophy.vue';
 
 <template>
    <div class="features-section-container">
-      <h3 class="section-minor-title">FEATURES</h3>
-      <h1 class="title">
+      <h3 class="section-minor-title text-xl font-bold">FEATURES</h3>
+      <h1 class="title text-3xl font-bold">
          Multiple Features available to Chat, find Games and Challenge Yourself !
       </h1>
       <div class="features-content-wrapper">
-         <div class="feature-content">
+         <div class="feature-content font-semibold">
             <div class="icon-wrapper">
                <IconChat svg-width="35" svg-color="#FFFFFF" />
             </div>
             <p>Add friends, chat with them and discover common interests in video games.</p>
          </div>
-         <div class="feature-content">
+         <div class="feature-content font-semibold">
             <div class="icon-wrapper">
                <IconTrophy svg-width="35" svg-color="#FFFFFF" />
             </div>
             <p>Display your ranks or achievments on all your favorite competitive games.</p>
          </div>
-         <div class="feature-content">
+         <div class="feature-content font-semibold">
             <div class="icon-wrapper">
                <IconSliders svg-width="35" svg-color="#FFFFFF" />
             </div>
             <p>Customize your account to reflect your tastes in video games.</p>
          </div>
-         <div class="feature-content">
+         <div class="feature-content font-semibold">
             <div class="icon-wrapper">
                <IconFavoriteStar svg-width="35" svg-color="#FFFFFF" />
             </div>
@@ -54,13 +54,9 @@ import IconTrophy from './icons/IconTrophy.vue';
    height: 45vh;
    /* --- Represent first title in the feature section --- */
    > .section-minor-title {
-      font-size: 1.25rem;
-      font-weight: 700;
       color: var(--primary-color);
    }
    > .title {
-      font-size: 2rem;
-      font-weight: 700;
       text-align: center;
       margin-bottom: 6rem;
    }
@@ -74,7 +70,6 @@ import IconTrophy from './icons/IconTrophy.vue';
          align-items: center;
          gap: 1rem;
          font-size: 1rem;
-         font-weight: 600;
          > .icon-wrapper {
             display: flex;
             justify-content: center;
