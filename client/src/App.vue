@@ -6,6 +6,7 @@ import LandingPageSection2 from './components/landing-page/LandingPageSection2.v
 import LandingPageSection3 from './components/landing-page/LandingPageSection3.vue';
 import LandingPageSection4 from './components/landing-page/LandingPageSection4.vue';
 import LandingPageSection5 from './components/landing-page/LandingPageSection5.vue';
+import MainFooter from './components/MainFooter.vue';
 </script>
 
 <template>
@@ -19,6 +20,9 @@ import LandingPageSection5 from './components/landing-page/LandingPageSection5.v
       <LandingPageSection4 />
       <LandingPageSection5 />
    </main>
+   <footer>
+      <MainFooter />
+   </footer>
 </template>
 
 <style scoped>
