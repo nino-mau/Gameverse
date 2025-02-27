@@ -54,7 +54,6 @@
    width: 100%;
    height: 3px;
    background: var(--primary-color);
-   /* background: white; */
    content: '';
    opacity: 0;
    transition:

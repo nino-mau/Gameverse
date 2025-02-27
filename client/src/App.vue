@@ -5,6 +5,7 @@ import LandingPageSection1 from './components/landing-page/LandingPageSection1.v
 import LandingPageSection2 from './components/landing-page/LandingPageSection2.vue';
 import LandingPageSection3 from './components/landing-page/LandingPageSection3.vue';
 import LandingPageSection4 from './components/landing-page/LandingPageSection4.vue';
+import LandingPageSection5 from './components/landing-page/LandingPageSection5.vue';
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import LandingPageSection4 from './components/landing-page/LandingPageSection4.v
       <LandingPageSection2 />
       <LandingPageSection3 />
       <LandingPageSection4 />
+      <LandingPageSection5 />
    </main>
 </template>
 
