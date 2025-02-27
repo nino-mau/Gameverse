@@ -8,6 +8,12 @@ import Button from 'primevue/button';
 // *** Import Modules ***
 import Swiper from 'swiper/bundle';
 
+// *** Import Custom Components ***
+import BtnCustomHover1 from '../BtnCustomHover1.vue';
+
+// *** Import Icons ***
+import IconGameController from '../icons/IconGameController.vue';
+
 // Create new swiper slider after DOM elements are loaded
 onMounted(() => {
    // eslint-disable-next-line no-unused-vars
@@ -35,13 +41,17 @@ onMounted(() => {
             sit aliquam sit nullam neques.
          </p>
          <div>
-            <Button
-               class="bg-white text-bg4 border-white h-[45px] w-[150px] mr-5 active:bg-btn-active"
-               label="Browse"
+            <BtnCustomHover1
+               btn-class="lp3-custom-btn1 lp3-custom-btn1:hover"
+               btn-label="Browse"
+               :btn-icon="IconGameController"
+               btn-icon-width="34"
+               btn-icon-color="var(--color-bg4)"
             />
             <Button
-               class="bg-bg4 border-white text-white h-[45px] w-[150px] hover:bg-white hover:text-bg4 active:bg-btn-active"
+               class="bg-bg4 border-white text-white h-[45px] w-[150px] ml-7 hover:bg-white hover:text-bg4 active:bg-btn-active"
                label="Learn more"
+               raised
             />
          </div>
       </div>
@@ -113,5 +123,22 @@ onMounted(() => {
          padding-top: 3rem;
       }
    }
+}
+
+.lp3-custom-btn1 {
+   background-color: white;
+   color: var(--color-bg4);
+   border-color: white;
+   height: 45px;
+   width: 150px;
+   margin-right: 5;
+   font-weight: 600; /* Semi-bold */
+}
+.lp3-custom-btn1:active {
+   background-color: var(--color-btn-active);
+}
+.lp3-custom-btn1:hover {
+   background-color: white !important;
+   border-color: white !important;
 }
 </style>
