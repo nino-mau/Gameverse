@@ -1,16 +1,16 @@
 <script setup>
 // *** Import Illustrations Svg ***
-import IlluLandingPage1 from './illustrations/IlluLandingPage1.vue';
+import IlluLandingPage1 from '../illustrations/IlluLandingPage1.vue';
 
 // *** Import Icons ***
-import IconArrowCircleRight from './icons/IconArrowCircleRight.vue';
+import IconArrowCircleRight from '../icons/IconArrowCircleRight.vue';
 
 // *** Import PrimeVue Components ***
 import Button from 'primevue/button';
 </script>
 
 <template>
-   <div class="lp-section1-container">
+   <div class="lp1-container">
       <div class="headline-container">
          <h1 class="title text-5xl/[1.6] font-bold">
             Discover & <span class="text-span text-primary">Challenge</span><br />
@@ -32,7 +32,7 @@ import Button from 'primevue/button';
 </template>
 
 <style scoped>
-.lp-section1-container {
+.lp1-container {
    display: flex;
    align-items: center;
    justify-content: center;

@@ -1,7 +1,7 @@
 @import './base.css';
 
 /* --- Import Tailwind --- */
-@import 'tailwindcss';
+@import 'tailwindcss' important;
 
 /* --- Import PrimeVue Tailwind Plugin --- */
 @import 'tailwindcss-primeui';
@@ -14,8 +14,15 @@
    --color-primary: var(--primary-color);
    --color-secondary: var(--secondary-color);
    --color-bg1: var(--secondary-color);
-   --color-bg2: var(--secondary-bg-color);
+   --color-bg2: #393273;
    --color-bg3: #39317d;
+   --color-bg4: #7c50a4;
+
+   --color-btn-active: #dcdbdb;
+
+   --drop-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+   --drop-shadow-md: 0 3px 3px rgb(0 0 0 / 0.4);
+   --drop-shadow-3xl: 0 3px 3px rgba(0, 0, 0, 0.4);
 }
 
 /* --- General --- */
@@ -23,8 +30,7 @@
 /* - Contains the entire site - */
 #app {
    width: 100%;
-   min-height: 100vh;
-   height: 200vh;
+   max-width: 1450px;
 }
 
 /* --- Shadow Effects --- */

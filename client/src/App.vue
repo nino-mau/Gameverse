@@ -1,9 +1,10 @@
 <script setup>
 // *** Import page sections components ***
 import MainNavbar from './components/MainNavbar.vue';
-import LandingPageSection1 from './components/LandingPageSection1.vue';
-import LandingPageSection2 from './components/LandingPageSection2.vue';
-import LandingPageSection3 from './components/LandingPageSection3.vue';
+import LandingPageSection1 from './components/landing-page/LandingPageSection1.vue';
+import LandingPageSection2 from './components/landing-page/LandingPageSection2.vue';
+import LandingPageSection3 from './components/landing-page/LandingPageSection3.vue';
+import LandingPageSection4 from './components/landing-page/LandingPageSection4.vue';
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import LandingPageSection3 from './components/LandingPageSection3.vue';
       <LandingPageSection1 />
       <LandingPageSection2 />
       <LandingPageSection3 />
+      <LandingPageSection4 />
    </main>
 </template>
 

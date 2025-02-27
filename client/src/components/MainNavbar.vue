@@ -38,7 +38,7 @@ const toggle = (event) => {
 <template>
    <nav class="navbar bg-bg2">
       <div class="site-logo-container">
-         <IconSite svg-class="shadow-effect-svg" svg-color="#FF92CB" svg-width="51px" />
+         <IconSite svg-class="drop-shadow-md" svg-color="#FF92CB" svg-width="51px" />
          <h4 class="site-title text-lg font-bold">GameVerse</h4>
       </div>
       <div class="link-container">
@@ -62,17 +62,17 @@ const toggle = (event) => {
       </div>
       <div class="account-menu-container">
          <IconSearch
-            svg-class="hover-effect-svg-white shadow-effect-svg"
+            svg-class="hover-effect-svg-white drop-shadow-sm"
             svg-color="#ffffff"
             svg-width="24px"
          />
          <IconNotifBell
-            svg-class="hover-effect-svg-white shadow-effect-svg"
+            svg-class="hover-effect-svg-white drop-shadow-sm"
             svg-color="#ffffff"
             svg-width="24px"
          />
          <IconCircleUserProfile
-            svg-class="hover-effect-svg-white shadow-effect-svg"
+            svg-class="hover-effect-svg-white drop-shadow-sm"
             svg-color="#ffffff"
             svg-width="35px"
          />

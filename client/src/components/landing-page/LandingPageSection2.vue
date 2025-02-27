@@ -1,38 +1,38 @@
 <script setup>
 // *** Import Icons ***
-import IconChat from './icons/IconChat.vue';
-import IconFavoriteStar from './icons/IconFavoriteStar.vue';
-import IconSliders from './icons/IconSliders.vue';
-import IconTrophy from './icons/IconTrophy.vue';
+import IconChat from '../icons/IconChat.vue';
+import IconFavoriteStar from '../icons/IconFavoriteStar.vue';
+import IconSliders from '../icons/IconSliders.vue';
+import IconTrophy from '../icons/IconTrophy.vue';
 </script>
 
 <template>
-   <div class="features-section-container">
+   <div class="lp2-container bg-bg3">
       <h3 class="section-minor-title text-xl font-bold">FEATURES</h3>
-      <h1 class="title text-3xl font-bold">
+      <h1 class="title text-3xl font-bold mt-4">
          Multiple Features available to Chat, find Games and Challenge Yourself !
       </h1>
       <div class="features-content-wrapper">
-         <div class="feature-content font-semibold">
-            <div class="icon-wrapper">
+         <div class="feature-content font-semibold text-base">
+            <div class="icon-wrapper mb-2">
                <IconChat svg-width="35" svg-color="#FFFFFF" />
             </div>
             <p>Add friends, chat with them and discover common interests in video games.</p>
          </div>
-         <div class="feature-content font-semibold">
-            <div class="icon-wrapper">
+         <div class="feature-content font-semibold text-base">
+            <div class="icon-wrapper mb-2">
                <IconTrophy svg-width="35" svg-color="#FFFFFF" />
             </div>
             <p>Display your ranks or achievments on all your favorite competitive games.</p>
          </div>
-         <div class="feature-content font-semibold">
-            <div class="icon-wrapper">
+         <div class="feature-content font-semibold text-base">
+            <div class="icon-wrapper mb-2">
                <IconSliders svg-width="35" svg-color="#FFFFFF" />
             </div>
             <p>Customize your account to reflect your tastes in video games.</p>
          </div>
-         <div class="feature-content font-semibold">
-            <div class="icon-wrapper">
+         <div class="feature-content font-semibold text-base">
+            <div class="icon-wrapper mb-2">
                <IconFavoriteStar svg-width="35" svg-color="#FFFFFF" />
             </div>
             <p>Add games to your favorites and get new one recommended to you.</p>
@@ -42,12 +42,11 @@ import IconTrophy from './icons/IconTrophy.vue';
 </template>
 
 <style scoped>
-.features-section-container {
+.lp2-container {
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   background-color: var(--secondary-bg-color);
    padding-right: 4.5rem;
    padding-left: 4.5rem;
    width: 100%;
@@ -69,7 +68,6 @@ import IconTrophy from './icons/IconTrophy.vue';
          justify-content: space-between;
          align-items: center;
          gap: 1rem;
-         font-size: 1rem;
          > .icon-wrapper {
             display: flex;
             justify-content: center;
