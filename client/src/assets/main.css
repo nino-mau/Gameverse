@@ -6,6 +6,9 @@
 /* --- Import PrimeVue Tailwind Plugin --- */
 @import 'tailwindcss-primeui';
 
+/* --- Import Hover.css --- */
+@import 'hover.css';
+
 /* --- Custom Tailwind --- */
 @theme {
    --color-*: initial;
@@ -67,6 +70,9 @@
 }
 
 /* - Svg hover color effect - */
-.hover-effect-svg-white:hover path {
+.hover-effect-svg-stroke:hover {
+   stroke: var(--primary-color) !important;
+}
+.hover-effect-svg-fill:hover path {
    fill: #eb8ad2 !important;
 }

@@ -6,7 +6,11 @@ import LandingPageSection2 from './components/landing-page/LandingPageSection2.v
 import LandingPageSection3 from './components/landing-page/LandingPageSection3.vue';
 import LandingPageSection4 from './components/landing-page/LandingPageSection4.vue';
 import LandingPageSection5 from './components/landing-page/LandingPageSection5.vue';
+import LandingPageSection6 from './components/landing-page/LandingPageSection6.vue';
+import LandingPageSection7 from './components/landing-page/LandingPageSection7.vue';
 import MainFooter from './components/MainFooter.vue';
+
+import BackgroundOverlaySplit from './components/background/BackgroundOverlaySplit.vue';
 </script>
 
 <template>
@@ -19,6 +23,8 @@ import MainFooter from './components/MainFooter.vue';
       <LandingPageSection3 />
       <LandingPageSection4 />
       <LandingPageSection5 />
+      <LandingPageSection6 />
+      <LandingPageSection7 />
    </main>
    <footer>
       <MainFooter />

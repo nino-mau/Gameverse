@@ -62,17 +62,17 @@ const toggle = (event) => {
       </div>
       <div class="account-menu-container">
          <IconSearch
-            svg-class="hover-effect-svg-white drop-shadow-sm"
+            svg-class="hover-effect-svg-stroke drop-shadow-sm"
             svg-color="#ffffff"
-            svg-width="24px"
+            svg-width="22px"
          />
          <IconNotifBell
-            svg-class="hover-effect-svg-white drop-shadow-sm"
+            svg-class="hover-effect-svg-stroke drop-shadow-sm"
             svg-color="#ffffff"
-            svg-width="24px"
+            svg-width="22px"
          />
          <IconCircleUserProfile
-            svg-class="hover-effect-svg-white drop-shadow-sm"
+            svg-class="hover-effect-svg-stroke drop-shadow-sm"
             svg-color="#ffffff"
             svg-width="35px"
          />

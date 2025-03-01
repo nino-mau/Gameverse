@@ -16,6 +16,23 @@ defineProps({
       role="img"
       :width="svgWidth"
       :class="svgClass"
+      :stroke="svgColor"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-circle-user"
+   >
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="10" r="3" />
+      <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
+   </svg>
+   <!-- <svg
+      role="img"
+      :width="svgWidth"
+      :class="svgClass"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
    >
@@ -30,7 +47,7 @@ defineProps({
          :fill="svgColor"
          d="M12 20a8 8 0 1 0 0-16.001A8 8 0 0 0 12 20Zm0 2C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Z"
       />
-   </svg>
+   </svg> -->
 </template>
 
 <style scoped>

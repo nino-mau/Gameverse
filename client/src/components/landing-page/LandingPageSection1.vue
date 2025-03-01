@@ -3,7 +3,7 @@
 import IlluLandingPage1 from '../illustrations/IlluLandingPage1.vue';
 
 // *** Import Icons ***
-import IconArrowCircleRight from '../icons/IconArrowCircleRight.vue';
+import IconPlay from '../icons/IconPlay.vue';
 
 // *** Import PrimeVue Components ***
 import Button from 'primevue/button';
@@ -23,7 +23,7 @@ import Button from 'primevue/button';
          </p>
          <Button class="button1" raised>
             <span class="text">Discover</span>
-            <span class="icon"><IconArrowCircleRight svg-width="34" svg-color="#5250A4" /></span>
+            <span class="icon"><IconPlay svg-width="34" svg-color="#5250A4" /></span>
          </Button>
          <Button class="button2" label="Learn more" variant="outlined" raised />
       </div>
