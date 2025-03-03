@@ -9,6 +9,9 @@
 /* --- Import Hover.css --- */
 @import 'hover.css';
 
+/* --- Import PrimeVue Icons --- */
+@import 'primeicons/primeicons.css';
+
 /* --- Custom Tailwind --- */
 @theme {
    --color-*: initial;
@@ -21,10 +24,16 @@
    --color-bg3: #39317d;
    --color-bg4: #7c50a4;
 
+   --color-custom-red: #a45078;
+   --color-custom-lightblue: #5078a4;
+   --color-custom-purple: #7c50a4;
+
    --color-btn-active: #dcdbdb;
 
    --drop-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
-   --drop-shadow-md: 0 3px 3px rgb(0 0 0 / 0.4);
+   --drop-shadow-md: 0 1px 2px rgb(0 0 0 / 0.4);
+   --drop-shadow-xl: 0 2px 2px rgb(0 0 0 / 0.4);
+   --drop-shadow-2xl: 0 2.5px 2.5px rgb(0 0 0 / 0.4);
    --drop-shadow-3xl: 0 3px 3px rgba(0, 0, 0, 0.4);
 }
 
@@ -69,10 +78,60 @@
    transform: translateY(0px);
 }
 
+/* - Text hover underline effect using marker style underline - */
+.hover-effect-text-underline-marker {
+   background-image: linear-gradient(120deg, var(--primary-color) 0%, var(--primary-color) 100%);
+   background-repeat: no-repeat;
+   background-size: 100% 0.4em;
+   background-position: 0 85%;
+   transition: background-size 0.25s ease-in;
+}
+.hover-effect-text-underline-marker:hover {
+   background-size: 100% 90%;
+}
+
 /* - Svg hover color effect - */
 .hover-effect-svg-stroke:hover {
    stroke: var(--primary-color) !important;
 }
 .hover-effect-svg-fill:hover path {
    fill: #eb8ad2 !important;
+}
+
+/* --- Override PrimeVue styling --- */
+
+:root {
+   /* -- Buttons -- */
+
+   /* This correspond to the hover background color of outlined buttons */
+   --p-button-outlined-primary-hover-background: var(--primary-color) !important;
+
+   /* This correspond to the hover color of outlined buttons */
+   --p-button-primary-hover-color: var(--secondary-color) !important;
+
+   /* This correspond to the background color of buttons when clicked */
+   --p-button-outlined-primary-active-background: #f472b6 !important;
+
+   /* This correspond to the border color of outlined buttons */
+   --p-button-outlined-primary-border-color: var(--primary-color) !important;
+
+   /* This correspond to the font-weight of the text in buttons label */
+   --p-button-label-font-weight: 600 !important;
+}
+/* This correspond to the text in the tiered menu dropdown */
+.p-tieredmenu-item-label {
+   font-size: 16px !important;
+   color: #334155;
+}
+.p-menuitem-text {
+   margin-left: 6px;
+}
+.p-iconfield {
+   display: flex !important;
+   align-items: center !important;
+}
+.p-inputicon {
+   top: unset !important;
+   margin-top: unset !important;
+   left: 4.1% !important;
 }

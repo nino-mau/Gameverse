@@ -6,16 +6,18 @@ import App from './App.vue';
 import router from './router';
 
 // *** Import Frameworks/Librairies ***
-// // import function to register Swiper custom elements
-// import { register } from 'swiper/element/bundle';
-// // register Swiper custom elements
-// register();
 // Swiper JS Styles
 import 'swiper/css/bundle';
 // PrimeVue
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
+// Gsap
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+// Animate.css
+import 'animate.css';
 
 // *** Import primevue components ***
 import Button from 'primevue/button';

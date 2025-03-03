@@ -1,30 +1,15 @@
 <script setup>
 // *** Import page sections components ***
 import MainNavbar from './components/MainNavbar.vue';
-import LandingPageSection1 from './components/landing-page/LandingPageSection1.vue';
-import LandingPageSection2 from './components/landing-page/LandingPageSection2.vue';
-import LandingPageSection3 from './components/landing-page/LandingPageSection3.vue';
-import LandingPageSection4 from './components/landing-page/LandingPageSection4.vue';
-import LandingPageSection5 from './components/landing-page/LandingPageSection5.vue';
-import LandingPageSection6 from './components/landing-page/LandingPageSection6.vue';
-import LandingPageSection7 from './components/landing-page/LandingPageSection7.vue';
 import MainFooter from './components/MainFooter.vue';
-
-import BackgroundOverlaySplit from './components/background/BackgroundOverlaySplit.vue';
 </script>
 
 <template>
    <header class="site-header">
       <MainNavbar />
    </header>
-   <main class="landing-page-main">
-      <LandingPageSection1 />
-      <LandingPageSection2 />
-      <LandingPageSection3 />
-      <LandingPageSection4 />
-      <LandingPageSection5 />
-      <LandingPageSection6 />
-      <LandingPageSection7 />
+   <main class="page-main">
+      <RouterView />
    </main>
    <footer>
       <MainFooter />
@@ -40,7 +25,7 @@ import BackgroundOverlaySplit from './components/background/BackgroundOverlaySpl
 }
 
 /* --- Represent the main content of the landing page --- */
-.landing-page-main {
+.page-main {
    width: 100%;
 }
 </style>

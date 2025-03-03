@@ -1,4 +1,7 @@
 <script setup>
+// **** IMPORTS ****
+import { onMounted, ref } from 'vue';
+
 // *** Import Illustrations Svg ***
 import IlluLandingPage1 from '../illustrations/IlluLandingPage1.vue';
 
@@ -7,13 +10,34 @@ import IconPlay from '../icons/IconPlay.vue';
 
 // *** Import PrimeVue Components ***
 import Button from 'primevue/button';
+
+// *** Import Framework ***
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
+// *** Import Functions ***
+import { animateElementOnScroll } from 'Modules/utils.js';
+
+// **** LOGIC ****
+
+// *** Select dom element using refs ***
+const titleSection = ref(null);
+const illuSection = ref(null);
+
+onMounted(() => {
+   // *** Trigger css animations from animate.css on scroll ***
+   animateElementOnScroll(titleSection, 'animate__bounceInLeft', 2, 0.2);
+   animateElementOnScroll(illuSection, 'animate__fadeInDownBig', 2, 0.8);
+});
 </script>
 
 <template>
    <div class="lp1-container">
-      <div class="headline-container">
+      <div class="headline-container invisible" ref="titleSection">
          <h1 class="title text-5xl/[1.6] font-bold">
-            Discover & <span class="text-span text-primary">Challenge</span><br />
+            <span class="hover-effect-text-underline-marker relative inline-block">Discover</span> &
+            <span class="text-span text-primary">Challenge</span><br />
             Yourself or Your<br />
             Friends !
          </h1>
@@ -27,7 +51,10 @@ import Button from 'primevue/button';
          </Button>
          <Button class="button2" label="Learn more" variant="outlined" raised />
       </div>
-      <IlluLandingPage1 svg-width="500" />
+
+      <div class="invisible" ref="illuSection">
+         <IlluLandingPage1 svg-width="500" svg-class="drop-shadow-3xl" />
+      </div>
    </div>
 </template>
 

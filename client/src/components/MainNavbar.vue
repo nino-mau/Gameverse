@@ -1,18 +1,32 @@
 <script setup>
-import { ref } from 'vue';
+// **** IMPORTS ****
+import { ref, defineAsyncComponent } from 'vue';
+import { useRouter } from 'vue-router';
 
 // *** Import Icons ***
 import IconSite from './icons/IconSite.vue';
-import IconCircleUserProfile from './icons/IconCircleUserProfile.vue';
-import IconSearch from './icons/IconSearch.vue';
-import IconNotifBell from './icons/IconNotifBell.vue';
 import IconChevronDown from './icons/IconChevronDown.vue';
+import IconGameController from './icons/IconGameController.vue';
+import IconLibrary from './icons/IconLibrary.vue';
+import IconMedal from './icons/IconMedal.vue';
+// eslint-disable-next-line no-unused-vars
+const IconCircleUserProfile = defineAsyncComponent(
+   () => import('./icons/IconCircleUserProfile.vue'),
+);
+// eslint-disable-next-line no-unused-vars
+const IconNotifBell = defineAsyncComponent(() => import('./icons/IconNotifBell.vue'));
+// eslint-disable-next-line no-unused-vars
+const IconSearch = defineAsyncComponent(() => import('./icons/IconSearch.vue'));
 
 // *** Import PrimeVue Components ***
+import Button from 'primevue/button';
 import TieredMenu from 'primevue/tieredmenu';
+// eslint-disable-next-line no-unused-vars
+const Avatar = defineAsyncComponent(() => import('primevue/avatar'));
 
-// *** Logic for the navbar games dropdown menu ***
+// **** LOGIC ****
 
+// *** Handle Dropdown Menu ***
 // Define the wrapper for the dropdown menu
 const menu = ref();
 
@@ -20,12 +34,18 @@ const menu = ref();
 const items = ref([
    {
       label: 'Browse',
+      icon: IconLibrary,
+      iconProps: { svgColor: '#334155', svgWidth: '20' },
    },
    {
       label: 'Discover',
+      icon: IconGameController,
+      iconProps: { svgColor: '#334155', svgWidth: '20' },
    },
    {
       label: 'Ranking',
+      icon: IconMedal,
+      iconProps: { svgColor: '#334155', svgWidth: '20' },
    },
 ]);
 
@@ -33,6 +53,17 @@ const items = ref([
 const toggle = (event) => {
    menu.value.toggle(event);
 };
+
+// *** Handle Routing ***
+
+const router = useRouter();
+
+function goToLoginPage() {
+   router.push('/login');
+}
+function goToRegisterPage() {
+   router.push('/register');
+}
 </script>
 
 <template>
@@ -42,11 +73,11 @@ const toggle = (event) => {
          <h4 class="site-title text-lg font-bold">GameVerse</h4>
       </div>
       <div class="link-container">
-         <ul class="list text-sm font-normal">
-            <li class="hover-effect-text-underline text-sm font-normal">Home</li>
-            <li class="hover-effect-text-underline text-sm font-normal">
+         <ul class="list text-base font-normal">
+            <li class="hover-effect-text-underline">Home</li>
+            <li class="hover-effect-text-underline">
                <span
-                  class="games-link text-sm font-normal"
+                  class="games-link"
                   @click="toggle"
                   aria-haspopup="true"
                   aria-controls="overlay_tmenu"
@@ -54,29 +85,60 @@ const toggle = (event) => {
                   Games
                   <IconChevronDown svg-color="#ffffff" svg-width="22px" />
                </span>
-               <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
+               <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup>
+                  <template #item="{ item }">
+                     <a class="p-menuitem-link">
+                        <span class="p-menuitem-icon">
+                           <component v-if="item.icon" :is="item.icon" v-bind="item.iconProps" />
+                        </span>
+                        <span class="p-menuitem-text">{{ item.label }}</span>
+                     </a>
+                  </template>
+               </TieredMenu>
             </li>
-            <li class="hover-effect-text-underline text-sm font-normal">About</li>
-            <li class="hover-effect-text-underline text-sm font-normal">Contact</li>
+            <li class="hover-effect-text-underline">About</li>
+            <li class="hover-effect-text-underline">Contact</li>
          </ul>
       </div>
-      <div class="account-menu-container">
+      <!-- <div class="account-menu-container">
          <IconSearch
             svg-class="hover-effect-svg-stroke drop-shadow-sm"
             svg-color="#ffffff"
-            svg-width="22px"
+            svg-width="25px"
          />
          <IconNotifBell
             svg-class="hover-effect-svg-stroke drop-shadow-sm"
             svg-color="#ffffff"
-            svg-width="22px"
+            svg-width="25px"
          />
-         <IconCircleUserProfile
-            svg-class="hover-effect-svg-stroke drop-shadow-sm"
-            svg-color="#ffffff"
-            svg-width="35px"
+         <Avatar
+            icon="pi pi-user"
+            class="shadow-xl mr-0.5 ml-0.5 w-[2.7rem] h-[2.7rem]"
+            size="large"
+            shape="circle"
+         >
+            <IconCircleUserProfile
+               svg-class="hover-effect-svg-stroke"
+               svg-color="var(--color-secondary)"
+               svg-width="32px"
+            />
+         </Avatar>
+         <p class="username text-base">Username</p>
+      </div> -->
+      <div class="h-full flex flex-row justify-center items-center gap-4 mr-[4.5rem]">
+         <Button
+            @click="goToLoginPage"
+            class="w-[88px] h-[39px] text-white text-base font-semibold"
+            label="Sign-in"
+            raised
          />
-         <p class="username shadow-effect-txt text-sm">Username</p>
+         <Button
+            @click="goToRegisterPage"
+            class="w-[88px] h-[39px] text-white border-white border-1 text-base font-semibold hover:text-secondary hover:bg-white active:bg-btn-active"
+            label="Sign-up"
+            variant="outlined"
+            raised
+         />
       </div>
    </nav>
 </template>
@@ -115,8 +177,6 @@ const toggle = (event) => {
       list-style-type: none;
       > li {
          position: relative;
-         font-size: 0.87rem;
-         font-weight: 400;
       }
    }
    /* Contains the games link which is a dropdown menu */

@@ -1,12 +1,9 @@
 <script setup>
-// *** Import Built-in Components
-import { onMounted } from 'vue';
+// **** IMPORTS ****
+import { onMounted, ref } from 'vue';
 
 // *** Import PrimeVue Components ***
 import Button from 'primevue/button';
-
-// *** Import Modules ***
-import Swiper from 'swiper/bundle';
 
 // *** Import Custom Components ***
 import BtnCustomHover1 from '../BtnCustomHover1.vue';
@@ -14,27 +11,72 @@ import BtnCustomHover1 from '../BtnCustomHover1.vue';
 // *** Import Icons ***
 import IconGameController from '../icons/IconGameController.vue';
 
-// Create new swiper slider after DOM elements are loaded
+// *** Import Frameworks ***
+import Swiper from 'swiper/bundle';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
+// *** Import Functions ***
+import { animateElementOnScroll } from 'Modules/utils.js';
+
+// **** LOGIC ****
+
+// *** Select dom element using refs ***
+const titleSection = ref(null);
+const sliderSection = ref(null);
+
 onMounted(() => {
-   // eslint-disable-next-line no-unused-vars
-   const swiper = new Swiper('.lp4-games-swiper', {
-      loop: true,
-      slidesPerView: '5',
-      spaceBetween: '1',
-      centeredSlides: false,
-      autoplay: {
-         delay: 0,
-      },
-      speed: 10000,
-   });
+   // Custom instructions is needed to make sure swiper is initialized after it become visible
+   function animateSliderOnScroll(element, animation, duration, delay) {
+      const domSilderSection = element.value;
+      gsap.to(domSilderSection, {
+         scrollTrigger: {
+            trigger: domSilderSection,
+            once: true,
+            start: 'top 100%',
+            onEnter: () => {
+               gsap.delayedCall(delay, () => {
+                  domSilderSection.classList.add(
+                     'animate__animated',
+                     animation,
+                     'animate_duration-' + duration + 's',
+                  );
+                  domSilderSection.classList.remove('invisible');
+
+                  // Init swiper element
+                  // eslint-disable-next-line no-unused-vars
+                  const swiper = new Swiper('.lp4-games-swiper', {
+                     loop: true,
+                     slidesPerView: '5',
+                     spaceBetween: '1',
+                     autoplay: {
+                        delay: 0,
+                     },
+                     speed: 10000,
+                  });
+               });
+            },
+         },
+      });
+   }
+
+   // *** Trigger css animations from animate.css on scroll ***
+   animateElementOnScroll(titleSection, 'animate__bounceInRight', 2, 0);
+   animateSliderOnScroll(sliderSection, 'animate__fadeInUp', 2, 1);
 });
 </script>
 
 <template>
-   <div class="lp4-container bg-bg4 h-[100vh] w-full pt-15 flex flex-col">
-      <div class="flex flex-col justify-center items-center gap-5 pr-[25rem] pl-[25rem]">
-         <h1 class="text-5xl/[1.6] font-bold text-center">
-            Hundreds of games ready to be discovered !
+   <div class="lp4-container bg-bg4 h-[94vh] w-full flex flex-col">
+      <div
+         class="flex flex-col justify-center items-center gap-5 pr-[25rem] pl-[25rem] invisible"
+         ref="titleSection"
+      >
+         <h1 class="text-5xl/[1.6] font-bold text-center mt-[3rem]">
+            <span class="text-primary">Hundreds of games</span> ready to be
+            <span class="hover-effect-text-underline-marker relative inline-block">discovered</span>
+            !
          </h1>
          <p class="text-base text-center">
             Lorem ipsum dolor sit amet consectetur adipiscing elidolor mattis sit phasellus mollis
@@ -45,18 +87,21 @@ onMounted(() => {
                btn-class="lp3-custom-btn1 lp3-custom-btn1:hover"
                btn-label="Browse"
                :btn-icon="IconGameController"
-               btn-icon-width="34"
+               btn-icon-width="40"
                btn-icon-color="var(--color-bg4)"
             />
             <Button
-               class="bg-bg4 border-white text-white h-[45px] w-[150px] ml-7 hover:bg-white hover:text-bg4 active:bg-btn-active"
+               class="bg-bg4 border-white text-white h-[55px] w-[240px] ml-7 hover:bg-white hover:text-bg4 active:bg-btn-active"
                label="Learn more"
                raised
             />
          </div>
       </div>
       <div class="flex-1 flex justify-center items-center">
-         <div class="lp4-games-swiper overflow-hidden">
+         <div
+            class="lp4-games-swiper overflow-hidden pointer-events-none invisible"
+            ref="sliderSection"
+         >
             <div class="swiper-wrapper">
                <div class="swiper-slide swiper-slide-group1">
                   <img src="@/assets/img/games-thumbnails/bg3.webp" alt="Baldur's Gate 3" />
@@ -129,8 +174,8 @@ onMounted(() => {
    background-color: white;
    color: var(--color-bg4);
    border-color: white;
-   height: 45px;
-   width: 150px;
+   height: 55px;
+   width: 240px;
    margin-right: 5;
    font-weight: 600; /* Semi-bold */
 }

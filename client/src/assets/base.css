@@ -67,26 +67,6 @@
    /* font-weight: normal; */
 }
 
-/* --- Override PrimeVue varialbe with custome one --- */
-:root {
-   /* -- Buttons -- */
-
-   /* This correspond to the hover background color of outlined buttons */
-   --p-button-outlined-primary-hover-background: var(--primary-color) !important;
-
-   /* This correspond to the hover color of outlined buttons */
-   --p-button-primary-hover-color: var(--secondary-color) !important;
-
-   /* This correspond to the background color of buttons when clicked */
-   --p-button-outlined-primary-active-background: #f472b6 !important;
-
-   /* This correspond to the border color of outlined buttons */
-   --p-button-outlined-primary-border-color: var(--primary-color) !important;
-
-   /* This correspond to the font-weight of the text in buttons label */
-   --p-button-label-font-weight: 600 !important;
-}
-
 body {
    display: flex;
    justify-content: center;
@@ -110,6 +90,6 @@ body {
       'Droid Sans',
       'Helvetica Neue',
       sans-serif;
-   font-size: 15px;
+   font-size: 16px !important;
    text-rendering: optimizeLegibility;
 }

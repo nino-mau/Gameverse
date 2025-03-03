@@ -32,4 +32,8 @@ defineProps({
    </svg>
 </template>
 
-<style scoped></style>
+<style scoped>
+svg {
+   z-index: -1;
+}
+</style>
