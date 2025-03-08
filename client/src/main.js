@@ -6,21 +6,25 @@ import App from './App.vue';
 import router from './router';
 
 // *** Import Frameworks/Librairies ***
+
 // Swiper JS Styles
 import 'swiper/css/bundle';
+
 // PrimeVue
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
+import ToastService from 'primevue/toastservice';
+
+// Pinia
+import { createPinia } from 'pinia';
+
 // Gsap
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 // Animate.css
 import 'animate.css';
-
-// *** Import primevue components ***
-import Button from 'primevue/button';
 
 // *** Custom style for primevue ***
 
@@ -48,9 +52,16 @@ const MyPreset = definePreset(Aura, {
    },
 });
 
-const app = createApp(App);
-app.component('PrButton', Button);
+// *** Setup App ***
 
+const pinia = createPinia();
+
+const app = createApp(App);
+
+// Set global variables
+app.config.globalProperties.$shortTermTokenKey = 'userToken';
+
+// Set plugins
 app.use(router);
 app.use(PrimeVue, {
    theme: {
@@ -60,5 +71,7 @@ app.use(PrimeVue, {
       },
    },
 });
+app.use(ToastService);
+app.use(pinia);
 
 app.mount('#app');

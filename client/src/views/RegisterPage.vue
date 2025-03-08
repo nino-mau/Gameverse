@@ -1,13 +1,10 @@
 <script setup>
-// **** IMPORTS ****
-
-// *** Import Components ***
-import FormLogin from '@/components/FormLogin.vue';
+import FormRegister from '@/components/FormRegister.vue';
 </script>
 
 <template>
    <div class="flex justify-center items-center h-[94vh]">
-      <FormLogin />
+      <FormRegister />
    </div>
 </template>
 

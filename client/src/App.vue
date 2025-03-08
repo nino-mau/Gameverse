@@ -1,10 +1,64 @@
 <script setup>
-// *** Import page sections components ***
+// **** IMPORTS ****
+import { onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+// Import frameworks/libs
+import { useUserAuthStore } from './stores/authStore.js';
+
+// Import PrimeVue Components
+import Toast from 'primevue/toast';
+import { useToast } from 'primevue/usetoast';
+
+// Import Components
 import MainNavbar from './components/MainNavbar.vue';
 import MainFooter from './components/MainFooter.vue';
+
+// **** INIT ****
+
+const userStore = useUserAuthStore();
+const route = useRoute();
+const toast = useToast();
+
+// **** LOGICS ****
+
+onMounted(async () => {
+   // Verify user token and get user infos
+   const r = await userStore.verifyUserLoggin();
+   if (r === true) {
+      toast.add({
+         severity: 'success',
+         summary: 'Succesful login',
+         detail: 'You succesfuly connected to your account.',
+         life: 3000,
+      });
+   } else if (r === false) {
+      toast.add({
+         severity: 'warn',
+         summary: 'Session expired',
+         detail: 'Your were disconnected after your session ended, please reconnect',
+         life: 3000,
+      });
+   }
+   console.log('ON MOUNT');
+   await userStore.getUserData();
+   console.log('ON MOUNT');
+});
+
+// Execute when page change
+watch(
+   () => route.fullPath,
+   async () => {
+      await userStore.verifyUserLoggin();
+      console.log('WATCH');
+      await userStore.getUserData();
+      console.log('WATCH');
+   },
+);
 </script>
 
 <template>
+   <Toast />
    <header class="site-header">
       <MainNavbar />
    </header>
