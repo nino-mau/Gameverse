@@ -63,7 +63,7 @@ export async function generateUserAccessToken(userData) {
    return token;
 }
 
-// Generate a a long term json web token for a user who selected "remember me"
+// Generate a a long term json web token for a user who selected "stay signed in"
 export async function generateUserRefreshToken(userData, tokenId, duration) {
    const secretKey = process.env.REFRESH_TOKEN_SECRET;
 

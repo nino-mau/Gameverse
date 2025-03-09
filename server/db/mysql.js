@@ -102,11 +102,9 @@ export async function insertGamesDetails(gamesArr) {
 export async function createRefreshTokenDb(userData) {
    const tokenId = uuidv4();
 
-   const tokenDuration = userData.rememberMe
+   const tokenDuration = userData.staySignedIn
       ? process.env.REFRESH_TOKEN_LONG
       : process.env.REFRESH_TOKEN_SHORT;
-
-   console.log(tokenDuration);
 
    const sql = `
       INSERT INTO refresh_tokens (user_id, token_id) 
@@ -200,6 +198,31 @@ export async function getRefreshTokenInfo(userId) {
    }
 }
 
+// *** DELETE ***
+
+// Delete the refresh token corresponding to an user id in database
+export async function deleteUserTokenDb(userId) {
+   let connection;
+
+   try {
+      connection = await pool.getConnection();
+
+      const sql = `DELETE FROM refresh_tokens WHERE user_id = ?`;
+      const value = userId;
+
+      const [result] = await connection.query(sql, value);
+
+      console.log('Delete Result:', result);
+      console.log('Affected rows:', result.affectedRows);
+      console.log('Inserted ID:', result.insertId);
+   } catch (error) {
+      console.error('deleteUserTokenDb: Error deleting data:', error);
+      return false;
+   } finally {
+      if (connection) connection.release();
+   }
+}
+
 // *** AUTHENTIFICATION ***
 
 // Register user in db
@@ -210,7 +233,7 @@ export async function registerUserDb(userData) {
       const hashedPassword = await bcrypt.hash(userData.pwd, saltRounds);
 
       const values = [userData.username, userData.email, hashedPassword];
-      const sql = `INSERT INTO users (user_name, user_email, user_password) VALUES (?)`;
+      const sql = `INSERT INTO users (user_name, user_email, user_password) VALUES (?, ?, ?)`;
 
       const result = await insertInDb(sql, values);
       if (result.affectedRows > 0) {

@@ -33,8 +33,8 @@ const toast = useToast();
 const router = useRouter();
 const serverError = ref(null);
 const userStore = useUserAuthStore();
-// Store bool of the remember me checkbox
-const rememberMeValue = ref();
+// Store bool of the stay signed in checkbox
+const staySignedInValue = ref();
 
 // **** LOGIC ****
 
@@ -66,38 +66,44 @@ const onFormSubmit = async (e) => {
 
    if (e.valid) {
       try {
-         if (rememberMeValue.value === undefined) {
-            rememberMeValue.value = false;
+         if (staySignedInValue.value === undefined) {
+            staySignedInValue.value = false;
          }
 
          const data = {
             username: e.values.username,
             password: e.values.password,
-            rememberMe: rememberMeValue.value,
+            staySignedIn: staySignedInValue.value,
          };
          const result = await postData('https://gameverse.local/api/users/login', data);
 
-         if (result.status === 'success') {
-            // Use user store function which store token in browser storage
-            // userStore.setToken(result.data.token);
+         // Handle failure and success
+         if (result.status === 200) {
+            // Set login status to true in pinia store
             userStore.isUserLoggedIn = true;
 
             // Redirect user to profile page
             router.push('/');
 
-            console.log(result.message, result);
-         } else if (result.status !== 500) {
+            console.log('LOGIN: ', result.message);
+         } else if (result.status === 401) {
             serverError.value = result.error;
-            console.error(result.error, result.details);
+            console.error('LOGIN: ', result.error);
          } else {
-            console.error(result.error, result.details);
+            console.error('LOGIN: ', result.error);
+            toast.add({
+               severity: 'error',
+               summary: 'Error',
+               detail: 'Loging in failed due to unexpected error',
+               life: 3000,
+            });
          }
       } catch (error) {
          console.error('Unexpected error loging in user:', error);
          toast.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Loging in failed cause of an unexpected error',
+            detail: 'Loging in failed due to unexpected error',
             life: 3000,
          });
       }
@@ -148,7 +154,7 @@ const onFormSubmit = async (e) => {
                   >{{ serverError }}</Message
                >
             </FloatLabel>
-            <FloatLabel variant="on" class="input-wrapper">
+            <FloatLabel variant="on">
                <IconField>
                   <InputIcon class="z-10">
                      <IconLock svg-width="18px" svg-color="#94a3b8" />
@@ -158,10 +164,11 @@ const onFormSubmit = async (e) => {
                      id="login-password-input"
                      :feedback="true"
                      autocomplete="off"
-                     inputClass="password-input-custom-spacing w-full"
+                     :inputClass="`password-input-custom-spacing w-full ${serverError ? 'p-invalid' : ''}`"
                      toggleMask
                      fluid
-                  />
+                  >
+                  </Password>
                   <label for="login-password-input">Password</label>
                </IconField>
                <Message
@@ -169,23 +176,23 @@ const onFormSubmit = async (e) => {
                   severity="error"
                   size="small"
                   variant="simple"
-                  class="text-invalid min-h-[10px] text-[15px]"
+                  class="text-invalid text-[15px]"
                   >{{ $form.password.error.message }}</Message
                >
             </FloatLabel>
-            <div class="inline-flex items-center">
+            <div class="mt-4 inline-flex items-center">
                <Checkbox
-                  name="rememberMe"
-                  inputId="login-rememberme-checkbox"
+                  name="staySignedIn"
+                  inputId="stay-signed-in-checkbox"
                   :binary="true"
-                  v-model="rememberMeValue"
+                  v-model="staySignedInValue"
                />
-               <label for="login-rememberme-checkbox" class="pl-2 font-semibold text-[#64748b]"
-                  >Remember Me
+               <label for="stay-signed-in-checkbox" class="pl-2 font-semibold text-[#64748b]"
+                  >Stay signed in
                </label>
             </div>
-            <Button type="submit" label="Sign-in" class="mt-10 w-full hover:text-white" raised />
-            <p class="mt-5 text-[#64748b]">
+            <Button type="submit" label="Sign-in" class="mt-9 w-full hover:text-white" raised />
+            <p class="mt-2 text-[#64748b]">
                Don't have an account ?
                <span class="text-primary font-semibold">Sign Up</span>
             </p>
@@ -194,7 +201,7 @@ const onFormSubmit = async (e) => {
       <div
          class="left-section-background bg-primary col-span-1 flex items-end justify-start rounded-e-md pb-5 pl-5"
       >
-         <h2 class="text-3xl font-semibold text-white drop-shadow-2xl">Welcome Back !</h2>
+         <h2 class="text-3xl font-semibold text-white drop-shadow-2xl">Welcome back !</h2>
       </div>
    </div>
 </template>
@@ -208,5 +215,8 @@ const onFormSubmit = async (e) => {
 .left-section-background {
    background-image: url('@/assets/img/background-img-login.webp');
    background-size: 100% 100%;
+}
+.p-password-input {
+   border-color: var(--color-invalid) !important;
 }
 </style>

@@ -64,13 +64,10 @@ export async function postData(url, data) {
          body: JSON.stringify(data),
       });
 
-      const responseData = await response.json();
-
-      if (!response.ok) {
-         console.error('See server response: ', responseData);
-      }
-
-      return responseData;
+      return {
+         status: response.status,
+         ...(await response.json()),
+      };
    } catch (error) {
       console.error('Fetch error:', error);
       throw error;

@@ -22,6 +22,7 @@ export async function userRegistration(req, res) {
          id: null,
          username: req.body.username,
          email: req.body.email,
+         staySignedIn: false, // False by default on register
          pwd: req.body.password,
          confirmPwd: req.body.confirmPassword,
       };
@@ -41,39 +42,58 @@ export async function userRegistration(req, res) {
          const r = await registerUserDb(userData);
 
          if (r.success === true) {
-            // Create short term JWT token for user
+            // Store user id
             userData.id = r.id;
-            const token = await generateUserAccessToken(userData);
+
+            // Create a refresh token id to be stored in db and used to create JWT refresh token
+            const r2 = await createRefreshTokenDb(userData);
+
+            // Create an access and refresh token for the user
+            const accessToken = await generateUserAccessToken(userData);
+            const refreshToken = await generateUserRefreshToken(userData, r2.tokenId, r2.duration);
+
+            // Configure cookie for access token
+            const accessTokenCookie = {
+               httpOnly: true,
+               secure: true, // True (https) when in production and false (http) when in dev
+               sameSite: 'none',
+               domain: 'gameverse.local',
+               maxAge: ms(process.env.ACCESS_TOKEN_DURATION), // 15 m
+            };
+            const refreshTokenCookie = {
+               httpOnly: true,
+               secure: true, // True (https) when in production and false (http) when in dev
+               sameSite: 'none',
+               domain: 'gameverse.local',
+               maxAge: ms(process.env.REFRESH_TOKEN_SHORT), // 1d
+            };
+
+            // Send cookies to client
+            res.cookie('accessToken', accessToken, { ...accessTokenCookie });
+            res.cookie('refreshToken', refreshToken, { ...refreshTokenCookie });
 
             res.status(200).json({
-               status: 'success',
                data: {
                   id: r.id,
-                  username: userData.username,
-                  email: userData.email,
-                  token: token,
                },
                message: 'User registration successful',
             });
-            console.log('User registration successful');
+            console.log('userRegistration: User registration successful');
          } else {
             res.status(500).json({
-               status: 'failure',
-               message: 'User registration unsuccessful',
-               error: errors,
+               error: 'User registration unsuccessful',
             });
-            console.error('User registration process unsucessful');
+            console.error('userRegistration: User registration process unsucessful');
          }
       } else {
          errors.syntax = syntaxErr;
          errors.duplicate = duplicateErr;
-         const statusCode = duplicateErr.status || syntaxErr.status || 400;
-         res.status(statusCode).json({ errors });
-         console.error('User registration unsucessful', errors);
+         res.status(409).json({ error: errors });
+         console.error('userRegistration: User registration unsucessful', errors);
       }
    } catch (error) {
-      console.error('Register process failed:', error);
-      res.status(500).json({ error: 'Register process failed', details: error.message });
+      console.error('userRegistration: Register process failed:', error);
+      res.status(500).json({ error: `Register process failed: ${error}` });
    }
 }
 
@@ -87,9 +107,10 @@ function _isSyntaxValid(data) {
    };
 
    if (Object.values(validations).includes(false)) {
-      return { error: 'Syntax error', status: 400 };
+      return { error: 'Syntax error' };
+   } else {
+      return null;
    }
-   return null;
 }
 
 // Private function to check if submited user data does not already exist  in db
@@ -119,21 +140,18 @@ async function _isUserInfoValid(data) {
          errorEmail: "Email isn't available",
          emailValue: data.email,
          usernameValue: data.username,
-         status: 422,
       };
    } else if (!isEmailAvailable) {
       return {
          type: 'email',
          errorEmail: "Email isn't available",
          emailValue: data.email,
-         status: 422,
       };
    } else if (!isUsernameAvailable) {
       return {
          type: 'username',
          errorUsername: "Username isn't available",
          usernameValue: data.username,
-         status: 422,
       };
    } else {
       return null;
@@ -150,7 +168,7 @@ export async function userLogin(req, res) {
          username: req.body.username,
          email: null,
          password: req.body.password,
-         rememberMe: req.body.rememberMe,
+         staySignedIn: req.body.staySignedIn,
       };
 
       const r = await _verifyLoginInfo(userData.username, userData.password);
@@ -180,7 +198,7 @@ export async function userLogin(req, res) {
             secure: true, // True (https) when in production and false (http) when in dev
             sameSite: 'none',
             domain: 'gameverse.local',
-            maxAge: userData.rememberMe
+            maxAge: userData.staySignedIn
                ? ms(process.env.REFRESH_TOKEN_LONG)
                : ms(process.env.REFRESH_TOKEN_SHORT), // 1 or 15 days
          };
@@ -190,23 +208,20 @@ export async function userLogin(req, res) {
          res.cookie('refreshToken', refreshToken, { ...refreshTokenCookie });
 
          // Respond to client
-         res.location(`/api/users/${userData.id}`)
-            .status(201)
-            .json({
-               status: 'success',
-               data: {
-                  id: userData.id,
-               },
-               message: 'User login successful',
-            });
+         res.status(200).json({
+            data: {
+               id: userData.id,
+            },
+            message: 'User login successful',
+         });
          console.log('userLogin: User login successful');
+      } else {
+         console.log('userLogin: Login informations are invalid');
+         res.status(401).json({ error: 'Username or password invalid' });
       }
    } catch (error) {
-      console.error('userLogin: Unexpected error caused login process to fail:', error);
-      res.status(500).json({
-         error: 'Unexpected error caused login process to fail:',
-         details: error.message,
-      });
+      console.error('userLogin: Login process failed:', error);
+      res.status(500).json({ error: `Login process failed: ${error}` });
    }
 }
 
@@ -214,16 +229,15 @@ export async function userLogin(req, res) {
 async function _verifyLoginInfo(username, password) {
    try {
       const dbUser = await getUserData(username);
-
-      if (!dbUser.length) {
+      if (!dbUser) {
          console.log('_verifyLoginInfo: User not found in database');
          return false;
       } else {
          try {
-            const isPwdValid = await bcrypt.compare(password, dbUser[0].user_password);
+            const isPwdValid = await bcrypt.compare(password, dbUser.user_password);
             if (isPwdValid) {
                console.log('_verifyLoginInfo: Passwords match');
-               return dbUser[0];
+               return dbUser;
             } else {
                console.error('_verifyLoginInfo: Passwords do not match');
                return false;

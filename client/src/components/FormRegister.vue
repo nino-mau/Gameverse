@@ -108,36 +108,40 @@ const resolver = zodResolver(
 
 const onFormSubmit = async (e) => {
    // e.originalEvent: Represents the native form submit event.
+   // e.reset: A function that resets the form to its initial state.
    // e.valid: A boolean that indicates whether the form is valid or not.
+   // e.values: An object containing the current values of all form fields.
    // e.states: Contains the current state of each form field, including validity status.
    // e.errors: An object that holds any validation errors for the invalid fields in the form.
-   // e.values: An object containing the current values of all form fields.
-   // e.reset: A function that resets the form to its initial state.
 
    if (e.valid) {
       // Post register data to the register endpoint triggering register process
       try {
          const result = await postData('https://gameverse.local/api/users/register', e.values);
 
+         console.log(result.status);
          // Handle failure and success
-         if (result.status === 'success') {
-            // Use user store function which store token in browser storage
+         if (result.status === 200) {
+            // Set login status to true in pinia store
             userStore.isUserLoggedIn = true;
 
             // Redirect user to profile page
             router.push('/');
 
-            console.log(result.message, result);
+            console.log('REGISTER: ', result.message);
+         } else if (result.status === 409) {
+            console.log(result.error);
+            registrationErrorHandling(result.error);
+            console.log('REGISTER: ', result.error);
          } else {
-            registrationErrorHandling(result.errors);
-            console.log(result.errors);
+            console.log('REGISTER: ', result.error);
          }
       } catch (error) {
-         console.error('Error registering user:', error);
+         console.error('REGISTER: ', error);
          toast.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Registration failed cause of an unexpected error',
+            detail: 'Registration failed due to unexpected error',
             life: 3000,
          });
       }
@@ -269,8 +273,8 @@ const onFormSubmit = async (e) => {
                   >{{ $form.confirmPassword.error.message }}</Message
                >
             </FloatLabel>
-            <Button type="submit" label="Sign-up" raised class="mt-6 w-full hover:text-white" />
-            <p class="mt-5 text-[#64748b]">
+            <Button type="submit" label="Sign-up" raised class="mt-5 w-full hover:text-white" />
+            <p class="mt-2 text-[#64748b]">
                Already have an account ?
                <span class="text-primary font-semibold">Sign In</span>
             </p>
@@ -279,7 +283,7 @@ const onFormSubmit = async (e) => {
       <div
          class="left-section-background bg-primary col-span-1 flex items-end justify-start rounded-e-md pb-5 pl-5"
       >
-         <h2 class="text-2xl font-semibold text-white drop-shadow-2xl">
+         <h2 class="text-3xl font-semibold text-white drop-shadow-2xl">
             Tanks for your interest !
          </h2>
       </div>

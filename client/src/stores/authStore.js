@@ -17,15 +17,46 @@ export const useUserAuthStore = defineStore('userAuth', {
    },
    getters: {},
    actions: {
-      // Used to update isUserLoggedIn
-      setLoginStatus(boolean) {
-         this.isUserLoggedIn = boolean;
-      },
+      // Call ressource to logout user with post request
+      async logoutUser() {
+         try {
+            const r = await fetch('https://gameverse.local/api/users/logout', {
+               method: 'POST',
+               credentials: 'include',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({}),
+            });
 
-      // Use clearToken to disconect user and create popup
-      logoutUser() {
-         this.isUserLoggedIn = false;
-         console.log('logoutUser: User disconnected');
+            if (r.status === 200) {
+               this.isUserLoggedIn = false;
+
+               console.log('logoutUser: User has been logged out');
+            } else if (r.status === 401) {
+               await this.getNewAccessToken();
+
+               const r2 = await fetch('https://gameverse.local/api/users/logout', {
+                  method: 'POST',
+                  credentials: 'include',
+                  headers: {
+                     'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({}),
+               });
+               if (r2.status === 200) {
+                  this.isUserLoggedIn = false;
+
+                  console.log('logoutUser: User has been logged out');
+               } else {
+                  console.log('logoutUser: ', r2.error);
+               }
+            } else {
+               console.log('logoutUser: ', r.error);
+            }
+         } catch (error) {
+            console.error('logoutUser: Unexpected Fetch Error', error);
+         }
       },
 
       // Use to get new access token when last one expired
@@ -134,7 +165,7 @@ export const useUserAuthStore = defineStore('userAuth', {
          }
       },
 
-      // Use to update isUserLoggedIn boolean
+      // Use to update isUserLoggedIn boolean by making post request to a ressource that validate access token
       async checkLoginStatus() {
          try {
             const r = await fetch('https://gameverse.local/api/users/access-token', {

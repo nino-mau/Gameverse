@@ -7,6 +7,7 @@ import { userLogin } from '../controllers/authController.js';
 import { userInfo } from '../controllers/usersController.js';
 import { authentificateAccessToken } from '../middlewares/middlewares.js';
 import { authentificateRefreshToken } from '../middlewares/middlewares.js';
+import { logoutUser } from '../controllers/usersController.js';
 
 // **** ROUTES ****
 
@@ -17,6 +18,9 @@ router.post('/users/register', userRegistration);
 
 // Define endpoint for receiving register form data
 router.post('/users/login', userLogin);
+
+// Define endpoint for client to logout
+router.post('/users/logout', authentificateAccessToken, logoutUser);
 
 // Define endpoint for receiving register form data
 router.get('/users/me', authentificateAccessToken, userInfo);

@@ -22,34 +22,40 @@ import { animateElementOnScroll } from 'Modules/utils.js';
 // **** LOGIC ****
 
 // *** Select dom element using refs ***
-const titleSection = ref(null);
+const title = ref(null);
+const para = ref(null);
+const buttons = ref(null);
 const illuSection = ref(null);
 
 onMounted(() => {
    // *** Trigger css animations from animate.css on scroll ***
-   animateElementOnScroll(titleSection, 'animate__bounceInLeft', 2, 0.2);
-   animateElementOnScroll(illuSection, 'animate__fadeInDownBig', 2, 0.8);
+   animateElementOnScroll(title, 'animate__bounceInLeft', 2, 0.2);
+   animateElementOnScroll(para, 'animate__bounceInLeft', 2, 0.5);
+   animateElementOnScroll(buttons, 'animate__bounceInUp', 2, 0.8);
+   animateElementOnScroll(illuSection, 'animate__fadeInUpBig', 2, 1.2);
 });
 </script>
 
 <template>
-   <div class="lp1-container">
-      <div class="headline-container invisible" ref="titleSection">
-         <h1 class="title text-5xl/[1.6] font-bold">
+   <div class="lp1-container overflow-hidden">
+      <div class="headline-container">
+         <h1 ref="title" class="title invisible text-5xl/[1.6] font-bold">
             <span class="hover-effect-text-underline-marker relative inline-block">Discover</span> &
             <span class="text-span text-primary">Challenge</span><br />
             Yourself or Your<br />
             Friends !
          </h1>
-         <p class="paragraph text-base">
+         <p ref="para" class="paragraph invisible text-base">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br />
             do eiusmod tempor incididunt.
          </p>
-         <Button class="button1" raised>
-            <span class="text">Discover</span>
-            <span class="icon"><IconPlay svg-width="34" svg-color="#5250A4" /></span>
-         </Button>
-         <Button class="button2" label="Learn more" variant="outlined" raised />
+         <div ref="buttons" class="button-container invisible">
+            <Button class="button1" raised>
+               <span class="text">Discover</span>
+               <span class="icon"><IconPlay svg-width="34" svg-color="#5250A4" /></span>
+            </Button>
+            <Button class="button2" label="Learn more" variant="outlined" raised />
+         </div>
       </div>
 
       <div class="invisible" ref="illuSection">
@@ -72,48 +78,50 @@ onMounted(() => {
       > .paragraph {
          margin-top: 2rem;
       }
-      > .button1 {
-         font-size: 1rem;
-         font-weight: var(--p-button-label-font-weight);
-         width: 240px;
-         height: 55px;
-         color: var(--secondary-color);
-         overflow: hidden;
-      }
-      /* -- Handle Hover Effect Btn1 -- */
-      > .button1 .text,
-      .button1 .icon {
-         position: relative;
-         transition: transform 0.3s; /* Smooth transition for animations */
-      }
-      > .button1 .text {
-         transform: translateY(0);
-         line-height: 50px; /* Vertically center the text */
-      }
-      > .button1 .icon {
-         transform: translateY(-120%);
-         position: absolute;
-         line-height: 10px; /* Vertically center the icon */
-      }
-      > .button1:hover .text {
-         transform: translateY(300%);
-      }
-      > .button1:hover .icon {
-         transform: translateY(0);
-      }
-      > .button2 {
-         font-size: 1rem;
-         width: 180px;
-         height: 55px;
-         margin-left: 1rem;
-         border-width: 2px;
-      }
-      > .button2:hover {
-         color: var(--secondary-color);
-      }
-      > .button1,
-      .button2 {
-         margin-top: 1.5rem;
+      > .button-container {
+         > .button1 {
+            font-size: 1rem;
+            font-weight: var(--p-button-label-font-weight);
+            width: 240px;
+            height: 55px;
+            color: var(--secondary-color);
+            overflow: hidden;
+         }
+         /* -- Handle Hover Effect Btn1 -- */
+         > .button1 .text,
+         .button1 .icon {
+            position: relative;
+            transition: transform 0.3s; /* Smooth transition for animations */
+         }
+         > .button1 .text {
+            transform: translateY(0);
+            line-height: 50px; /* Vertically center the text */
+         }
+         > .button1 .icon {
+            transform: translateY(-120%);
+            position: absolute;
+            line-height: 10px; /* Vertically center the icon */
+         }
+         > .button1:hover .text {
+            transform: translateY(300%);
+         }
+         > .button1:hover .icon {
+            transform: translateY(0);
+         }
+         > .button2 {
+            font-size: 1rem;
+            width: 180px;
+            height: 55px;
+            margin-left: 1rem;
+            border-width: 2px;
+         }
+         > .button2:hover {
+            color: var(--secondary-color);
+         }
+         > .button1,
+         .button2 {
+            margin-top: 1.5rem;
+         }
       }
    }
 }
