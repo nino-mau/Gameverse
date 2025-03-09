@@ -2,6 +2,10 @@
 
 // Import Dependencies
 import jwt from 'jsonwebtoken';
+import ms from 'ms';
+
+// Functions
+import { getRefreshTokenInfo } from '../db/mysql.js';
 
 // **** FUNCTIONS ****
 
@@ -22,21 +26,56 @@ export function areAllObjectsItemsTrue(obj) {
    Object.values(obj).every((item) => item === true);
 }
 
-// Generate a an json web token for a new user
-export async function generateUserJWT(userData) {
-   // To replace with env
-   const secretKey = process.env.JWT_SECRET;
+// Check if refresh token is valid (if it exist in db)
+export async function verifyRefreshToken(userId, tokenId) {
+   const data = await getRefreshTokenInfo(userId);
+   if (data) {
+      // Compare token id and verify if token is expired
+      if (tokenId === data.token_id) {
+         console.log('verifyRefreshToken: Refresh token is valid');
+         return true;
+      } else {
+         console.log("verifyRefreshToken: Refresh token isn't valid");
+         return false;
+      }
+   } else {
+      console.log("verifyRefreshToken: Refresh token isn't valid");
+      return false;
+   }
+}
+
+// Generate a an json web token for a new user, duration is a string with a time identifier (m/h)
+export async function generateUserAccessToken(userData) {
+   const secretKey = process.env.ACCESS_TOKEN_SECRET;
 
    const token = jwt.sign(
       {
          id: userData.id,
          username: userData.username,
          email: userData.email,
-         role: 'user',
+         role: 'accessToken',
       },
       secretKey,
       {
-         expiresIn: '1h',
+         expiresIn: ms(process.env.ACCESS_TOKEN_DURATION),
+      },
+   );
+   return token;
+}
+
+// Generate a a long term json web token for a user who selected "remember me"
+export async function generateUserRefreshToken(userData, tokenId, duration) {
+   const secretKey = process.env.REFRESH_TOKEN_SECRET;
+
+   const token = jwt.sign(
+      {
+         tokenId: tokenId,
+         userId: userData.id,
+         role: 'refreshToken',
+      },
+      secretKey,
+      {
+         expiresIn: duration,
       },
    );
    return token;

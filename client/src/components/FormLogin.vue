@@ -33,6 +33,8 @@ const toast = useToast();
 const router = useRouter();
 const serverError = ref(null);
 const userStore = useUserAuthStore();
+// Store bool of the remember me checkbox
+const rememberMeValue = ref();
 
 // **** LOGIC ****
 
@@ -64,11 +66,21 @@ const onFormSubmit = async (e) => {
 
    if (e.valid) {
       try {
-         const result = await postData('http://gameverse.local/api/users/login', e.values);
+         if (rememberMeValue.value === undefined) {
+            rememberMeValue.value = false;
+         }
+
+         const data = {
+            username: e.values.username,
+            password: e.values.password,
+            rememberMe: rememberMeValue.value,
+         };
+         const result = await postData('https://gameverse.local/api/users/login', data);
 
          if (result.status === 'success') {
             // Use user store function which store token in browser storage
-            userStore.setToken(result.data.token);
+            // userStore.setToken(result.data.token);
+            userStore.isUserLoggedIn = true;
 
             // Redirect user to profile page
             router.push('/');
@@ -162,7 +174,12 @@ const onFormSubmit = async (e) => {
                >
             </FloatLabel>
             <div class="inline-flex items-center">
-               <Checkbox inputId="login-rememberme-checkbox" value="Cheese" />
+               <Checkbox
+                  name="rememberMe"
+                  inputId="login-rememberme-checkbox"
+                  :binary="true"
+                  v-model="rememberMeValue"
+               />
                <label for="login-rememberme-checkbox" class="pl-2 font-semibold text-[#64748b]"
                   >Remember Me
                </label>

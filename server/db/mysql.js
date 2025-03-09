@@ -3,6 +3,7 @@
 // Import dependencies
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
+import { v4 as uuidv4 } from 'uuid';
 
 // **** FUNCTIONS ****
 
@@ -23,7 +24,7 @@ async function insertInDb(query, values) {
 
    try {
       connection = await pool.getConnection();
-      const [insertResult] = await connection.query(query, [values]);
+      const [insertResult] = await connection.query(query, values);
 
       console.log('Insert Result:', insertResult);
       console.log('Affected rows:', insertResult.affectedRows);
@@ -34,7 +35,7 @@ async function insertInDb(query, values) {
       console.error('Error inserting data:', error);
       throw error;
    } finally {
-      if (connection) await connection.release();
+      if (connection) connection.release();
    }
 }
 
@@ -97,6 +98,35 @@ export async function insertGamesDetails(gamesArr) {
    insertInDb(sql, values);
 }
 
+// Put refresh token (id, expire date) in DB, will be used to create JWT token sent to frontend and verify it or revoke it after that
+export async function createRefreshTokenDb(userData) {
+   const tokenId = uuidv4();
+
+   const tokenDuration = userData.rememberMe
+      ? process.env.REFRESH_TOKEN_LONG
+      : process.env.REFRESH_TOKEN_SHORT;
+
+   console.log(tokenDuration);
+
+   const sql = `
+      INSERT INTO refresh_tokens (user_id, token_id) 
+      VALUES (?, ?)
+      ON DUPLICATE KEY UPDATE 
+         token_id = VALUES(token_id)
+   `;
+   const values = [userData.id, tokenId];
+
+   const r = await insertInDb(sql, values);
+
+   if (r.affectedRows > 0) {
+      console.log('createRefreshTokenDb: Succesfuly inserted token id in db');
+      return { duration: tokenDuration, tokenId: tokenId };
+   } else {
+      console.log('createRefreshTokenDb: Creating refresh token row in db failed');
+      return false;
+   }
+}
+
 // *** SELECTS ***
 
 // Take a select query and execute it
@@ -110,6 +140,11 @@ async function selectInDb(query, value) {
 
       const results = rows;
       console.log('Query results:', results);
+
+      if (results.length === 1) {
+         return results[0];
+      }
+
       return results;
    } catch (error) {
       console.error('Error selecting data:', error);
@@ -126,7 +161,7 @@ export async function getAuthData() {
    return r;
 }
 
-// Extract data of one user
+// Extract data of one user identified by username
 export async function getUserData(username) {
    const sql = `SELECT user_id, user_name, user_email, user_password FROM users WHERE user_name = ?`;
    const r = selectInDb(sql, username);
@@ -135,6 +170,32 @@ export async function getUserData(username) {
       return r;
    } else {
       console.log('User not found in database');
+      return false;
+   }
+}
+
+// Extract data of one user identified by id
+export async function getUserDataById(userId) {
+   const sql = `SELECT user_id, user_name, user_email FROM users WHERE user_id = ?`;
+   const r = selectInDb(sql, userId);
+
+   if (r) {
+      return r;
+   } else {
+      console.log('User not found in database');
+      return false;
+   }
+}
+
+// Extract token id from the corresponding user id in refresh token table
+export async function getRefreshTokenInfo(userId) {
+   const sql = `SELECT token_id FROM refresh_tokens WHERE user_id = ?`;
+   const r = await selectInDb(sql, userId);
+
+   if (r) {
+      return r;
+   } else {
+      console.log('getRefreshTokenInf: Refresh token not found in database');
       return false;
    }
 }

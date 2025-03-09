@@ -3,33 +3,42 @@ import Express from 'express';
 
 // Import dependencies
 import 'dotenv/config';
+import cookieParser from 'cookie-parser';
 
 // Import middlewares
 import cors from 'cors';
 
 // Import routes
-import authRoutes from './routes/users.route.js';
+import usersRoutes from './routes/users.route.js';
 
-// **** LOGIC ****
+// **** SETUP ****
 
-// *** Express Setup ***
-
-const app = Express();
 // const port = process.env.PORT;
 const port = process.env.PORT;
-// Allow express to parse json notably receiving data from post requests
-app.use(Express.json());
+
+const app = Express();
+
 // Allow fetch requests from frontend local dev environement
 app.use(
    cors({
-      origin: 'http://localhost:5173', // Or your allowed origin
+      origin: ['http://localhost:5173', 'https://gameverse.local'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
+      exposedHeaders: ['set-cookie'],
    }),
 );
 
+// Allow express to parse json notably receiving data from post requests
+app.use(Express.json());
+
+// Allow to parse and manipulate cookies more easily
+app.use(cookieParser());
+
 // *** Routes setup ***
 
-// Use the register endpoint route
-app.use('/api', authRoutes);
+// Use all the users related ressources and endpoints
+app.use('/api', usersRoutes);
 
 app.get('/', (req, res) => {
    res.send('Hello World!');
@@ -38,3 +47,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
    console.log(`Example app listening on port ${port}`);
 });
+
+// **** LOGIC ****

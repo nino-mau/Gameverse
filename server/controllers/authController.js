@@ -2,13 +2,16 @@
 
 // Dependencies
 import bcrypt from 'bcrypt';
+import ms from 'ms';
 
 // Functions
 import { isValidEmailFormat } from '../utils/utils.js';
 import { getAuthData } from '../db/mysql.js';
 import { getUserData } from '../db/mysql.js';
 import { registerUserDb } from '../db/mysql.js';
-import { generateUserJWT } from '../utils/utils.js';
+import { generateUserAccessToken } from '../utils/utils.js';
+import { generateUserRefreshToken } from '../utils/utils.js';
+import { createRefreshTokenDb } from '../db/mysql.js';
 
 // **** REGISTER ****
 
@@ -40,7 +43,7 @@ export async function userRegistration(req, res) {
          if (r.success === true) {
             // Create short term JWT token for user
             userData.id = r.id;
-            const token = await generateUserJWT(userData);
+            const token = await generateUserAccessToken(userData);
 
             res.status(200).json({
                status: 'success',
@@ -139,45 +142,64 @@ async function _isUserInfoValid(data) {
 
 // **** LOGIN ****
 
-// Handle receiving posted login data, validate it and send a short term JWT token
+// Handle loging in the user with a access/refresh token method
 export async function userLogin(req, res) {
    try {
       const userData = {
          id: null,
          username: req.body.username,
          email: null,
-         pwd: req.body.password,
+         password: req.body.password,
+         rememberMe: req.body.rememberMe,
       };
 
-      const r = await _verifyLoginInfo(userData.username, userData.pwd);
+      const r = await _verifyLoginInfo(userData.username, userData.password);
 
       if (r) {
+         // Take missing user data in db
          userData.id = r.user_id;
          userData.email = r.user_email;
 
-         // Create a JWT token with users infos
-         const token = await generateUserJWT(userData);
+         // Create a refresh token id to be stored in db and used to create JWT refresh token
+         const r2 = await createRefreshTokenDb(userData);
 
-         // Send response with JWT token and location of user ressource
-         res.location(`/api/users/${r.id}`)
+         // Create an access and refresh token for the user
+         const accessToken = await generateUserAccessToken(userData);
+         const refreshToken = await generateUserRefreshToken(userData, r2.tokenId, r2.duration);
+
+         // Configure cookie for access token
+         const accessTokenCookie = {
+            httpOnly: true,
+            secure: true, // True (https) when in production and false (http) when in dev
+            sameSite: 'none',
+            domain: 'gameverse.local',
+            maxAge: ms(process.env.ACCESS_TOKEN_DURATION), // 15 m
+         };
+         const refreshTokenCookie = {
+            httpOnly: true,
+            secure: true, // True (https) when in production and false (http) when in dev
+            sameSite: 'none',
+            domain: 'gameverse.local',
+            maxAge: userData.rememberMe
+               ? ms(process.env.REFRESH_TOKEN_LONG)
+               : ms(process.env.REFRESH_TOKEN_SHORT), // 1 or 15 days
+         };
+
+         // Send cookies to client
+         res.cookie('accessToken', accessToken, { ...accessTokenCookie });
+         res.cookie('refreshToken', refreshToken, { ...refreshTokenCookie });
+
+         // Respond to client
+         res.location(`/api/users/${userData.id}`)
             .status(201)
             .json({
                status: 'success',
                data: {
                   id: userData.id,
-                  username: userData.username,
-                  email: userData.email,
-                  token: token,
                },
                message: 'User login successful',
             });
          console.log('userLogin: User login successful');
-      } else {
-         res.status(422).json({
-            status: 'failure',
-            error: 'Username or password invalid',
-         });
-         console.error('userLogin: Login failed, username or Password invalid');
       }
    } catch (error) {
       console.error('userLogin: Unexpected error caused login process to fail:', error);
@@ -197,18 +219,19 @@ async function _verifyLoginInfo(username, password) {
          console.log('_verifyLoginInfo: User not found in database');
          return false;
       } else {
-         // Wrap bcrypt.compare in a Promise to use with await
-         return new Promise((resolve, reject) => {
-            bcrypt.compare(password, dbUser[0].user_password, (err, result) => {
-               if (err) {
-                  console.error('_verifyLoginInfo: Error comparing passwords:', err);
-                  reject(err); // Reject the Promise on bcrypt error
-                  return;
-               } else if (result) {
-                  resolve(dbUser[0]);
-               }
-            });
-         });
+         try {
+            const isPwdValid = await bcrypt.compare(password, dbUser[0].user_password);
+            if (isPwdValid) {
+               console.log('_verifyLoginInfo: Passwords match');
+               return dbUser[0];
+            } else {
+               console.error('_verifyLoginInfo: Passwords do not match');
+               return false;
+            }
+         } catch (error) {
+            console.error('_verifyLoginInfo: Problem with comparing process', error);
+            return false;
+         }
       }
    } catch (error) {
       console.error('_verifyLoginInfo: Unexpected error during login info verification', error);

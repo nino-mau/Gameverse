@@ -24,7 +24,8 @@ const toast = useToast();
 
 onMounted(async () => {
    // Verify user token and get user infos
-   const r = await userStore.verifyUserLoggin();
+   console.log('ON MOUNT');
+   const r = await userStore.checkLoginStatus();
    if (r === true) {
       toast.add({
          severity: 'success',
@@ -40,7 +41,6 @@ onMounted(async () => {
          life: 3000,
       });
    }
-   console.log('ON MOUNT');
    await userStore.getUserData();
    console.log('ON MOUNT');
 });
@@ -49,7 +49,7 @@ onMounted(async () => {
 watch(
    () => route.fullPath,
    async () => {
-      await userStore.verifyUserLoggin();
+      await userStore.checkLoginStatus();
       console.log('WATCH');
       await userStore.getUserData();
       console.log('WATCH');

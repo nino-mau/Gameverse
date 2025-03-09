@@ -117,12 +117,12 @@ const onFormSubmit = async (e) => {
    if (e.valid) {
       // Post register data to the register endpoint triggering register process
       try {
-         const result = await postData('http://gameverse.local/api/users/register', e.values);
+         const result = await postData('https://gameverse.local/api/users/register', e.values);
 
          // Handle failure and success
          if (result.status === 'success') {
             // Use user store function which store token in browser storage
-            userStore.setToken(result.data.token);
+            userStore.isUserLoggedIn = true;
 
             // Redirect user to profile page
             router.push('/');

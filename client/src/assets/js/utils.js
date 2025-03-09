@@ -56,8 +56,10 @@ export async function postData(url, data) {
    try {
       const response = await fetch(url, {
          method: 'POST',
+         credentials: 'include',
          headers: {
             'Content-Type': 'application/json',
+            Origin: window.location.origin,
          },
          body: JSON.stringify(data),
       });
@@ -76,13 +78,13 @@ export async function postData(url, data) {
 }
 
 // Reusable fetch function to get a ressource from the server, takes url and current JWT token
-export async function getRessource(url, token) {
+export async function getRessource(url) {
    try {
       const response = await fetch(url, {
          method: 'GET',
+         credentials: 'include',
          headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
          },
       });
 
@@ -109,12 +111,13 @@ export async function checkUserTokenValidity(token) {
    }
 
    try {
-      const response = await fetch('http://gameverse.local/api/users/token-auth', {
+      const response = await fetch('https://gameverse.local/api/users/token-auth', {
          method: 'POST',
          headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
          },
+         credentials: true,
          body: JSON.stringify({}),
       });
 

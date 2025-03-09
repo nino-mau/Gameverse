@@ -1,21 +1,13 @@
 // **** IMPORT ****
 import { defineStore } from 'pinia';
 
-// Functions
-import { getRessource } from '@/assets/js/utils';
-
 // **** STORE SETUP ****
 
 // Pinia store that handle user state (loggedin state, loggedout state, server authentification, user data...)
 export const useUserAuthStore = defineStore('userAuth', {
    state: () => {
-      const userTokenKeyLocal = 'userToken';
-
       return {
          isUserLoggedIn: false,
-         // short term JWT token
-         userTokenKey: userTokenKeyLocal,
-         userToken: localStorage.getItem(userTokenKeyLocal) || null,
          userData: {
             id: null,
             username: null,
@@ -23,34 +15,8 @@ export const useUserAuthStore = defineStore('userAuth', {
          },
       };
    },
-   getters: {
-      // Return bool based on value of userToken;
-      isUserAuthenticated() {
-         if (this.userToken) {
-            return true;
-         } else if (!this.userToken) {
-            return false;
-         } else {
-            return false;
-         }
-      },
-   },
+   getters: {},
    actions: {
-      // Use to set token
-      setToken(token) {
-         this.userToken = token;
-         localStorage.setItem(this.userTokenKey, token);
-         this.isUserLoggedIn = true;
-      },
-
-      // Use to disconnect user
-      clearToken() {
-         this.userToken = null;
-         localStorage.removeItem(this.userTokenKey);
-         this.isUserLoggedIn = false;
-         this.userData = { id: null, username: null, email: null };
-      },
-
       // Used to update isUserLoggedIn
       setLoginStatus(boolean) {
          this.isUserLoggedIn = boolean;
@@ -58,89 +24,161 @@ export const useUserAuthStore = defineStore('userAuth', {
 
       // Use clearToken to disconect user and create popup
       logoutUser() {
-         this.clearToken();
+         this.isUserLoggedIn = false;
          console.log('logoutUser: User disconnected');
       },
 
-      // Private function used to check with the server if the locally stored token is valid
-      async _validateUserToken() {
+      // Use to get new access token when last one expired
+      async getNewAccessToken() {
          try {
-            const response = await fetch('http://gameverse.local/api/users/token-auth', {
+            const response = await fetch('https://gameverse.local/api/users/refresh-token', {
                method: 'POST',
+               credentials: 'include',
                headers: {
-                  Authorization: `Bearer ${this.userToken}`,
                   'Content-Type': 'application/json',
                },
                body: JSON.stringify({}),
             });
 
-            if (response.ok) {
-               console.log('validateUserToken: Validated user token.');
+            if (response.status === 200) {
+               this.isUserLoggedIn = true;
+               console.log('getNewAccessToken: Refresh key validated, new access token provided');
                return true;
+            } else if (response.status === 401) {
+               console.log('getNewAccessToken:', response.error);
+               return false;
             } else {
-               if (response.status === 401 || response.status === 403) {
-                  console.log(
-                     'validateUserToken: JWT is invalid (status:',
-                     response.status,
-                     ' - POST request).',
-                  );
-               } else {
-                  console.error(
-                     `validateUserToken: JWT Check failed, unexpected error (POST): ${response.status}`,
-                  );
-               }
+               console.log('getNewAccessToken: ', response.error);
                return false;
             }
          } catch (error) {
-            console.error(
-               'validateUserToken: JWT Check failed, fetch request failed (POST):',
-               error,
-            );
+            console.error('getNewAccessToken: Unexpected Fetch Error', error);
             return false;
          }
       },
 
-      // Use _validateUserToken to determine if user is logged in
-      async verifyUserLoggin() {
-         if (this.userToken) {
-            this.isUserLoggedIn = true;
-            const r = await this._validateUserToken();
+      // Use to get protected ressource on server
+      async getProtectedRessource(ressourceUrl, ressourceName) {
+         try {
+            const r = await fetch(ressourceUrl, {
+               method: 'GET',
+               credentials: 'include',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+            });
 
-            if (r === true) {
-               this.isUserLoggedIn = true;
-               console.log('checkLoginStatus: User logged in');
-               return true;
+            const data = await r.json();
+            const status = r.status;
+
+            if (status === 200) {
+               console.log('getProtectedRessource: Succesfuly received ', ressourceName);
+               return data;
+            } else if (status === 401) {
+               // Get new access token
+               await this.getNewAccessToken();
+
+               // Retry to get the ressource
+               const r2 = await fetch(ressourceUrl, {
+                  method: 'GET',
+                  credentials: 'include',
+                  headers: {
+                     'Content-Type': 'application/json',
+                  },
+               });
+               const rdata = await r2.json();
+               const status = r2.status;
+
+               if (status === 200) {
+                  console.log('getProtectedRessource: Succesfuly received ', ressourceName);
+                  return rdata;
+               } else if (status === 500) {
+                  console.log('getProtectedRessource: User is not logged in or unexpected error');
+                  return false;
+               } else {
+                  console.log('getProtectedRessource: Failed to get ', ressourceName);
+                  return false;
+               }
+            } else if (status === 500) {
+               console.log('getProtectedRessource: User is not logged in or unexpected error');
+               return false;
             } else {
-               localStorage.removeItem(this.userTokenKey);
-               this.isUserLoggedIn = false;
-               console.error('checkLoginStatus: Invalid user token, disonnecting user');
+               console.log('getProtectedRessource: Failed to get ', ressourceName);
                return false;
             }
-         } else {
-            this.isUserLoggedIn = false;
-            console.log('checkLoginStatus: No user logged in');
+         } catch (error) {
+            console.error(
+               'getProtectedRessource: Fetch error while getting ',
+               ressourceName + ' :' + error,
+            );
          }
       },
 
-      // Make request to the server to get user data corresponding to locally stored token
+      // Use getProtectedRessource to get user data
       async getUserData() {
-         if (this.userToken) {
-            try {
-               const result = await getRessource(
-                  'http://gameverse.local/api/users/me',
-                  this.userToken,
-               );
-               console.log('getUserData: Received user data :', result);
-               console.log('getUserData: local this.userData :', this.userData);
-               // Put the received user info in the reactive userData object
-               Object.assign(this.userData, result);
-               console.log('getUserData: Processed user data (after assign):', this.userData); // <--- COMPLETE LOG HERE
-               console.log('getUserData: Received user data :', result); // Keep original log too
-            } catch (error) {
-               console.error('getUserData: Unexpected fetch error:', error);
+         try {
+            const userData = await this.getProtectedRessource(
+               'https://gameverse.local/api/users/me',
+               'User Data',
+            );
+            if (userData) {
+               this.isUserLoggedIn = true;
+               Object.assign(this.userData, userData);
+            } else {
+               this.isUserLoggedIn = false;
+               console.log('getUserData: Unexpected error');
+               return false;
             }
-         } else {
-            console.log('getUserData: No user is logged in');
+         } catch (error) {
+            console.log('getUserData: Unexpected error', error);
+         }
+      },
+
+      // Use to update isUserLoggedIn boolean
+      async checkLoginStatus() {
+         try {
+            const r = await fetch('https://gameverse.local/api/users/access-token', {
+               method: 'POST',
+               credentials: 'include',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({}),
+            });
+
+            if (r.status === 200) {
+               this.isUserLoggedIn = true;
+
+               console.log('checkLoginStatus: User is logged in !');
+            } else if (r.status === 401) {
+               await this.getNewAccessToken();
+
+               const r2 = await fetch('https://gameverse.local/api/users/access-token', {
+                  method: 'POST',
+                  credentials: 'include',
+                  headers: {
+                     'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({}),
+               });
+               if (r2.status === 200) {
+                  this.isUserLoggedIn = true;
+
+                  console.log('checkLoginStatus: User is logged in');
+               } else {
+                  this.isUserLoggedIn = false;
+
+                  console.log('checkLoginStatus: User is not logged in');
+               }
+            } else {
+               this.isUserLoggedIn = false;
+
+               console.log('checkLoginStatus: User is not logged in');
+            }
+         } catch (error) {
+            this.isUserLoggedIn = false;
+
+            console.error('getNewAccessToken: Unexpected Fetch Error', error);
          }
       },
    },
