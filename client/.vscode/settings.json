@@ -1,20 +1,26 @@
 {
    "explorer.fileNesting.enabled": true,
    "explorer.fileNesting.patterns": {
-      "package.json": "package-lock.json, .eslint*, eslint*, .prettier*, prettier*"
+      "tsconfig.json": "tsconfig.*.json, env.d.ts",
+      "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+      "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig"
    },
    "editor.codeActionsOnSave": {
       "source.fixAll": "explicit"
    },
+   // PEACOCK COLORS
    "workbench.colorCustomizations": {
+      "folderPathColor.custom1": "#ffcc55",
+      "folderPathColor.custom2": "#42b883",
+      "folderPathColor.custom3": "#4488FF",
       "commandCenter.border": "#15202b99",
-      "sash.hoverBorder": "#fbed80",
-      "titleBar.activeBackground": "#f9e64f",
+      "sash.hoverBorder": "#65c89b",
+      "titleBar.activeBackground": "#42b883",
       "titleBar.activeForeground": "#15202b",
-      "titleBar.inactiveBackground": "#f9e64f99",
+      "titleBar.inactiveBackground": "#42b88399",
       "titleBar.inactiveForeground": "#15202b99"
    },
-   "peacock.color": "#f9e64f",
+   "peacock.color": "#42b883",
    // *** FORMAT SETTINGS ***
    "editor.defaultFormatter": "esbenp.prettier-vscode",
    "editor.formatOnType": false,

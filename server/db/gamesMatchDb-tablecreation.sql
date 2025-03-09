@@ -14,9 +14,8 @@ CREATE TABLE `users` (
   `user_name` varchar(100) NOT NULL,
   `user_email` varchar(100) NOT NULL,
   `user_password` varchar(100) NOT NULL,
-  `user_remember_token` mediumtext,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- gameverse.games_details definition
@@ -52,6 +51,16 @@ CREATE TABLE `games_platforms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
+-- gameverse.refresh_tokens definition
+
+CREATE TABLE `refresh_tokens` (
+  `user_id` int NOT NULL,
+  `token_id` longtext NOT NULL,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `refresh_token_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 -- gameverse.users_details definition
 
 CREATE TABLE `users_details` (
@@ -72,6 +81,16 @@ CREATE TABLE `users_favorites_games` (
   KEY `users_favorites_games_games_FK` (`game_id`),
   CONSTRAINT `users_favorites_games_games_FK` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`),
   CONSTRAINT `users_favorites_games_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- gameverse.users_favorites_genres definition
+
+CREATE TABLE `users_favorites_genres` (
+  `user_id` int NOT NULL,
+  `game_genre` varchar(100) NOT NULL,
+  PRIMARY KEY (`user_id`,`game_genre`),
+  CONSTRAINT `users_favorites_genres_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -113,19 +132,6 @@ CREATE TABLE `users_owned_games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
--- gameverse.users_ranks definition
-
-CREATE TABLE `users_ranks` (
-  `user_id` int NOT NULL,
-  `game_id` int NOT NULL,
-  `user_rank` varchar(100) NOT NULL,
-  PRIMARY KEY (`user_id`,`game_id`),
-  KEY `users_ranks_games_FK` (`game_id`),
-  CONSTRAINT `users_ranks_games_FK` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`),
-  CONSTRAINT `users_ranks_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
 -- gameverse.users_platforms definition
 
 CREATE TABLE `users_platforms` (
@@ -136,11 +142,14 @@ CREATE TABLE `users_platforms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
--- gameverse.users_favorites_genres definition
+-- gameverse.users_ranks definition
 
-CREATE TABLE `users_favorites_genres` (
+CREATE TABLE `users_ranks` (
   `user_id` int NOT NULL,
-  `game_genre` varchar(100) NOT NULL,
-  PRIMARY KEY (`user_id`,`game_genre`),
-  CONSTRAINT `users_favorites_genres_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+  `game_id` int NOT NULL,
+  `user_rank` varchar(100) NOT NULL,
+  PRIMARY KEY (`user_id`,`game_id`),
+  KEY `users_ranks_games_FK` (`game_id`),
+  CONSTRAINT `users_ranks_games_FK` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`),
+  CONSTRAINT `users_ranks_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
