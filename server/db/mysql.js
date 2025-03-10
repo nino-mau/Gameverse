@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   password: 'C0sezok?92', // Replace with your MySQL password
+   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
@@ -43,31 +43,27 @@ async function insertInDb(query, values) {
 export async function insertGamesNames(gamesArr) {
    const values = gamesArr.map((obj) => [obj.name]);
    const sql = `INSERT INTO games (game_name) VALUES ?`;
-   insertInDb(sql, values);
+   insertInDb(sql, [values]);
 }
 
 // Insert games genre and the corresponding games id in the games_genre table
-export async function insertGamesGenres(gamesArr) {
-   let namesGenresArr = [];
+export async function insertGamesGenres(gamesArr, initialId = 1) {
+   let values = [];
 
-   // Create an array of game -> genre objects to use for the sql query
-   gamesArr.forEach((game, id) => {
-      const genres = game.genres;
-      genres.forEach((genre) => {
-         const Obj = new Object();
-         Obj[id + 1] = genre;
-         namesGenresArr.push(Obj);
-         delete Obj.name;
+   // Create array of [game_id, genre] pairs
+   gamesArr.forEach((game, index) => {
+      const gameId = index + initialId; // Game IDs start at 1
+      game.genres.forEach((genre) => {
+         values.push([gameId, genre]);
       });
    });
 
-   const values = namesGenresArr.map((obj) => [Object.keys(obj), Object.values(obj)]);
    const sql = `INSERT INTO games_genre (game_id, game_genre) VALUES ?`;
-   insertInDb(sql, values);
+   insertInDb(sql, [values]);
 }
 
 // Insert games platforms and the corresponding games id in the games_genre table
-export async function insertGamesPlatforms(gamesArr) {
+export async function insertGamesPlatforms(gamesArr, initialId = 1) {
    let namesPlatformsArr = [];
 
    // Create an array of game -> genre objects to use for the sql query
@@ -75,7 +71,7 @@ export async function insertGamesPlatforms(gamesArr) {
       const platforms = game.platforms;
       platforms.forEach((platform) => {
          const Obj = new Object();
-         Obj[id + 1] = platform;
+         Obj[id + initialId] = platform;
          namesPlatformsArr.push(Obj);
          delete Obj.name;
       });
@@ -83,19 +79,19 @@ export async function insertGamesPlatforms(gamesArr) {
 
    const values = namesPlatformsArr.map((obj) => [Object.keys(obj), Object.values(obj)]);
    const sql = `INSERT INTO games_platforms (game_id, game_platform) VALUES ?`;
-   insertInDb(sql, values);
+   insertInDb(sql, [values]);
 }
 
 // Insert desc, price and review in the games_details table
-export async function insertGamesDetails(gamesArr) {
+export async function insertGamesDetails(gamesArr, initialId = 1) {
    const values = gamesArr.map((obj, index) => [
-      index + 1,
+      index + initialId,
       obj.description,
       obj.user_rating,
       obj.price,
    ]);
    const sql = `INSERT INTO games_details (game_id, game_description, game_review, game_price) VALUES ?`;
-   insertInDb(sql, values);
+   insertInDb(sql, [values]);
 }
 
 // Put refresh token (id, expire date) in DB, will be used to create JWT token sent to frontend and verify it or revoke it after that

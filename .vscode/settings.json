@@ -5,9 +5,9 @@
    ],
    // PEACOCK COLORS
    "workbench.colorCustomizations": {
-      "folderPathColor.custom1": "#ffcc55",
-      "folderPathColor.custom2": "#42b883",
-      "folderPathColor.custom3": "#4488FF"
-   }
+    "folderPathColor.custom1": "#ffcc55",
+    "folderPathColor.custom2": "#42b883",
+    "folderPathColor.custom3": "#4488FF"
+}
    // "peacock.color": "#113324"
 }
