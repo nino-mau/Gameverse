@@ -14,10 +14,11 @@ import { ChevronDown } from 'lucide-vue-next';
 import IconLibrary from './icons/IconLibrary.vue';
 import IconGameController from './icons/IconGameController.vue';
 import IconChevronDownFilledHover from './icons/IconChevronDownFilledHover.vue';
+
 // PrimeVue Components
 import Button from 'primevue/button';
-import TieredMenu from 'primevue/tieredmenu';
 import Popover from 'primevue/popover';
+import TieredMenu from 'primevue/tieredmenu';
 
 // Async
 const Avatar = defineAsyncComponent(() => import('primevue/avatar'));
@@ -29,6 +30,7 @@ const IconSearch = defineAsyncComponent(() => import('./icons/IconSearch.vue'));
 
 // **** INIT ****
 
+const router = useRouter();
 // Init pinia store
 const userStore = useUserAuthStore();
 // Get reactive state from user Store
@@ -50,6 +52,9 @@ const items = ref([
       label: 'Browse',
       icon: markRaw(IconLibrary),
       iconProps: { svgColor: '#334155', svgWidth: '20' },
+      command: () => {
+         router.push('/browse');
+      },
    },
    {
       label: 'Discover',
@@ -80,6 +85,7 @@ const accountPopover = ref();
 // True when popover is open
 const isPopoverOpen = ref(false);
 
+// Open account popover
 const toggleAccountPopover = (event) => {
    accountPopover.value.toggle(event);
    isPopoverOpen.value = !isPopoverOpen.value;
@@ -90,23 +96,15 @@ const onPopoverHide = () => {
 
 // *** Handle Routing ***
 
-const router = useRouter();
-
+function goToHomePage() {
+   router.push('/');
+}
 function goToLoginPage() {
    router.push('/login');
 }
 function goToRegisterPage() {
    router.push('/register');
 }
-
-// onMounted(() => {
-//    console.log('MainNavbar Mounted - isUserLoggedIn:', isUserLoggedIn.value); // Log on mount
-// });
-
-// watch(isUserLoggedIn, (newValue, oldValue) => {
-//    // Watch isUserLoggedIn ref
-//    console.log('isUserLoggedIn Ref changed in MainNavbar:', oldValue, '=>', newValue);
-// });
 </script>
 
 <template>
@@ -117,7 +115,13 @@ function goToRegisterPage() {
       </div>
       <div class="link-container">
          <ul class="list text-base font-normal">
-            <li class="hover-effect-text-underline">Home</li>
+            <li
+               role="link"
+               @click="goToHomePage"
+               class="hover-effect-text-underline cursor-pointer"
+            >
+               Home
+            </li>
             <li class="hover-effect-text-underline after:w-[75%]">
                <span
                   :class="['games-link', isDropdownOpen ? '' : 'hover-icon-spin']"
@@ -143,14 +147,6 @@ function goToRegisterPage() {
                   @hide="onMenuHide"
                   popup
                >
-                  <!-- <template #item="{ item }">
-                     <a class="p-menuitem-link">
-                        <span class="p-menuitem-icon">
-                           <component v-if="item.icon" :is="item.icon" v-bind="item.iconProps" />
-                        </span>
-                        <span class="p-menuitem-text">{{ item.label }}</span>
-                     </a>
-                  </template> -->
                   <template #itemicon="{ item }">
                      <component :is="item.icon" v-bind="item.iconProps" />
                   </template>

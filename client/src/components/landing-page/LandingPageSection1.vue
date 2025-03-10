@@ -40,7 +40,7 @@ onMounted(() => {
    <div class="lp1-container overflow-hidden">
       <div class="headline-container">
          <h1 ref="title" class="title invisible text-5xl/[1.6] font-bold">
-            <span class="hover-effect-text-underline-marker relative inline-block">Discover</span> &
+            <span class="hover-effect-text-underline-marker relative">Discover</span> &
             <span class="text-span text-primary">Challenge</span><br />
             Yourself or Your<br />
             Friends !

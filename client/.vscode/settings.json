@@ -39,14 +39,15 @@
    "git.decorations.enabled": false,
    // "material-icon-theme.activeIconPack": "vue",
    "material-icon-theme.folders.associations": {
+      "browse-games": "vue",
+      "landing-page": "vue",
       "illustrations": "images",
       "illustration": "images",
-      "landing-page": "home",
       "unused": "dump"
    },
    // *** Tailwind Fold settings ***
    "tailwind-fold.autoFold": true,
    "tailwind-fold.foldStyle": "ALL",
-   "tailwind-fold.unfoldedTextOpacity": 0.6,
+   "tailwind-fold.unfoldedTextOpacity": 0.9,
    "tailwind-fold.foldLengthThreshold": 50
 }
