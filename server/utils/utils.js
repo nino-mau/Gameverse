@@ -3,11 +3,22 @@
 // Import Dependencies
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
+import fs from 'fs';
 
 // Functions
 import { getRefreshTokenInfo } from '../db/mysql.js';
 
 // **** FUNCTIONS ****
+
+// Convert content of a json file to a javascript object
+export function jsonToObject(file) {
+   try {
+      const data = fs.readFileSync(file, 'utf8');
+      return JSON.parse(data);
+   } catch (err) {
+      console.error('Error:', err);
+   }
+}
 
 // *** Authentifications ***
 

@@ -11,7 +11,8 @@ import { v4 as uuidv4 } from 'uuid';
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   // password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   password: 'C0sezok?92', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
@@ -40,14 +41,14 @@ async function insertInDb(query, values) {
 }
 
 // Insert an array of games names into the games table
-export async function insertGamesNames(gamesArr) {
+export async function insertGameNames(gamesArr) {
    const values = gamesArr.map((obj) => [obj.name]);
-   const sql = `INSERT INTO games (game_name) VALUES ?`;
+   const sql = `INSERT INTO games (name) VALUES ?`;
    insertInDb(sql, [values]);
 }
 
 // Insert games genre and the corresponding games id in the games_genre table
-export async function insertGamesGenres(gamesArr, initialId = 1) {
+export async function insertGameGenres(gamesArr, initialId = 1) {
    let values = [];
 
    // Create array of [game_id, genre] pairs
@@ -58,39 +59,39 @@ export async function insertGamesGenres(gamesArr, initialId = 1) {
       });
    });
 
-   const sql = `INSERT INTO games_genre (game_id, game_genre) VALUES ?`;
+   const sql = `INSERT INTO game_genres (game_id, genre) VALUES ?`;
    insertInDb(sql, [values]);
 }
 
 // Insert games platforms and the corresponding games id in the games_genre table
-export async function insertGamesPlatforms(gamesArr, initialId = 1) {
-   let namesPlatformsArr = [];
+export async function insertGameDevelopers(gamesArr, initialId = 1) {
+   let namesDevelopersArr = [];
 
    // Create an array of game -> genre objects to use for the sql query
    gamesArr.forEach((game, id) => {
-      const platforms = game.platforms;
-      platforms.forEach((platform) => {
+      const developers = game.developers;
+      developers.forEach((platform) => {
          const Obj = new Object();
          Obj[id + initialId] = platform;
-         namesPlatformsArr.push(Obj);
+         namesDevelopersArr.push(Obj);
          delete Obj.name;
       });
    });
 
-   const values = namesPlatformsArr.map((obj) => [Object.keys(obj), Object.values(obj)]);
-   const sql = `INSERT INTO games_platforms (game_id, game_platform) VALUES ?`;
+   const values = namesDevelopersArr.map((obj) => [Object.keys(obj), Object.values(obj)]);
+   const sql = `INSERT INTO game_developers (game_id, developer) VALUES ?`;
    insertInDb(sql, [values]);
 }
 
 // Insert desc, price and review in the games_details table
-export async function insertGamesDetails(gamesArr, initialId = 1) {
+export async function insertGameDetails(gamesArr, initialId = 1) {
    const values = gamesArr.map((obj, index) => [
       index + initialId,
       obj.description,
-      obj.user_rating,
+      obj.steam_review.score,
       obj.price,
    ]);
-   const sql = `INSERT INTO games_details (game_id, game_description, game_review, game_price) VALUES ?`;
+   const sql = `INSERT INTO game_details (game_id, description, review_score, price) VALUES ?`;
    insertInDb(sql, [values]);
 }
 

@@ -1,0 +1,929 @@
+[
+   {
+      "appId": "2001120",
+      "name": "Split Fiction",
+      "price": "49,99€",
+      "description": "Embrace mind-blowing moments as you’re pulled deep into the many worlds of Split Fiction, a boundary-pushing co-op adventure.",
+      "developers": ["Hazelight Studios"],
+      "publishers": ["Electronic Arts"],
+      "genres": ["Action", "Adventure"],
+      "release_date": "6 Mar, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2001120/header.jpg?t=1741288314",
+      "store_url": "https://store.steampowered.com/app/2001120",
+      "steam_review": {
+         "score": 9,
+         "total": 4398,
+         "summary": "Overwhelmingly Positive"
+      }
+   },
+   {
+      "appId": "3241660",
+      "name": "R.E.P.O.",
+      "price": "9,75€",
+      "description": "An online co-op horror game with up to 6 players. Locate valuable, fully physics-based objects and handle them with care as you retrieve and extract to satisfy your creator's desires.",
+      "developers": ["semiwork"],
+      "publishers": ["semiwork"],
+      "genres": ["Action", "Early Access"],
+      "release_date": "26 Feb, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3241660/header.jpg?t=1740578354",
+      "store_url": "https://store.steampowered.com/app/3241660",
+      "steam_review": {
+         "score": 9,
+         "total": 11945,
+         "summary": "Overwhelmingly Positive"
+      }
+   },
+   {
+      "appId": "2246340",
+      "name": "Monster Hunter Wilds",
+      "price": "69,99€",
+      "description": "The unbridled force of nature runs wild and relentless, with environments transforming drastically from one moment to the next. This is a story of monsters and humans and their struggles to live in harmony in a world of duality.",
+      "developers": ["CAPCOM Co., Ltd."],
+      "publishers": ["CAPCOM Co., Ltd."],
+      "genres": ["Action", "Adventure", "RPG"],
+      "release_date": "27 Feb, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2246340/header.jpg?t=1741142072",
+      "store_url": "https://store.steampowered.com/app/2246340",
+      "steam_review": {
+         "score": 6,
+         "total": 60021,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "730",
+      "name": "Counter-Strike 2",
+      "price": "Free",
+      "description": "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2.",
+      "developers": ["Valve"],
+      "publishers": ["Valve"],
+      "genres": ["Action", "Free To Play"],
+      "release_date": "21 Aug, 2012",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg?t=1729703045",
+      "store_url": "https://store.steampowered.com/app/730",
+      "steam_review": {
+         "score": 8,
+         "total": 2322435,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "2943650",
+      "name": "FragPunk",
+      "price": "Free",
+      "description": "FragPunk is a thrilling 5v5 hero shooter where Shard Cards allow you to break the rules of combat and ensure that no two rounds are ever the same. Get ready to unleash your skills!",
+      "developers": ["Bad Guitar Studio"],
+      "publishers": ["Bad Guitar Studio"],
+      "genres": ["Action", "Free To Play"],
+      "release_date": "6 Mar, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2943650/34ec73c3b90db8becc8a656c25c56aacb99ad18d/header.jpg?t=1741587960",
+      "store_url": "https://store.steampowered.com/app/2943650",
+      "steam_review": {
+         "score": 6,
+         "total": 6380,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "1675200",
+      "name": "Steam Deck",
+      "price": "419,--€",
+      "description": "",
+      "developers": [],
+      "publishers": [],
+      "genres": [],
+      "release_date": "17 Jan, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1675200/header.jpg?t=1699990406",
+      "store_url": "https://store.steampowered.com/app/1675200",
+      "steam_review": {
+         "score": 7,
+         "total": 13,
+         "summary": "Positive"
+      }
+   },
+   {
+      "appId": "2429640",
+      "name": "THRONE AND LIBERTY",
+      "price": "Free",
+      "description": "Welcome to THRONE AND LIBERTY, a free-to-play, multi-platform MMORPG. With an always changing environment, Massive Scale PvPvE, and the ability to transform into creatures to battle across land, sea, and air.",
+      "developers": ["NCSOFT"],
+      "publishers": ["Amazon Games"],
+      "genres": ["Action", "Adventure", "Massively Multiplayer", "RPG", "Free To Play"],
+      "release_date": "1 Oct, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2429640/3930116fbc33b812208c9da1ed0599f086a20876/header.jpg?t=1741285277",
+      "store_url": "https://store.steampowered.com/app/2429640",
+      "steam_review": {
+         "score": 5,
+         "total": 29229,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "2669320",
+      "name": "EA SPORTS FC™ 25",
+      "price": "20,99€",
+      "description": "EA SPORTS FC™ 25 gives you more ways to win for the club. Team up with friends in your favourite modes with the new 5v5 Rush, and manage your club to victory as FC IQ delivers more tactical control than ever before.",
+      "developers": ["EA Canada", "EA Romania"],
+      "publishers": ["Electronic Arts"],
+      "genres": ["Simulation", "Sports"],
+      "release_date": "26 Sep, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2669320/header.jpg?t=1740132694",
+      "store_url": "https://store.steampowered.com/app/2669320",
+      "steam_review": {
+         "score": 5,
+         "total": 17522,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "2185060",
+      "name": "Two Point Museum",
+      "price": "29,99€",
+      "description": "Curate and manage incredible museums! Explore to discover amazing artifacts. Design and refine the layout, keep staff happy, guests entertained, donations plentiful… and children off the exhibits",
+      "developers": ["Two Point Studios"],
+      "publishers": ["SEGA"],
+      "genres": ["Casual", "Indie", "Simulation", "Strategy"],
+      "release_date": "4 Mar, 2025",
+      "metacritic_score": 84,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2185060/header.jpg?t=1741615258",
+      "store_url": "https://store.steampowered.com/app/2185060",
+      "steam_review": {
+         "score": 9,
+         "total": 1279,
+         "summary": "Overwhelmingly Positive"
+      }
+   },
+   {
+      "appId": "3159330",
+      "name": "Assassin’s Creed Shadows",
+      "price": "69,99€",
+      "description": "Experience an epic action-adventure story set in feudal Japan! Become a lethal shinobi assassin and powerful legendary samurai as you explore a beautiful open world in a time of chaos.",
+      "developers": [
+         "Ubisoft Quebec",
+         "Ubisoft Belgrade",
+         "Ubisoft Bordeaux",
+         "Ubisoft Bucharest & Craiova",
+         "Ubisoft Chengdu",
+         "Ubisoft Montpellier",
+         "Ubisoft Montreal",
+         "Ubisoft Osaka",
+         "Ubisoft Philippines",
+         "Ubisoft Shanghai",
+         "Ubisoft Singapore",
+         "Ubisoft Sofia",
+         "Ubisoft Ukraine"
+      ],
+      "publishers": ["Ubisoft"],
+      "genres": ["Action", "Adventure", "RPG"],
+      "release_date": "20 Mar, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3159330/header.jpg?t=1741374708",
+      "store_url": "https://store.steampowered.com/app/3159330",
+      "steam_review": {
+         "score": 7,
+         "total": "N/A",
+         "summary": "No user reviews"
+      }
+   },
+   {
+      "appId": "1771300",
+      "name": "Kingdom Come: Deliverance II",
+      "price": "59,99€",
+      "description": "A thrilling story-driven action RPG, with a rich open world, set in 15th century Medieval Europe. Experience the ultimate medieval adventure - through the eyes of young Henry - as you embark on a journey of epic proportions.",
+      "developers": ["Warhorse Studios"],
+      "publishers": ["Deep Silver"],
+      "genres": ["Action", "Adventure", "RPG"],
+      "release_date": "4 Feb, 2025",
+      "metacritic_score": 88,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1771300/header.jpg?t=1739812122",
+      "store_url": "https://store.steampowered.com/app/1771300",
+      "steam_review": {
+         "score": 8,
+         "total": 36797,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "236390",
+      "name": "War Thunder",
+      "price": "Free",
+      "description": "War Thunder is the most comprehensive free-to-play, cross-platform, MMO military game dedicated to aviation, armoured vehicles, and naval craft, from the early 20th century to the most advanced modern combat units. Join now and take part in major battles on land, in the air, and at sea.",
+      "developers": ["Gaijin Entertainment"],
+      "publishers": ["Gaijin Network Ltd"],
+      "genres": ["Action", "Massively Multiplayer", "Simulation", "Free To Play"],
+      "release_date": "15 Aug, 2013",
+      "metacritic_score": 81,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/236390/header.jpg?t=1740747992",
+      "store_url": "https://store.steampowered.com/app/236390",
+      "steam_review": {
+         "score": 6,
+         "total": 254962,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "1874880",
+      "name": "Arma Reforger",
+      "price": "39,99€",
+      "description": "Experience authentic Cold War combat and join the struggle for the sprawling, mid-Atlantic island of Everon and its smaller, offshore territory, Arland – or take on the role of Game Master and create your very own scenarios for others to enjoy.",
+      "developers": ["Bohemia Interactive"],
+      "publishers": ["Bohemia Interactive"],
+      "genres": ["Action", "Simulation", "Strategy"],
+      "release_date": "16 Nov, 2023",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1874880/header.jpg?t=1740582835",
+      "store_url": "https://store.steampowered.com/app/1874880",
+      "steam_review": {
+         "score": 6,
+         "total": 16153,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "1551360",
+      "name": "Forza Horizon 5",
+      "price": "29,99€",
+      "description": "Explore the vibrant open world landscapes of Mexico with limitless, fun driving action in the world’s greatest cars.",
+      "developers": ["Playground Games"],
+      "publishers": ["Xbox Game Studios"],
+      "genres": ["Action", "Adventure", "Racing", "Simulation", "Sports"],
+      "release_date": "8 Nov, 2021",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/header.jpg?t=1741106928",
+      "store_url": "https://store.steampowered.com/app/1551360",
+      "steam_review": {
+         "score": 8,
+         "total": 80156,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1086940",
+      "name": "Baldur's Gate 3",
+      "price": "59,99€",
+      "description": "Baldur’s Gate 3 is a story-rich, party-based RPG set in the universe of Dungeons &amp; Dragons, where your choices shape a tale of fellowship and betrayal, survival and sacrifice, and the lure of absolute power.",
+      "developers": ["Larian Studios"],
+      "publishers": ["Larian Studios"],
+      "genres": ["Adventure", "RPG", "Strategy"],
+      "release_date": "3 Aug, 2023",
+      "metacritic_score": 96,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg?t=1740386911",
+      "store_url": "https://store.steampowered.com/app/1086940",
+      "steam_review": {
+         "score": 9,
+         "total": 441704,
+         "summary": "Overwhelmingly Positive"
+      }
+   },
+   {
+      "appId": "2183900",
+      "name": "Warhammer 40,000: Space Marine 2",
+      "price": "38,99€",
+      "description": "Embody the superhuman skill and brutality of a Space Marine. Unleash deadly abilities and devastating weaponry to obliterate the relentless Tyranid swarms. Defend the Imperium in spectacular third-person action in solo or multiplayer modes.",
+      "developers": ["Saber Interactive"],
+      "publishers": ["Focus Entertainment"],
+      "genres": ["Action", "Adventure", "RPG"],
+      "release_date": "9 Sep, 2024",
+      "metacritic_score": 82,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2183900/header_alt_assets_4.jpg?t=1741257806",
+      "store_url": "https://store.steampowered.com/app/2183900",
+      "steam_review": {
+         "score": 8,
+         "total": 91637,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "359550",
+      "name": "Tom Clancy's Rainbow Six® Siege",
+      "price": "3,99€",
+      "description": "Tom Clancy's Rainbow Six® Siege is an elite, tactical team-based shooter where superior planning and execution triumph.",
+      "developers": ["Ubisoft Montreal"],
+      "publishers": ["Ubisoft"],
+      "genres": ["Action"],
+      "release_date": "1 Dec, 2015",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/header.jpg?t=1741397094",
+      "store_url": "https://store.steampowered.com/app/359550",
+      "steam_review": {
+         "score": 8,
+         "total": 679976,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1158310",
+      "name": "Crusader Kings III",
+      "price": "14,99€",
+      "description": "Love, fight, scheme, and claim greatness. Determine your noble house’s legacy in the sprawling grand strategy of Crusader Kings III. Death is only the beginning as you guide your dynasty’s bloodline in the rich and larger-than-life simulation of the Middle Ages.",
+      "developers": ["Paradox Development Studio"],
+      "publishers": ["Paradox Interactive"],
+      "genres": ["RPG", "Simulation", "Strategy"],
+      "release_date": "1 Sep, 2020",
+      "metacritic_score": 91,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1158310/header.jpg?t=1741620851",
+      "store_url": "https://store.steampowered.com/app/1158310",
+      "steam_review": {
+         "score": 8,
+         "total": 58289,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "916440",
+      "name": "Anno 1800",
+      "price": "5,99€",
+      "description": "Anno 1800™ – Lead the Industrial Revolution! Welcome to the dawn of the Industrial Age. The path you choose will define your world. Are you an innovator or an exploiter? A conqueror or a liberator? How the world remembers your name is up to you.",
+      "developers": ["Ubisoft Mainz"],
+      "publishers": ["Ubisoft"],
+      "genres": ["Simulation", "Strategy"],
+      "release_date": "16 Apr, 2019",
+      "metacritic_score": 81,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/916440/header.jpg?t=1739894341",
+      "store_url": "https://store.steampowered.com/app/916440",
+      "steam_review": {
+         "score": 6,
+         "total": 9067,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "814380",
+      "name": "Sekiro™: Shadows Die Twice - GOTY Edition",
+      "price": "29,99€",
+      "description": "Game of the Year - The Game Awards 2019 Best Action Game of 2019 - IGN Carve your own clever path to vengeance in the award winning adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series. Take Revenge. Restore Your Honor. Kill Ingeniously.",
+      "developers": ["FromSoftware, Inc."],
+      "publishers": [
+         "Activision (Excluding Japan and Asia)",
+         "FromSoftware, Inc. (Japan)",
+         "方块游戏 (Asia)"
+      ],
+      "genres": ["Action", "Adventure"],
+      "release_date": "21 Mar, 2019",
+      "metacritic_score": 88,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg?t=1726158438",
+      "store_url": "https://store.steampowered.com/app/814380",
+      "steam_review": {
+         "score": 8,
+         "total": 89093,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "2215430",
+      "name": "Ghost of Tsushima DIRECTOR'S CUT",
+      "price": "40,19€",
+      "description": "A storm is coming. Venture into the complete Ghost of Tsushima DIRECTOR’S CUT on PC; forge your own path through this open-world action adventure and uncover its hidden wonders. Brought to you by Sucker Punch Productions, Nixxes Software and PlayStation Studios.",
+      "developers": ["Sucker Punch Productions", "Nixxes Software"],
+      "publishers": ["PlayStation Publishing LLC"],
+      "genres": ["Action", "Adventure"],
+      "release_date": "16 May, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg?t=1737495883",
+      "store_url": "https://store.steampowered.com/app/2215430",
+      "steam_review": {
+         "score": 8,
+         "total": 33351,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "690830",
+      "name": "Foundation",
+      "price": "33,99€",
+      "description": "Foundation is a grid-less, laidback medieval city-building game with a focus on organic development, monument construction and resource management.",
+      "developers": ["Polymorph Games"],
+      "publishers": ["Polymorph Games"],
+      "genres": ["Indie", "Simulation", "Strategy"],
+      "release_date": "31 Jan, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/690830/header.jpg?t=1741207750",
+      "store_url": "https://store.steampowered.com/app/690830",
+      "steam_review": {
+         "score": 8,
+         "total": 9307,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1172470",
+      "name": "Apex Legends™",
+      "price": "Free",
+      "description": "Apex Legends is the award-winning, free-to-play Hero Shooter from Respawn Entertainment. Master an ever-growing roster of legendary characters with powerful abilities, and experience strategic squad play and innovative gameplay in the next evolution of Hero Shooter and Battle Royale.",
+      "developers": ["Respawn"],
+      "publishers": ["Electronic Arts"],
+      "genres": ["Action", "Adventure", "Free To Play"],
+      "release_date": "4 Nov, 2020",
+      "metacritic_score": 88,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1172470/header.jpg?t=1741192528",
+      "store_url": "https://store.steampowered.com/app/1172470",
+      "steam_review": {
+         "score": 6,
+         "total": 417899,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "394360",
+      "name": "Hearts of Iron IV",
+      "price": "14,99€",
+      "description": "Victory is at your fingertips! Your ability to lead your nation is your supreme weapon, the strategy game Hearts of Iron IV lets you take command of any nation in World War II; the most engaging conflict in world history.",
+      "developers": ["Paradox Development Studio"],
+      "publishers": ["Paradox Interactive"],
+      "genres": ["Simulation", "Strategy"],
+      "release_date": "6 Jun, 2016",
+      "metacritic_score": 83,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/394360/header.jpg?t=1741248953",
+      "store_url": "https://store.steampowered.com/app/394360",
+      "steam_review": {
+         "score": 8,
+         "total": 144421,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1295660",
+      "name": "Sid Meier's Civilization VII",
+      "price": "69,99€",
+      "description": "The award-winning strategy game franchise returns with a revolutionary new chapter. Sid Meier's Civilization® VII empowers you to build the greatest empire the world has ever known!",
+      "developers": ["Firaxis Games"],
+      "publishers": ["2K"],
+      "genres": ["Simulation", "Strategy"],
+      "release_date": "10 Feb, 2025",
+      "metacritic_score": 80,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1295660/header.jpg?t=1741195489",
+      "store_url": "https://store.steampowered.com/app/1295660",
+      "steam_review": {
+         "score": 5,
+         "total": 22284,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "3487990",
+      "name": "THRONE AND LIBERTY – Talandre Celebration Pack: Gold",
+      "price": "99,99€",
+      "description": "Celebrate THRONE AND LIBERTY'S Wilds of Talandre launch with a Gold Talandre Celebration pack that includes 6,000 Lucent, lucky looking Clover Wolfertinger glide morph and a Black Swan outfit and headpiece. Lucent may be subject to a 3-day holding period for usage within the Auction House.",
+      "developers": ["NCSOFT"],
+      "publishers": ["Amazon Games"],
+      "genres": ["Action", "Adventure", "Massively Multiplayer", "RPG", "Free To Play"],
+      "release_date": "6 Mar, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3487990/481763507b2fb047ce5f6813f3355d2f57cd1b5a/header.jpg?t=1741280460",
+      "store_url": "https://store.steampowered.com/app/3487990",
+      "steam_review": {
+         "score": 5,
+         "total": "N/A",
+         "summary": "No user reviews"
+      }
+   },
+   {
+      "appId": "2933620",
+      "name": "Call of Duty®: Black Ops 6",
+      "price": "79,99€",
+      "description": "Call of Duty®: Black Ops 6 is signature Black Ops across a cinematic single-player Campaign, a best-in-class Multiplayer experience and with the epic return of Round-Based Zombies.",
+      "developers": [
+         "Treyarch",
+         "Raven Software",
+         "Beenox",
+         "High Moon Studios",
+         "Activision Shanghai",
+         "Sledgehammer Games",
+         "Infinity Ward",
+         "Demonware"
+      ],
+      "publishers": ["Activision"],
+      "genres": ["Action"],
+      "release_date": "24 Oct, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2933620/header.jpg?t=1740790590",
+      "store_url": "https://store.steampowered.com/app/2933620",
+      "steam_review": {
+         "score": 5,
+         "total": 7766,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "1340990",
+      "name": "Rise of the Ronin",
+      "price": "49,99€",
+      "description": "Embark on an epic journey across war-torn 19th-century Japan in this open-world action RPG from Team NINJA, the veteran studio behind &quot;Nioh&quot; and &quot;NINJA GAIDEN.&quot;",
+      "developers": ["KOEI TECMO GAMES CO., LTD."],
+      "publishers": ["KOEI TECMO GAMES CO., LTD."],
+      "genres": ["Action", "Adventure", "RPG"],
+      "release_date": "10 Mar, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1340990/header.jpg?t=1741320119",
+      "store_url": "https://store.steampowered.com/app/1340990",
+      "steam_review": {
+         "score": 7,
+         "total": "N/A",
+         "summary": "No user reviews"
+      }
+   },
+   {
+      "appId": "230410",
+      "name": "Warframe",
+      "price": "Free",
+      "description": "Awaken as an unstoppable warrior and battle alongside your friends in this story-driven free-to-play online action game",
+      "developers": ["Digital Extremes"],
+      "publishers": ["Digital Extremes"],
+      "genres": ["Action", "RPG", "Free To Play"],
+      "release_date": "25 Mar, 2013",
+      "metacritic_score": 69,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/230410/header.jpg?t=1740594560",
+      "store_url": "https://store.steampowered.com/app/230410",
+      "steam_review": {
+         "score": 8,
+         "total": 264025,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1222670",
+      "name": "The Sims™ 4",
+      "price": "Free",
+      "description": "Play with life and discover the possibilities. Unleash your imagination and create a world of Sims that’s wholly unique. Explore and customize every detail from Sims to homes–and much more.",
+      "developers": ["Maxis"],
+      "publishers": ["Electronic Arts"],
+      "genres": ["Adventure", "Casual", "Simulation", "Free To Play"],
+      "release_date": "18 Jun, 2020",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222670/header_alt_assets_7.jpg?t=1740506448",
+      "store_url": "https://store.steampowered.com/app/1222670",
+      "steam_review": {
+         "score": 8,
+         "total": 87122,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "2840770",
+      "name": "Avatar: Frontiers of Pandora™",
+      "price": "23,09€",
+      "description": "Avatar: Frontiers of Pandora™ is a first-person, action-adventure game set in the Western Frontier. Reconnect with your lost heritage and discover what it truly means to be Na'vi as you join other clans to protect Pandora.",
+      "developers": ["Massive Entertainment – A Ubisoft Studio"],
+      "publishers": ["Ubisoft"],
+      "genres": ["Action", "Adventure"],
+      "release_date": "17 Jun, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2840770/header.jpg?t=1736259377",
+      "store_url": "https://store.steampowered.com/app/2840770",
+      "steam_review": {
+         "score": 5,
+         "total": 1912,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "1449850",
+      "name": "Yu-Gi-Oh! Master Duel",
+      "price": "Free",
+      "description": "Yu-Gi-Oh! MASTER DUEL is the ultimate free-to-play cross-platform strategy card game with fast-paced Duels, stunning HD graphics and a new, dynamic soundtrack! Get ready to challenge Duelists around the world!",
+      "developers": ["KONAMI"],
+      "publishers": ["KONAMI"],
+      "genres": ["Simulation", "Strategy", "Free To Play"],
+      "release_date": "18 Jan, 2022",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1449850/header.jpg?t=1738647047",
+      "store_url": "https://store.steampowered.com/app/1449850",
+      "steam_review": {
+         "score": 6,
+         "total": 42965,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "1623730",
+      "name": "Palworld",
+      "price": "21,74€",
+      "description": "Fight, farm, build and work alongside mysterious creatures called &quot;Pals&quot; in this completely new multiplayer, open world survival and crafting game!",
+      "developers": ["Pocketpair"],
+      "publishers": ["Pocketpair"],
+      "genres": ["Action", "Adventure", "Indie", "RPG", "Early Access"],
+      "release_date": "18 Jan, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1623730/header.jpg?t=1737094038",
+      "store_url": "https://store.steampowered.com/app/1623730",
+      "steam_review": {
+         "score": 9,
+         "total": 151055,
+         "summary": "Overwhelmingly Positive"
+      }
+   },
+   {
+      "appId": "1562430",
+      "name": "DREDGE",
+      "price": "12,49€",
+      "description": "DREDGE is a single-player fishing adventure with a sinister undercurrent. Sell your catch, upgrade your boat, and dredge the depths for long-buried secrets. Explore a mysterious archipelago and discover why some things are best left forgotten.",
+      "developers": ["Black Salt Games"],
+      "publishers": ["Team17"],
+      "genres": ["Adventure", "RPG"],
+      "release_date": "30 Mar, 2023",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1562430/header.jpg?t=1739550347",
+      "store_url": "https://store.steampowered.com/app/1562430",
+      "steam_review": {
+         "score": 9,
+         "total": 27736,
+         "summary": "Overwhelmingly Positive"
+      }
+   },
+   {
+      "appId": "227300",
+      "name": "Euro Truck Simulator 2",
+      "price": "19,99€",
+      "description": "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.",
+      "developers": ["SCS Software"],
+      "publishers": ["SCS Software"],
+      "genres": ["Indie", "Simulation"],
+      "release_date": "12 Oct, 2012",
+      "metacritic_score": 79,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/227300/header.jpg?t=1739871676",
+      "store_url": "https://store.steampowered.com/app/227300",
+      "steam_review": {
+         "score": 9,
+         "total": 161908,
+         "summary": "Overwhelmingly Positive"
+      }
+   },
+   {
+      "appId": "2694490",
+      "name": "Path of Exile 2",
+      "price": "27,75€",
+      "description": "Path of Exile 2 is a next generation Action RPG from Grinding Gear Games, featuring co-op for up to six players. Set years after the original Path of Exile, you will return to the dark world of Wraeclast and seek to end the corruption that is spreading.",
+      "developers": ["Grinding Gear Games"],
+      "publishers": ["Grinding Gear Games"],
+      "genres": ["Action", "Adventure", "Massively Multiplayer", "RPG", "Early Access"],
+      "release_date": "6 Dec, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2694490/header.jpg?t=1736126604",
+      "store_url": "https://store.steampowered.com/app/2694490",
+      "steam_review": {
+         "score": 8,
+         "total": 85695,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1245620",
+      "name": "ELDEN RING",
+      "price": "59,99€",
+      "description": "THE CRITICALLY ACCLAIMED FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.",
+      "developers": ["FromSoftware, Inc."],
+      "publishers": ["FromSoftware, Inc.", "Bandai Namco Entertainment"],
+      "genres": ["Action", "RPG"],
+      "release_date": "24 Feb, 2022",
+      "metacritic_score": 94,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1739922037",
+      "store_url": "https://store.steampowered.com/app/1245620",
+      "steam_review": {
+         "score": 8,
+         "total": 518764,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "553850",
+      "name": "HELLDIVERS™ 2",
+      "price": "39,99€",
+      "description": "The Galaxy’s Last Line of Offence. Enlist in the Helldivers and join the fight for freedom across a hostile galaxy in a fast, frantic, and ferocious third-person shooter.",
+      "developers": ["Arrowhead Game Studios"],
+      "publishers": ["PlayStation Publishing LLC"],
+      "genres": ["Action"],
+      "release_date": "8 Feb, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/553850/header.jpg?t=1741137570",
+      "store_url": "https://store.steampowered.com/app/553850",
+      "steam_review": {
+         "score": 8,
+         "total": 709442,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1677280",
+      "name": "Company of Heroes 3",
+      "price": "27,49€",
+      "description": "Company of Heroes 3 combines heart-pounding combat with deeper strategic choices in a stunning Mediterranean theatre of war. In Company of Heroes 3, every battle tells a story...what's yours?",
+      "developers": ["Relic Entertainment"],
+      "publishers": ["Relic Entertainment"],
+      "genres": ["Action", "Strategy"],
+      "release_date": "23 Feb, 2023",
+      "metacritic_score": 81,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1677280/header_alt_assets_2.jpg?t=1741286646",
+      "store_url": "https://store.steampowered.com/app/1677280",
+      "steam_review": {
+         "score": 5,
+         "total": 16500,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "1599340",
+      "name": "Lost Ark",
+      "price": "Free",
+      "description": "Embark on an odyssey for the Lost Ark in a vast, vibrant world: explore new lands, seek out lost treasures, and test yourself in thrilling action combat in this action-packed free-to-play RPG.",
+      "developers": ["Smilegate RPG"],
+      "publishers": ["Amazon Games"],
+      "genres": ["Action", "Adventure", "Massively Multiplayer", "RPG", "Free To Play"],
+      "release_date": "11 Feb, 2022",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1599340/header.jpg?t=1736361963",
+      "store_url": "https://store.steampowered.com/app/1599340",
+      "steam_review": {
+         "score": 5,
+         "total": 104331,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "2842040",
+      "name": "Star Wars Outlaws",
+      "price": "34,99€",
+      "description": "Experience the first-ever open world Star Wars™ game and explore distinct locations across the galaxy, both iconic and new. Risk it all as scoundrel Kay Vess, seeking freedom and the means to start a new life.",
+      "developers": ["Massive Entertainment – A Ubisoft Studio"],
+      "publishers": ["Ubisoft"],
+      "genres": ["Action", "Adventure"],
+      "release_date": "21 Nov, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2842040/header.jpg?t=1740164681",
+      "store_url": "https://store.steampowered.com/app/2842040",
+      "steam_review": {
+         "score": 6,
+         "total": 2124,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "1091500",
+      "name": "Cyberpunk 2077",
+      "price": "59,99€",
+      "description": "Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.",
+      "developers": ["CD PROJEKT RED"],
+      "publishers": ["CD PROJEKT RED"],
+      "genres": ["RPG"],
+      "release_date": "9 Dec, 2020",
+      "metacritic_score": 86,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg?t=1734434803",
+      "store_url": "https://store.steampowered.com/app/1091500",
+      "steam_review": {
+         "score": 8,
+         "total": 348095,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1681430",
+      "name": "RoboCop: Rogue City",
+      "price": "9,99€",
+      "description": "Become the legendary part man, part machine, all cop hero and deliver justice in Old Detroit.",
+      "developers": ["Teyon"],
+      "publishers": ["Nacon"],
+      "genres": ["Action", "Adventure"],
+      "release_date": "2 Nov, 2023",
+      "metacritic_score": 76,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1681430/header.jpg?t=1741624420",
+      "store_url": "https://store.steampowered.com/app/1681430",
+      "steam_review": {
+         "score": 8,
+         "total": 10631,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "582660",
+      "name": "Black Desert",
+      "price": "0,99€",
+      "description": "Played by over 20 million Adventurers - Black Desert Online is an open-world, action MMORPG. Experience intense, action-packed combat, battle massive world bosses, fight alongside friends to siege and conquer castles, and train in professions such as fishing, trading, crafting, cooking, and more!",
+      "developers": ["Pearl Abyss"],
+      "publishers": ["Pearl Abyss"],
+      "genres": ["Action", "Adventure", "Massively Multiplayer", "RPG", "Simulation", "Strategy"],
+      "release_date": "24 May, 2017",
+      "metacritic_score": 80,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/582660/header.jpg?t=1740425518",
+      "store_url": "https://store.steampowered.com/app/582660",
+      "steam_review": {
+         "score": 6,
+         "total": 48311,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "252490",
+      "name": "Rust",
+      "price": "39,99€",
+      "description": "The only aim in Rust is to survive. Everything wants you to die - the island’s wildlife, other inhabitants, the environment, and other survivors. Do whatever it takes to last another night.",
+      "developers": ["Facepunch Studios"],
+      "publishers": ["Facepunch Studios"],
+      "genres": ["Action", "Adventure", "Indie", "Massively Multiplayer", "RPG"],
+      "release_date": "8 Feb, 2018",
+      "metacritic_score": 69,
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg?t=1738927718",
+      "store_url": "https://store.steampowered.com/app/252490",
+      "steam_review": {
+         "score": 8,
+         "total": 575052,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "3487980",
+      "name": "THRONE AND LIBERTY – Talandre Celebration Pack: Silver",
+      "price": "49,99€",
+      "description": "Celebrate THRONE AND LIBERTY'S Wilds of Talandre launch with a Silver Talandre Celebration pack that includes 2,875 Lucent, a Dappled Lumicora dash and swim in style Steam Tsarca morph. Lucent may be subject to a 3-day holding period for usage within the Auction House.",
+      "developers": ["NCSOFT"],
+      "publishers": [],
+      "genres": ["Action", "Adventure", "Massively Multiplayer", "RPG", "Free To Play"],
+      "release_date": "6 Mar, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3487980/ed0e4dde92dac058e80914b0c6ed1b072c881209/header.jpg?t=1741280452",
+      "store_url": "https://store.steampowered.com/app/3487980",
+      "steam_review": {
+         "score": 5,
+         "total": 1,
+         "summary": "1 user reviews"
+      }
+   },
+   {
+      "appId": "2878960",
+      "name": "WWE 2K25",
+      "price": "59,99€",
+      "description": "Celebrate The Bloodline in Showcase. Compete online in MyGM. Expanded gameplay includes intergender wrestling, chain wrestling, barricade diving, the return of Promos + much more!",
+      "developers": ["Visual Concepts"],
+      "publishers": ["2K"],
+      "genres": ["Simulation", "Sports"],
+      "release_date": "14 Mar, 2025",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2878960/header.jpg?t=1741371282",
+      "store_url": "https://store.steampowered.com/app/2878960",
+      "steam_review": {
+         "score": 5,
+         "total": 365,
+         "summary": "Mixed"
+      }
+   },
+   {
+      "appId": "2399420",
+      "name": "Le Mans Ultimate",
+      "price": "30,44€",
+      "description": "Le Mans is a continually evolving story... powered by emotion, speed and glory. Le Mans Ultimate - the official game of the FIA World Endurance Championship and 24 Hours of Le Mans.",
+      "developers": ["Studio 397"],
+      "publishers": ["Studio 397"],
+      "genres": ["Racing", "Early Access"],
+      "release_date": "20 Feb, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2399420/header.jpg?t=1737563029",
+      "store_url": "https://store.steampowered.com/app/2399420",
+      "steam_review": {
+         "score": 6,
+         "total": 2531,
+         "summary": "Mostly Positive"
+      }
+   },
+   {
+      "appId": "1203620",
+      "name": "Enshrouded",
+      "price": "29,99€",
+      "description": "You are Flameborn, last ember of hope of a dying race. Awaken, survive the terror of a corrupting fog, and reclaim the lost beauty of your kingdom. Venture into a vast world, vanquish punishing bosses, build grand halls and forge your path in this co-op survival action RPG for up to 16 players.",
+      "developers": ["Keen Games GmbH"],
+      "publishers": ["Keen Games GmbH"],
+      "genres": ["Action", "Adventure", "RPG", "Early Access"],
+      "release_date": "24 Jan, 2024",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1203620/header.jpg?t=1738154124",
+      "store_url": "https://store.steampowered.com/app/1203620",
+      "steam_review": {
+         "score": 8,
+         "total": 37283,
+         "summary": "Very Positive"
+      }
+   },
+   {
+      "appId": "1527950",
+      "name": "Wartales",
+      "price": "17,49€",
+      "description": "Wartales is an open world RPG in which you lead a group of mercenaries in their search for wealth across a massive medieval universe. Explore the world, recruit companions, collect bounties and unravel the secrets of the tombs of the ancients!",
+      "developers": ["Shiro Games"],
+      "publishers": ["Shiro Games"],
+      "genres": ["Adventure", "Indie", "RPG", "Strategy"],
+      "release_date": "12 Apr, 2023",
+      "metacritic_score": "N/A",
+      "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1527950/header.jpg?t=1741594457",
+      "store_url": "https://store.steampowered.com/app/1527950",
+      "steam_review": {
+         "score": 8,
+         "total": 11812,
+         "summary": "Very Positive"
+      }
+   }
+]

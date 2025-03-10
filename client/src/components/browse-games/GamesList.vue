@@ -43,36 +43,36 @@ const gameListRows = [
          <div
             class="grid max-h-[350px] w-[80%] grid-cols-3 place-content-center place-items-center"
          >
-            <div class="col-span-1 h-[250px] w-[350px]">
+            <div class="z-0 col-span-1 h-[332px] w-[244px]">
                <div class="h-[70%]">
                   <img
-                     class="rounded-t-xl object-cover"
-                     src="https://images.igdb.com/igdb/image/upload/t_1080p/ar5bh.jpg"
+                     class="rounded-xl object-cover"
+                     src="https://images.igdb.com/igdb/image/upload/t_cover_big/co8ae0.jpg"
                   />
                </div>
-               <div class="bg-card-bg h-[30%] rounded-b-xl">
+               <div class="bg-bg3 relative z-10 h-[30%] rounded-b-xl">
                   <h1>{{ row[0].name }}</h1>
                </div>
             </div>
-            <div class="col-span-1 h-[250px] w-[350px]">
+            <div class="z-0 col-span-1 h-[332px] w-[244px]">
                <div class="h-[70%]">
                   <img
-                     class="rounded-t-xl object-cover"
-                     src="https://images.igdb.com/igdb/image/upload/t_1080p/ar21ru.jpg"
+                     class="rounded-xl object-cover"
+                     src="https://images.igdb.com/igdb/image/upload/t_cover_big/co8ae0.jpg"
                   />
                </div>
-               <div class="bg-card-bg h-[30%] rounded-b-xl">
+               <div class="bg-bg3 relative z-10 h-[30%] rounded-b-xl">
                   <h1>{{ row[1].name }}</h1>
                </div>
             </div>
-            <div class="col-span-1 h-[250px] w-[350px]">
+            <div class="z-0 col-span-1 h-[332px] w-[244px]">
                <div class="h-[70%]">
                   <img
-                     class="rounded-t-xl object-cover"
-                     src="https://images.igdb.com/igdb/image/upload/t_1080p/ar744.jpg"
+                     class="rounded-xl object-cover"
+                     src="https://images.igdb.com/igdb/image/upload/t_cover_big/co8ae0.jpg"
                   />
                </div>
-               <div class="bg-card-bg h-[30%] rounded-b-xl">
+               <div class="bg-bg3 relative z-10 h-[30%] rounded-b-xl">
                   <h1>{{ row[2].name }}</h1>
                </div>
             </div>
