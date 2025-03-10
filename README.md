@@ -1,32 +1,33 @@
-# GameVerse
+# GameVerse.local
 
-## nginx configuration
+## 1. Nginx Configuration
 
 ### 1. vhost-configuration in sites-available -> gameverse.local
 
-      server {
-      listen 443 ssl;
-      server_name gameverse.local;
+```nginx
+server {
+   listen 443 ssl;
+   server_name gameverse.local;
 
-         ssl_certificate /etc/nginx/ssl/local.crt;
-         ssl_certificate_key /etc/nginx/ssl/local.key;
+   ssl_certificate /etc/nginx/ssl/local.crt;
+   ssl_certificate_key /etc/nginx/ssl/local.key;
 
-         location / {
-            proxy_pass http://localhost:4000;
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection 'upgrade';
-            proxy_set_header Host $host;
-            proxy_cache_bypass $http_upgrade;
-         }
+   location / {
+      proxy_pass http://localhost:4000;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection 'upgrade';
+      proxy_set_header Host $host;
+      proxy_cache_bypass $http_upgrade;
+   }
 
-      }
-         server {
-         listen 80;
-         server_name gameverse.local;
-         return 301 https://$host$request_uri; # Redirect HTTP to HTTPS
-      }
-
+}
+server {
+   listen 80;
+   server_name gameverse.local;
+   return 301 https://$host$request_uri; # Redirect HTTP to HTTPS
+}
+```
 
 ### 2. first ssl file in /etc/nginx/ssl -> local.crt
 
@@ -84,26 +85,103 @@
       zrweoM/o4+6W5IwfEghOaA==
       -----END PRIVATE KEY-----
 
-## .env file content in development
+## 2. Devlopment Env
 
-      \# Store environement, either production or devlopment
-      NODE_ENV='dev'
+```ini
+# Store environement, either production or devlopment
+NODE_ENV='dev'
 
-      \# Store secret passphare for short term jwt
-      ACCESS_TOKEN_SECRET=0658627a26e0110b60f6e8707943ef982bd359bf5801165e9e8c42f7c652a1fb
+# Store secret passphare for short term jwt
+ACCESS_TOKEN_SECRET='0658627a26e0110b60f6e8707943ef982bd359bf5801165e9e8c42f7c652a1fb'
 
-      \# Store duration of access token
-      ACCESS_TOKEN_DURATION='5m'
+# Store duration of access token
+ACCESS_TOKEN_DURATION='5m'
 
-      \# Store secret passphrase for longterm jwt
-      REFRESH_TOKEN_SECRET=bc058456b0247310390a0ff054a92ad5c90221a257532a808e045371f6fdc4cf
+# Store secret passphrase for longterm jwt
+REFRESH_TOKEN_SECRET='bc058456b0247310390a0ff054a92ad5c90221a257532a808e045371f6fdc4cf'
 
-      \# Store two differents possible duration of refresh token
-      REFRESH_TOKEN_LONG='15d'
-      REFRESH_TOKEN_SHORT='1d'
+# Store two differents possible duration of refresh token
+REFRESH_TOKEN_LONG='15d'
+REFRESH_TOKEN_SHORT='1d'
 
-      \# Store port
-      PORT=4000
+# Store port
+PORT=4000
 
-      \# Store site url
-      SITE_URL=<https://gameverse.local>
+# Store site url
+SITE_URL='https://gameverse.local'
+```
+
+## 3. File Structure
+
+      📁 GamesMatch
+         📁 .vscode
+         📁 client
+            📁 .vscode
+                  ─ extensions.json
+                  ─ settings.json
+            ─ index.html
+            📁 public
+                  ─ favicon.ico
+            ─ README.md
+            📁 src
+                  ─ App.vue
+                  📁 assets
+                     ─ base.css
+                     📁 css
+                        ─ hover-effects.css
+                     📁 fonts
+                     📁 img
+                     📁 js
+                        ─ utils.js
+                     ─ main.css
+                  📁 components
+                     📁 background
+                     ─ BtnCustomHover1.vue
+                     ─ FormLogin.vue
+                     ─ FormRegister.vue
+                     📁 icons
+                        📁 brands
+                     📁 illustrations
+                        ─
+                     📁 landing-page
+                        ─ LandingPageSection1.vue
+                        ─ LandingPageSection2.vue
+                        ─ LandingPageSection3.vue
+                        ─ LandingPageSection4.vue
+                        ─ LandingPageSection5.vue
+                        ─ LandingPageSection6.vue
+                        ─ LandingPageSection7.vue
+                     ─ MainFooter.vue
+                     ─ MainNavbar.vue
+                     📁 unused
+                        ─ FeatureSection1.vue
+                  ─ main.js
+                  📁 router
+                     ─ index.js
+                  📁 stores
+                     ─ authStore.js
+                  📁 views
+                     ─ LandingPage.vue
+                     ─ LoginPage.vue
+                     ─ RegisterPage.vue
+            ─ vite.config.js
+         📁 server
+            📁 .vscode
+            ─ app.js
+            📁 controllers
+                  ─ authController.js
+                  ─ usersController.js
+            📁 db
+            📁 middlewares
+                  ─ middlewares.js
+            ─ package-lock.json
+            ─ package.json
+            📁 routes
+                  ─ users.route.js
+            📁 utils
+                  ─ utils.js
+         ─ README.md
+
+```
+
+```
