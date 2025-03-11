@@ -4,6 +4,9 @@
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+// import { jsonToObject } from '../utils/utils.js';
+
+// Functions
 
 // **** FUNCTIONS ****
 
@@ -11,11 +14,63 @@ import { v4 as uuidv4 } from 'uuid';
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   // password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
-   password: 'C0sezok?92', // Replace with your MySQL password
+   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   //    password: 'C0sezok?92', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
+
+export const gamesNamesArr = [
+   'header-0.webp',
+   'header-1.webp',
+   'header-10-1741682833647.webp',
+   'header-11-1741682833647.webp',
+   'header-12-1741682833647.webp',
+   'header-13-1741682833648.webp',
+   'header-14-1741682833648.webp',
+   'header-15',
+   'header-16-1741682833649.webp',
+   'header-17-1741682833649.webp',
+   'header-18-1741682833649.webp',
+   'header-19-1741682833650.webp',
+   'header-2.webp',
+   'header-20-1741682833650.webp',
+   'header-21-1741682833650.webp',
+   'header-22-1741682833651.webp',
+   'header-23-1741682833651.webp',
+   'header-24-1741682833651.webp',
+   'header-25-1741682833652.webp',
+   'header-26-1741682833652.webp',
+   'header-27-1741682833652.webp',
+   'header-28-1741682833653.webp',
+   'header-29',
+   'header-3.webp',
+   'header-30-1741682833653.webp',
+   'header-31-1741682833653.webp',
+   'header-32-1741682833654.webp',
+   'header-33-1741682833654.webp',
+   'header-34-1741682833654.webp',
+   'header-35-1741682833655.webp',
+   'header-36-1741682833655.webp',
+   'header-37-1741682833655.webp',
+   'header-38',
+   'header-39-1741682833656.webp',
+   'header-4.webp',
+   'header-40-1741682833656.webp',
+   'header-41-1741682833657.webp',
+   'header-42-1741682833657.webp',
+   'header-43-1741682833657.webp',
+   'header-44-1741682833658.webp',
+   'header-45-1741682833658.webp',
+   'header-46-1741682833658.webp',
+   'header-47-1741682833658.webp',
+   'header-48-1741682833659.webp',
+   'header-49-1741682833659.webp',
+   'header-6.webp',
+   'header-7.webp',
+   'header-8.webp',
+   'header-9-1741682833646.webp',
+];
 
 // *** INSERTS ***
 
@@ -83,15 +138,28 @@ export async function insertGameDevelopers(gamesArr, initialId = 1) {
    insertInDb(sql, [values]);
 }
 
-// Insert desc, price and review in the games_details table
-export async function insertGameDetails(gamesArr, initialId = 1) {
+// Insert desc, price and review and image names in the games_details table
+export async function insertGameDetails(gamesArr, arr, initialId = 1) {
+   const sortedArr = arr.sort((a, b) => {
+      const numA = parseInt(a.match(/header-(\d+)/)[1]);
+      const numB = parseInt(b.match(/header-(\d+)/)[1]);
+      return numA - numB;
+   });
+
    const values = gamesArr.map((obj, index) => [
       index + initialId,
       obj.description,
       obj.steam_review.score,
       obj.price,
    ]);
-   const sql = `INSERT INTO game_details (game_id, description, review_score, price) VALUES ?`;
+
+   values.forEach((item) => {
+      item.push(sortedArr[values.indexOf(item)]);
+   });
+   console.log(values);
+
+   const sql = `INSERT INTO game_details (game_id, description, review_score, price, image_name) VALUES ?`;
+
    insertInDb(sql, [values]);
 }
 
@@ -197,7 +265,7 @@ export async function getRefreshTokenInfo(userId) {
 
 // Extract game_details table from database
 export async function getGameDetails() {
-   const sql = `SELECT g.game_id, g.name, gd.review_score FROM games g, game_details gd WHERE g.game_id = gd.game_id`;
+   const sql = `SELECT g.game_id, g.name, gd.review_score, gd.image_name FROM games g, game_details gd WHERE g.game_id = gd.game_id`;
    const r = selectInDb(sql);
    return r;
 }

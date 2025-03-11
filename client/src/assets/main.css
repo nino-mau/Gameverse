@@ -22,8 +22,12 @@
    --color-black: #000000;
    --color-primary: var(--primary-color);
    --color-secondary: var(--secondary-color);
-   --color-invalid: #dc2626;
-   --color-bg1: var(--secondary-color);
+   --color-invalid: #ef4444;
+   --color-valid: #22c55e;
+   --color-warn: #f97316;
+   --color-review-best: #84bd3a;
+   --color-review-average: #fea200;
+   --color-review-bad: #e51404;
    --color-bg2: #393273;
    --color-bg3: #39317d;
    --color-bg4: #7c50a4;
@@ -80,6 +84,11 @@
 
    /* This correspond to the font-weight of the text in buttons label */
    --p-button-label-font-weight: 600 !important;
+
+   /* Overide default multiselect placeholder color text */
+   --p-multiselect-placeholder-color: none !important;
+   --p-multiselect-color: none !important
+;
 }
 /* This correspond to the text in the tiered menu dropdown */
 .p-tieredmenu-item-label {
@@ -99,6 +108,7 @@
    margin-top: unset !important;
    left: 4.1% !important;
 }
+
 /* This allow to use custom icons with the iconfield component and password component */
 .password-input-custom-spacing {
    padding-left: calc((var(--p-form-field-padding-x) * 2) + var(--p-icon-size)) !important;
