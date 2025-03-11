@@ -180,7 +180,7 @@ watch(selectedGenres, () => {
       <!-- Games List Menu -->
       <div class="mb-15 flex flex-row justify-start gap-10">
          <!-- Select genres button -->
-         <MultiSelect
+         <Select
             v-model="selectedGenres"
             :options="genresFilterList"
             optionLabel="name"
@@ -188,8 +188,9 @@ watch(selectedGenres, () => {
             class="bg-secondary w-[17rem] border-2 text-xl text-[#ffffff]"
             :maxSelectedLabels="1"
             showClear
+            outlined
          >
-         </MultiSelect>
+         </Select>
          <!-- Sort button -->
          <!-- <MultiSelect
             v-model="selectedSortOptions"

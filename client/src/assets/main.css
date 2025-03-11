@@ -86,8 +86,8 @@
    --p-button-label-font-weight: 600 !important;
 
    /* Overide default multiselect placeholder color text */
-   --p-multiselect-placeholder-color: none !important;
-   --p-multiselect-color: none !important
+   --p-select-placeholder-color: none !important;
+   --p-select-color: none !important
 ;
 }
 /* This correspond to the text in the tiered menu dropdown */
