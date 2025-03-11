@@ -3,10 +3,10 @@
 import { onMounted, ref } from 'vue';
 
 // *** Import Illustrations Svg ***
-import IlluLandingPage1 from '../illustrations/IlluLandingPage1.vue';
+import IlluLandingPage1 from '@/components/illustrations/IlluLandingPage1.vue';
 
 // *** Import Icons ***
-import IconPlay from '../icons/IconPlay.vue';
+import IconPlay from '@/components/icons/IconPlay.vue';
 
 // *** Import PrimeVue Components ***
 import Button from 'primevue/button';
@@ -17,7 +17,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // *** Import Functions ***
-import { animateElementOnScroll } from 'Modules/utils.js';
+import { animateElementOnScroll } from '@/utils/general';
 
 // **** LOGIC ****
 

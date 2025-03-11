@@ -4,19 +4,19 @@ import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
 // Import Functions
-import { postData } from '@/assets/js/utils';
+import { postData } from '@/utils/api.js';
 
 // Import Libs/frameworks
 import { z } from 'zod';
 import { Form } from '@primevue/forms';
 import { useToast } from 'primevue/usetoast';
-import { useUserAuthStore } from '../stores/authStore.js';
+import { useUserAuthStore } from '@/stores/authStore.js';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
 
 // Import Icons
-import IconLock from './icons/IconLock.vue';
-import IconEmail from './icons/IconEmail.vue';
-import IconCircleUserProfile from './icons/IconCircleUserProfile.vue';
+import IconLock from '@/components/icons/IconLock.vue';
+import IconEmail from '@/components/icons/IconEmail.vue';
+import IconCircleUserProfile from '@/components/icons/IconCircleUserProfile.vue';
 
 // Import PrimeVue Components
 import Button from 'primevue/button';

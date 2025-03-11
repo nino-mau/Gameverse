@@ -11,7 +11,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // *** Import Functions ***
-import { animateElementOnScroll } from 'Modules/utils.js';
+import { animateElementOnScroll } from '@/utils/general';
 
 // **** LOGIC ****
 
@@ -27,30 +27,30 @@ onMounted(() => {
 </script>
 
 <template>
-   <div class="h-[75vh] flex flex-col justify-end">
-      <div class="h-[538px] flex flex-col justify-end">
-         <div class="h-[412px] bg-bg4 grid grid-cols-2 place-items-center">
+   <div class="flex h-[75vh] flex-col justify-end">
+      <div class="flex h-[538px] flex-col justify-end">
+         <div class="bg-bg4 grid h-[412px] grid-cols-2 place-items-center">
             <div class="span-cols-1 invisible" ref="imgSection">
                <img class="mt-[-8.2rem]" src="@/assets/img/game-character-illustration3.webp" />
             </div>
             <div
-               class="text-section span-cols-1 flex flex-col justify-center ml-25 invisible"
+               class="text-section span-cols-1 invisible ml-25 flex flex-col justify-center"
                ref="titleSection"
             >
-               <h3 class="text-3xl/[1.6] font-bold pr-15 text-white">
+               <h3 class="pr-15 text-3xl/[1.6] font-bold text-white">
                   See our
                   <span
-                     class="text-white custom-hover-effect-text-underline-marker relative inline-block"
+                     class="custom-hover-effect-text-underline-marker relative inline-block text-white"
                      >Frequently Asked Questions</span
                   >
                   for any aditional Informations !
                </h3>
-               <p class="pr-15 pt-5">
+               <p class="pt-5 pr-15">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                   incididunt ut labore et dolore
                </p>
                <Button
-                  class="w-[240px] h-[55px] text-white border-white border-2 font-semibold mt-3 hover:text-bg4 hover:bg-white active:bg-btn-active active:border-btn-active"
+                  class="hover:text-bg4 active:bg-btn-active active:border-btn-active mt-3 h-[55px] w-[240px] border-2 border-white font-semibold text-white hover:bg-white"
                   label="FAQ"
                   variant="outlined"
                   raised

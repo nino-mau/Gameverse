@@ -10,11 +10,9 @@ import cors from 'cors';
 
 // Import routes
 import usersRoutes from './routes/users.route.js';
+import gamesRoutes from './routes/games.route.js';
 
 // **** SETUP ****
-
-// const port = process.env.PORT;
-const port = process.env.PORT;
 
 const app = Express();
 
@@ -40,9 +38,16 @@ app.use(cookieParser());
 // Use all the users related ressources and endpoints
 app.use('/api', usersRoutes);
 
+// Use all the games related ressources and endpoints
+app.use('/api', gamesRoutes);
+
+// Test
+
 app.get('/', (req, res) => {
    res.send('Hello World!');
 });
+
+const port = process.env.PORT;
 
 app.listen(port, () => {
    console.log(`Example app listening on port ${port}`);

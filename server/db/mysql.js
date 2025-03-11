@@ -195,6 +195,20 @@ export async function getRefreshTokenInfo(userId) {
    }
 }
 
+// Extract game_details table from database
+export async function getGameDetails() {
+   const sql = `SELECT g.game_id, g.name, gd.review_score FROM games g, game_details gd WHERE g.game_id = gd.game_id`;
+   const r = selectInDb(sql);
+   return r;
+}
+
+// Extract game_genres table from database
+export async function getGameGenres() {
+   const sql = `SELECT * FROM game_genres`;
+   const r = selectInDb(sql);
+   return r;
+}
+
 // *** DELETE ***
 
 // Delete the refresh token corresponding to an user id in database

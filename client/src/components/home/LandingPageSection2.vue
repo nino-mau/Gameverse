@@ -6,9 +6,9 @@ import { onMounted, ref } from 'vue';
 import Card from 'primevue/card';
 
 // *** Import Icons ***
-import IconChat from '../icons/IconChat.vue';
-import IconSettingsWheel from '../icons/IconSettingsWheel.vue';
-import IconMedal from '../icons/IconMedal.vue';
+import IconChat from '@/components/icons/IconChat.vue';
+import IconSettingsWheel from '@/components/icons/IconSettingsWheel.vue';
+import IconMedal from '@/components/icons/IconMedal.vue';
 
 // *** Import Framework ***
 import gsap from 'gsap';
@@ -16,7 +16,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // *** Import Functions ***
-import { animateElementOnScroll } from 'Modules/utils.js';
+import { animateElementOnScroll } from '@/utils/general';
 
 // **** LOGIC ****
 
@@ -39,9 +39,9 @@ onMounted(() => {
 </script>
 
 <template>
-   <div class="h-[70Vh] bg-bg3 flex flex-col justify-center pt-20">
+   <div class="bg-bg3 flex h-[70Vh] flex-col justify-center pt-20">
       <div class="" ref="mainTitle">
-         <h1 class="text-5xl/[1.6] text-center font-bold">
+         <h1 class="text-center text-5xl/[1.6] font-bold">
             Experiment with an impressive set <br />
             of
             <span class="hover-effect-text-underline-marker relative inline-block"
@@ -50,64 +50,64 @@ onMounted(() => {
          </h1>
       </div>
       <div
-         class="lp6-container w-full h-[50vh] flex flex-row justify-center items-center gap-[6rem]"
+         class="lp6-container flex h-[50vh] w-full flex-row items-center justify-center gap-[6rem]"
       >
          <Card
-            class="w-[21rem] h-[14.5rem] overflow-hidden bg-[#5078a4] flex flex-col justify-center items-center invisible"
+            class="invisible flex h-[14.5rem] w-[21rem] flex-col items-center justify-center overflow-hidden bg-[#5078a4]"
             ref="cardLeft"
          >
             <template #header>
                <div
-                  class="w-[60px] h-[60px] rounded-full border-2 border-white flex justify-center items-center mt-5"
+                  class="mt-5 flex h-[60px] w-[60px] items-center justify-center rounded-full border-2 border-white"
                >
                   <IconChat svg-width="39" svg-color="#ffffff" />
                </div>
             </template>
             <template #title
-               ><h1 class="text-2xl font-bold text-white text-center">Social</h1></template
+               ><h1 class="text-center text-2xl font-bold text-white">Social</h1></template
             >
             <template #content>
-               <p class="m-0 text-white text-center pr-5 pl-5 mt-2">
+               <p class="m-0 mt-2 pr-5 pl-5 text-center text-white">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                </p>
             </template>
          </Card>
          <Card
-            class="w-[21rem] h-[14.5rem] overflow-hidden bg-[#a45078] flex flex-col justify-center items-center invisible"
+            class="invisible flex h-[14.5rem] w-[21rem] flex-col items-center justify-center overflow-hidden bg-[#a45078]"
             ref="cardMiddle"
          >
             <template #header>
                <div
-                  class="w-[60px] h-[60px] rounded-full border-2 border-white flex justify-center items-center mt-5"
+                  class="mt-5 flex h-[60px] w-[60px] items-center justify-center rounded-full border-2 border-white"
                >
                   <IconMedal svg-width="39" svg-color="#ffffff" />
                </div>
             </template>
             <template #title
-               ><h1 class="text-2xl font-bold text-white text-center">Ranking</h1></template
+               ><h1 class="text-center text-2xl font-bold text-white">Ranking</h1></template
             >
             <template #content>
-               <p class="m-0 text-white text-center pr-5 pl-5 mt-2">
+               <p class="m-0 mt-2 pr-5 pl-5 text-center text-white">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                </p>
             </template>
          </Card>
          <Card
-            class="w-[21rem] h-[14.5rem] overflow-hidden bg-[#7c50a4] flex flex-col justify-center items-center invisible"
+            class="invisible flex h-[14.5rem] w-[21rem] flex-col items-center justify-center overflow-hidden bg-[#7c50a4]"
             ref="cardRight"
          >
             <template #header>
                <div
-                  class="w-[60px] h-[60px] rounded-full border-2 border-white flex justify-center items-center mt-5"
+                  class="mt-5 flex h-[60px] w-[60px] items-center justify-center rounded-full border-2 border-white"
                >
                   <IconSettingsWheel svg-width="39" svg-color="#ffffff" />
                </div>
             </template>
             <template #title
-               ><h1 class="text-2xl font-bold text-white text-center">Customization</h1></template
+               ><h1 class="text-center text-2xl font-bold text-white">Customization</h1></template
             >
             <template #content>
-               <p class="m-0 text-white text-center pr-5 pl-5 mt-2">
+               <p class="m-0 mt-2 pr-5 pl-5 text-center text-white">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                </p>
             </template>

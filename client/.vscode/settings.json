@@ -40,10 +40,15 @@
    // "material-icon-theme.activeIconPack": "vue",
    "material-icon-theme.folders.associations": {
       "browse-games": "vue",
-      "landing-page": "vue",
+      "main": "vue",
       "illustrations": "images",
       "illustration": "images",
-      "unused": "dump"
+      "unused": "vue",
+      "composable": "functions",
+      "ui": "vue",
+      "landing-page": "vue",
+      "forms": "vue",
+      "home": "vue"
    },
    // *** Tailwind Fold settings ***
    "tailwind-fold.autoFold": true,

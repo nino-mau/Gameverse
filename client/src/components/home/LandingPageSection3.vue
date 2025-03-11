@@ -6,20 +6,20 @@ import { onMounted, ref } from 'vue';
 import Button from 'primevue/button';
 
 // *** Import Illustration ***
-import IlluAllPlatforms1 from '../illustrations/IlluAllPlatforms1.vue';
+import IlluAllPlatforms1 from '@/components/illustrations/IlluAllPlatforms1.vue';
 
 // *** Import Icons ***
-import IconSteam from '../icons/brands/IconSteam.vue';
-import IconXbox from '../icons/brands/IconXbox.vue';
-import IconSteamdeck from '../icons/brands/IconSteamdeck.vue';
-import IconStadia from '../icons/brands/IconStadia.vue';
-import IconShadow from '../icons/brands/IconShadow.vue';
-import IconRogAlly from '../icons/brands/IconRogAlly.vue';
-import IconPlaystation from '../icons/brands/IconPlaystation.vue';
-import IconLinuxMint from '../icons/brands/IconLinuxMint.vue';
-import IconGog from '../icons/brands/IconGog.vue';
-import IconEpicGames from '../icons/brands/IconEpicGames.vue';
-import IconAndroid from '../icons/brands/IconAndroid.vue';
+import IconSteam from '@/components/icons/brands/IconSteam.vue';
+import IconXbox from '@/components/icons/brands/IconXbox.vue';
+import IconSteamdeck from '@/components/icons/brands/IconSteamdeck.vue';
+import IconStadia from '@/components/icons/brands/IconStadia.vue';
+import IconShadow from '@/components/icons/brands/IconShadow.vue';
+import IconRogAlly from '@/components/icons/brands/IconRogAlly.vue';
+import IconPlaystation from '@/components/icons/brands/IconPlaystation.vue';
+import IconLinuxMint from '@/components/icons/brands/IconLinuxMint.vue';
+import IconGog from '@/components/icons/brands/IconGog.vue';
+import IconEpicGames from '@/components/icons/brands/IconEpicGames.vue';
+import IconAndroid from '@/components/icons/brands/IconAndroid.vue';
 
 // *** Import Frameworks ***
 import Swiper from 'swiper/bundle';
@@ -28,7 +28,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // *** Import Functions ***
-import { animateElementOnScroll } from 'Modules/utils.js';
+import { animateElementOnScroll } from '@/utils/general';
 
 // **** LOGIC ****
 
@@ -82,7 +82,7 @@ onMounted(() => {
 
 <template>
    <div class="lp3-container flex flex-col items-center justify-center gap-[5rem]">
-      <div class="flex flex-row justify-center items-center gap-[2rem]">
+      <div class="flex flex-row items-center justify-center gap-[2rem]">
          <div class="invisible" ref="titleSection">
             <h1 class="title text-5xl/[1.6] font-bold">
                <span class="">Features</span>
@@ -100,7 +100,7 @@ onMounted(() => {
                incididunt.
             </p>
             <Button
-               class="w-[240px] h-[55px] text-secondary font-semibold hover:text-secondary mt-[1.5rem]"
+               class="text-secondary hover:text-secondary mt-[1.5rem] h-[55px] w-[240px] font-semibold"
                label="Sign-up"
                raised
             />
@@ -109,7 +109,7 @@ onMounted(() => {
             <IlluAllPlatforms1 svg-width="650" />
          </div>
       </div>
-      <div class="brands-swiper mt-10 invisible" ref="sliderSection">
+      <div class="brands-swiper invisible mt-10" ref="sliderSection">
          <div class="swiper-wrapper">
             <div class="swiper-slide">
                <IconXbox svg-class="brands-icons" svg-color="#ffffff" />

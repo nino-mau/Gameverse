@@ -1,15 +1,15 @@
 <script setup>
 // *** Import Icons ***
-import IconSite from './icons/IconSite.vue';
-import IconGithub from './icons/brands/IconGithub.vue';
-import IconTwitch from './icons/brands/IconTwitch.vue';
-import IconLinkedin from './icons/brands/IconLinkedin.vue';
-import IconInsta from './icons/brands/IconInsta.vue';
+import IconSite from '@/components/icons/IconSite.vue';
+import IconGithub from '@/components/icons/brands/IconGithub.vue';
+import IconTwitch from '@/components/icons/brands/IconTwitch.vue';
+import IconLinkedin from '@/components/icons/brands/IconLinkedin.vue';
+import IconInsta from '@/components/icons/brands/IconInsta.vue';
 </script>
 
 <template>
    <div
-      class="main-footer w-full h-[25vh] bg-bg2 flex flex-col justify-center items-center gap-[24px] bottom-0"
+      class="main-footer bg-bg2 bottom-0 flex h-[25vh] w-full flex-col items-center justify-center gap-[24px]"
    >
       <div class="top-section-container flex flex-row gap-[8px]">
          <IconSite svg-color="#ffffff" svg-class="custom-site-logo" />
@@ -28,7 +28,7 @@ import IconInsta from './icons/brands/IconInsta.vue';
          <li><IconLinkedin svg-color="#ffffff" svg-width="17" svg-class="hvr-float" /></li>
          <li><IconTwitch svg-color="#ffffff" svg-width="17" svg-class="hvr-float" /></li>
       </ul>
-      <p class="text-xs font-medium text-center">© 2025 GameVerse, Inc.</p>
+      <p class="text-center text-xs font-medium">© 2025 GameVerse, Inc.</p>
    </div>
 </template>
 

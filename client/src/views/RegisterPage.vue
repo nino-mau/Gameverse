@@ -1,9 +1,9 @@
 <script setup>
-import FormRegister from '@/components/FormRegister.vue';
+import FormRegister from '@/components/forms/FormRegister.vue';
 </script>
 
 <template>
-   <div class="flex justify-center items-center h-[94vh]">
+   <div class="flex h-[94vh] items-center justify-center">
       <FormRegister />
    </div>
 </template>

@@ -8,8 +8,8 @@ import Card from 'primevue/card';
 import Avatar from 'primevue/avatar';
 
 // *** Import Icons ***
-import IconChevronRight from '../icons/IconChevronRight.vue';
-import IconCircleUserProfile from '../icons/IconCircleUserProfile.vue';
+import IconChevronRight from '@/components/icons/IconChevronRight.vue';
+import IconCircleUserProfile from '@/components/icons/IconCircleUserProfile.vue';
 
 // *** Import Frameworks ***
 import gsap from 'gsap';
@@ -17,7 +17,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // *** Import Functions ***
-import { animateElementOnScroll } from 'Modules/utils.js';
+import { animateElementOnScroll } from '@/utils/general';
 
 // **** LOGIC ****
 
@@ -39,22 +39,22 @@ onMounted(() => {
 <template>
    <div class="h-[94Vh]">
       <div>
-         <h1 class="text-4xl font-bold ml-[4.5rem] mb-10 invisible" ref="titleSection1">
+         <h1 class="invisible mb-10 ml-[4.5rem] text-4xl font-bold" ref="titleSection1">
             Trending Games <IconChevronRight svg-color="#ffffff" svg-width="35px" />
          </h1>
          <div
-            class="background-img-container grid grid-cols-2 place-content-center h-[432px] invisible"
+            class="background-img-container invisible grid h-[432px] grid-cols-2 place-content-center"
             ref="mainSection1"
          >
             <div
-               class="col-span-1 flex flex-col gap-3 justify-start items-start pl-[3rem] pb-[5rem]"
+               class="col-span-1 flex flex-col items-start justify-start gap-3 pb-[5rem] pl-[3rem]"
             >
                <img
-                  class="w-[250px] h-[140px] drop-shadow-3xl"
+                  class="drop-shadow-3xl h-[140px] w-[250px]"
                   src="@/assets/img/ernightreign-title.png"
                />
                <h3
-                  class="ml-[22px] text-4xl font-bold text-center custom-hover-effect-text-underline-marker relative inline-block"
+                  class="custom-hover-effect-text-underline-marker relative ml-[22px] inline-block text-center text-4xl font-bold"
                >
                   Elden-Ring: Night Reign
                </h3>
@@ -63,18 +63,18 @@ onMounted(() => {
                   reprehenderit cillum nulla.
                </p>
                <Button
-                  class="w-[240px] h-[55px] ml-[22px] text-custom-red bg-white border-white font-semibold active:bg-white hover:bg-btn-active mt-3"
+                  class="text-custom-red hover:bg-btn-active mt-3 ml-[22px] h-[55px] w-[240px] border-white bg-white font-semibold active:bg-white"
                   label="See in library"
                   raised
                />
             </div>
-            <div class="col-span-1 flex flex-col gap-3 items-end pr-[3rem] pb-[5rem]">
+            <div class="col-span-1 flex flex-col items-end gap-3 pr-[3rem] pb-[5rem]">
                <img
-                  class="w-[250px] h-[140px] drop-shadow-3xl"
+                  class="drop-shadow-3xl h-[140px] w-[250px]"
                   src="@/assets/img/mhwild-title.png"
                />
                <h3
-                  class="mr-[22px] text-4xl font-bold text-center custom2-hover-effect-text-underline-marker relative inline-block"
+                  class="custom2-hover-effect-text-underline-marker relative mr-[22px] inline-block text-center text-4xl font-bold"
                >
                   Monster Hunter Wild
                </h3>
@@ -83,7 +83,7 @@ onMounted(() => {
                   reprehenderit cillum nulla.
                </p>
                <Button
-                  class="w-[240px] h-[55px] mr-[22px] border-2 text-white border-white font-semibold hover:text-custom-lightblue hover:bg-white active:bg-btn-active mt-3"
+                  class="hover:text-custom-lightblue active:bg-btn-active mt-3 mr-[22px] h-[55px] w-[240px] border-2 border-white font-semibold text-white hover:bg-white"
                   label="See in library"
                   variant="outlined"
                   raised
@@ -92,18 +92,18 @@ onMounted(() => {
          </div>
       </div>
       <div class="mt-[4rem]">
-         <h1 class="text-4xl font-bold ml-[4.5rem] mb-10 invisible" ref="titleSection2">
+         <h1 class="invisible mb-10 ml-[4.5rem] text-4xl font-bold" ref="titleSection2">
             Best players <IconChevronRight svg-color="#ffffff" svg-width="35px" />
          </h1>
          <div
-            class="grid grid-cols-3 place-content-center place-items-center pt-[6rem] invisible"
+            class="invisible grid grid-cols-3 place-content-center place-items-center pt-[6rem]"
             ref="mainSection2"
          >
             <div class="col-span-1">
-               <div class="flex justify-center items-center">
+               <div class="flex items-center justify-center">
                   <Avatar
                      icon="pi pi-user"
-                     class="w-[8rem] h-[8rem] shadow-2xl mr-0.5 ml-0.5 absolute"
+                     class="absolute mr-0.5 ml-0.5 h-[8rem] w-[8rem] shadow-2xl"
                      size="xlarge"
                      shape="circle"
                   >
@@ -111,18 +111,18 @@ onMounted(() => {
                   </Avatar>
                </div>
                <Card
-                  class="w-[19rem] h-[22rem] flex flex-col justify-center pt-15 border-4 border-[#ff0068] shadow-2xl"
+                  class="flex h-[22rem] w-[19rem] flex-col justify-center border-4 border-[#ff0068] pt-15 shadow-2xl"
                >
                   <template #header>
-                     <h3 class="text-3xl font-bold text-center text-[#ff0068]">Username</h3>
+                     <h3 class="text-center text-3xl font-bold text-[#ff0068]">Username</h3>
                   </template>
                   <template #content>
                      <div class="flex flex-col items-center gap-4">
                         <img
-                           class="w-[8rem] h-[8rem] drop-shadow-3xl"
+                           class="drop-shadow-3xl h-[8rem] w-[8rem]"
                            src="@/assets/img/ranks/icon-rank1.webp"
                         />
-                        <p class="text-sm text-center italic opacity-50">
+                        <p class="text-center text-sm italic opacity-50">
                            Valorent, Overwatch, League of Legend, Starcraft 2...
                         </p>
                      </div>
@@ -130,10 +130,10 @@ onMounted(() => {
                </Card>
             </div>
             <div class="span-cols-1 col-span-1">
-               <div class="flex justify-center items-center">
+               <div class="flex items-center justify-center">
                   <Avatar
                      icon="pi pi-user"
-                     class="w-[8rem] h-[8rem] shadow-2xl mr-0.5 ml-0.5 absolute"
+                     class="absolute mr-0.5 ml-0.5 h-[8rem] w-[8rem] shadow-2xl"
                      size="xlarge"
                      shape="circle"
                   >
@@ -141,18 +141,18 @@ onMounted(() => {
                   </Avatar>
                </div>
                <Card
-                  class="w-[19rem] h-[22rem] flex flex-col justify-center pt-15 border-4 border-[#ffa65c] shadow-2xl"
+                  class="flex h-[22rem] w-[19rem] flex-col justify-center border-4 border-[#ffa65c] pt-15 shadow-2xl"
                >
                   <template #header>
-                     <h3 class="text-3xl font-bold text-center text-[#ffa65c]">Username</h3>
+                     <h3 class="text-center text-3xl font-bold text-[#ffa65c]">Username</h3>
                   </template>
                   <template #content>
                      <div class="flex flex-col items-center gap-4">
                         <img
-                           class="w-[8rem] h-[8rem] drop-shadow-3xl"
+                           class="drop-shadow-3xl h-[8rem] w-[8rem]"
                            src="@/assets/img/ranks/icon-rank2.webp"
                         />
-                        <p class="text-sm text-center italic opacity-50">
+                        <p class="text-center text-sm italic opacity-50">
                            Valorent, Overwatch, League of Legend, Starcraft 2...
                         </p>
                      </div>
@@ -160,10 +160,10 @@ onMounted(() => {
                </Card>
             </div>
             <div class="span-cols-1 col-span-1">
-               <div class="flex justify-center items-center">
+               <div class="flex items-center justify-center">
                   <Avatar
                      icon="pi pi-user"
-                     class="w-[8rem] h-[8rem] shadow-2xl mr-0.5 ml-0.5 absolute"
+                     class="absolute mr-0.5 ml-0.5 h-[8rem] w-[8rem] shadow-2xl"
                      size="xlarge"
                      shape="circle"
                   >
@@ -171,18 +171,18 @@ onMounted(() => {
                   </Avatar>
                </div>
                <Card
-                  class="w-[19rem] h-[22rem] flex flex-col justify-center pt-15 border-4 border-[#9966ff] shadow-2xl"
+                  class="flex h-[22rem] w-[19rem] flex-col justify-center border-4 border-[#9966ff] pt-15 shadow-2xl"
                >
                   <template #header>
-                     <h3 class="text-3xl font-bold text-center text-[#9966ff]">Username</h3>
+                     <h3 class="text-center text-3xl font-bold text-[#9966ff]">Username</h3>
                   </template>
                   <template #content>
                      <div class="flex flex-col items-center gap-4">
                         <img
-                           class="w-[8rem] h-[8rem] drop-shadow-3xl"
+                           class="drop-shadow-3xl h-[8rem] w-[8rem]"
                            src="@/assets/img/ranks/icon-rank3.webp"
                         />
-                        <p class="text-sm text-center italic opacity-50">
+                        <p class="text-center text-sm italic opacity-50">
                            Valorent, Overwatch, League of Legend, Starcraft 2...
                         </p>
                      </div>

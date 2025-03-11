@@ -2,11 +2,11 @@
 // **** IMPORTS ****
 
 // *** Import Components ***
-import FormLogin from '@/components/FormLogin.vue';
+import FormLogin from '@/components/forms/FormLogin.vue';
 </script>
 
 <template>
-   <div class="flex justify-center items-center h-[94vh]">
+   <div class="flex h-[94vh] items-center justify-center">
       <FormLogin />
    </div>
 </template>

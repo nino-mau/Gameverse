@@ -13,6 +13,8 @@ import { logoutUser } from '../controllers/usersController.js';
 
 const router = Express.Router();
 
+// *** Users ***
+
 // Define endpoint for receiving register form data
 router.post('/users/register', userRegistration);
 

@@ -4,15 +4,15 @@ import { onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 // Import frameworks/libs
-import { useUserAuthStore } from './stores/authStore.js';
+import { useUserAuthStore } from '@/stores/authStore.js';
 
 // Import PrimeVue Components
 import Toast from 'primevue/toast';
 import { useToast } from 'primevue/usetoast';
 
 // Import Components
-import MainNavbar from './components/MainNavbar.vue';
-import MainFooter from './components/MainFooter.vue';
+import MainNavbar from '@/components/main/MainNavbar.vue';
+import MainFooter from '@/components/main/MainFooter.vue';
 
 // **** INIT ****
 

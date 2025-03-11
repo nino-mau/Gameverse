@@ -5,15 +5,15 @@ import { useRouter } from 'vue-router';
 
 // Import frameworks/libs
 import { storeToRefs } from 'pinia';
-import { useUserAuthStore } from '../stores/authStore.js';
+import { useUserAuthStore } from '@/stores/authStore.js';
 
 // Icons
-import IconSite from './icons/IconSite.vue';
-import IconMedal from './icons/IconMedal.vue';
+import IconSite from '@/components/icons/IconSite.vue';
+import IconMedal from '@/components/icons/IconMedal.vue';
 import { ChevronDown } from 'lucide-vue-next';
-import IconLibrary from './icons/IconLibrary.vue';
-import IconGameController from './icons/IconGameController.vue';
-import IconChevronDownFilledHover from './icons/IconChevronDownFilledHover.vue';
+import IconLibrary from '@/components/icons/IconLibrary.vue';
+import IconGameController from '@/components/icons/IconGameController.vue';
+import IconChevronDownFilledHover from '@/components/icons/IconChevronDownFilledHover.vue';
 
 // PrimeVue Components
 import Button from 'primevue/button';
@@ -23,10 +23,10 @@ import TieredMenu from 'primevue/tieredmenu';
 // Async
 const Avatar = defineAsyncComponent(() => import('primevue/avatar'));
 const IconCircleUserProfile = defineAsyncComponent(
-   () => import('./icons/IconCircleUserProfile.vue'),
+   () => import('@/components/icons/IconCircleUserProfile.vue'),
 );
-const IconNotifBell = defineAsyncComponent(() => import('./icons/IconNotifBell.vue'));
-const IconSearch = defineAsyncComponent(() => import('./icons/IconSearch.vue'));
+const IconNotifBell = defineAsyncComponent(() => import('@/components/icons/IconNotifBell.vue'));
+const IconSearch = defineAsyncComponent(() => import('@/components/icons/IconSearch.vue'));
 
 // **** INIT ****
 

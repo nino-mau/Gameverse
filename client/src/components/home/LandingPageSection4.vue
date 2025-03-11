@@ -6,10 +6,10 @@ import { onMounted, ref } from 'vue';
 import Button from 'primevue/button';
 
 // *** Import Custom Components ***
-import BtnCustomHover1 from '../BtnCustomHover1.vue';
+import BtnCustomHover1 from '@/components/ui/BtnCustomHover1.vue';
 
 // *** Import Icons ***
-import IconGameController from '../icons/IconGameController.vue';
+import IconGameController from '@/components/icons/IconGameController.vue';
 
 // *** Import Frameworks ***
 import Swiper from 'swiper/bundle';
@@ -18,7 +18,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // *** Import Functions ***
-import { animateElementOnScroll } from 'Modules/utils.js';
+import { animateElementOnScroll } from '@/utils/general';
 
 // **** LOGIC ****
 
@@ -68,17 +68,17 @@ onMounted(() => {
 </script>
 
 <template>
-   <div class="lp4-container bg-bg4 h-[94vh] w-full flex flex-col">
+   <div class="lp4-container bg-bg4 flex h-[94vh] w-full flex-col">
       <div
-         class="flex flex-col justify-center items-center gap-5 pr-[25rem] pl-[25rem] invisible"
+         class="invisible flex flex-col items-center justify-center gap-5 pr-[25rem] pl-[25rem]"
          ref="titleSection"
       >
-         <h1 class="text-5xl/[1.6] font-bold text-center mt-[3rem]">
+         <h1 class="mt-[3rem] text-center text-5xl/[1.6] font-bold">
             <span class="text-primary">Hundreds of games</span> ready to be
             <span class="hover-effect-text-underline-marker relative inline-block">discovered</span>
             !
          </h1>
-         <p class="text-base text-center">
+         <p class="text-center text-base">
             Lorem ipsum dolor sit amet consectetur adipiscing elidolor mattis sit phasellus mollis
             sit aliquam sit nullam neques.
          </p>
@@ -91,15 +91,15 @@ onMounted(() => {
                btn-icon-color="var(--color-bg4)"
             />
             <Button
-               class="bg-bg4 border-white text-white h-[55px] w-[240px] ml-7 hover:bg-white hover:text-bg4 active:bg-btn-active"
+               class="bg-bg4 hover:text-bg4 active:bg-btn-active ml-7 h-[55px] w-[240px] border-white text-white hover:bg-white"
                label="Learn more"
                raised
             />
          </div>
       </div>
-      <div class="flex-1 flex justify-center items-center">
+      <div class="flex flex-1 items-center justify-center">
          <div
-            class="lp4-games-swiper overflow-hidden pointer-events-none invisible"
+            class="lp4-games-swiper pointer-events-none invisible overflow-hidden"
             ref="sliderSection"
          >
             <div class="swiper-wrapper">
