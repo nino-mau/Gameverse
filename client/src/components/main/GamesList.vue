@@ -1,8 +1,10 @@
 <script setup>
-// #### IMPORT ####
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
 
 // Vue
-import { reactive, onMounted, ref, watch } from 'vue';
+import { reactive, onMounted, ref, markRaw } from 'vue';
 
 // Prime vue
 import { Select } from 'primevue';
@@ -11,36 +13,50 @@ import { Select } from 'primevue';
 import lodash from 'lodash';
 
 // Icons
-import { Bookmark } from 'lucide-vue-next';
-import { Star } from 'lucide-vue-next';
+import {
+   Bookmark,
+   Star,
+   Swords,
+   Compass,
+   Wand2,
+   Coins,
+   Globe,
+   Monitor,
+   Dumbbell,
+   Armchair,
+   Sparkles,
+   GraduationCap,
+   Car,
+   ChevronRight,
+} from 'lucide-vue-next';
 
 // Functions
 import { getData } from '@/utils/api';
 import { denormalizeAssociativeTable } from '@/utils/general';
 
-// #### LOGIC ####
+/*==============================
+============  MAIN  ============
+===============================*/
 
-// ** Filter/Sort Buttons Setup **
+// ** Sorting/Filtring ** //
 
-// Genres
-const selectedGenres = ref();
 const genresFilterList = ref([
-   { name: 'Action' },
-   { name: 'Adventure' },
-   { name: 'RPG' },
-   { name: 'Free to play' },
-   { name: 'MMO' },
-   { name: 'Simulation' },
-   { name: 'Sports' },
-   { name: 'Casual' },
-   { name: 'Indie' },
-   { name: 'Strategy' },
-   { name: 'Racing' },
+   { name: 'Action', icon: markRaw(Swords) },
+   { name: 'Adventure', icon: markRaw(Compass) },
+   { name: 'RPG', icon: markRaw(Wand2) },
+   { name: 'Free To Play', icon: markRaw(Coins) },
+   { name: 'MMO', icon: markRaw(Globe) },
+   { name: 'Simulation', icon: markRaw(Monitor) },
+   { name: 'Sports', icon: markRaw(Dumbbell) },
+   { name: 'Casual', icon: markRaw(Armchair) },
+   { name: 'Indie', icon: markRaw(Sparkles) },
+   { name: 'Strategy', icon: markRaw(GraduationCap) },
+   { name: 'Racing', icon: markRaw(Car) },
 ]);
 
-// Sort
-// const selectedSortOptions = ref();
-// const sortOptionsList = ref([]);
+const sortOptionsList = ref([{ name: 'Best reviews' }, { name: 'Worst reviews' }]);
+
+// ** Functions ** //
 
 // Handle setting color depending on review score for text
 function handleReviewScoreColor(reviewScore) {
@@ -75,7 +91,7 @@ async function getGameInfos() {
 }
 
 // Parse all the data together, apply filters, divide the array into rows of 3 and place it in a reactive array for use in template
-function parseRawDbData(array, genreArray) {
+function parseGamesData(array, genreArray) {
    const fullGameArray = [];
 
    array.forEach((obj) => {
@@ -94,25 +110,11 @@ function parseRawDbData(array, genreArray) {
    });
    // Split this array in chunks of 3 then push it in the reactive array
    gameRowsArray.push(...lodash.chunk(fullGameArray, 3));
+   // Create a backup
+   backupGameRowsArray.push(...lodash.chunk(fullGameArray, 3));
 }
 
-// function filterArray(targetArr, filterArr) {
-//    console.log('Initial:', targetArr);
-//    targetArr.forEach((chunk) => {
-//       chunk.forEach((obj) => {
-//          const index = targetArr.indexOf(obj);
-//          if (!obj.genres.includes(filterArr)) {
-//             delete targetArr[index];
-//          }
-//       });
-//    });
-
-//    console.log(targetArr);
-//    // Clear gameRowsArray and place target array in it's place
-//    gameRowsArray.length = 0;
-//    gameRowsArray.push(...targetArr);
-// }
-
+// Filter array by genre
 function filterArray(originalArray, selectedGenres) {
    // If no genres selected, return the original array
    if (!selectedGenres || selectedGenres.length === 0) {
@@ -146,19 +148,25 @@ function filterArray(originalArray, selectedGenres) {
    gameRowsArray.push(...filteredRows);
 }
 
+// Detect when a genre is selected or unselected
+function onSelectGenreChange(event) {
+   if (!event.value) {
+      gameRowsArray.length = 0;
+      gameRowsArray.push(...backupGameRowsArray);
+   } else {
+      gameRowsArray.length = 0;
+      gameRowsArray.push(...backupGameRowsArray);
+      filterArray(gameRowsArray, event.value);
+   }
+}
+
 // Create the reactive object which will store games infos
 const gameRowsArray = reactive([]);
-
-// Create variable storing fetched game data;
-// const rawGamesData = [];
-// const rawGenresData = [];
+const backupGameRowsArray = [];
 
 onMounted(async () => {
    // Get games informations from the server
    const r = await getGameInfos();
-
-   // rawGamesData.push(r.games);
-   // rawGenresData.push(r.genres);
 
    const rawGamesData = r.games;
    const rawGenresData = r.genres;
@@ -167,11 +175,7 @@ onMounted(async () => {
    const genreArray = denormalizeAssociativeTable(rawGenresData);
 
    // Parse all the data and create chunks
-   parseRawDbData(rawGamesData, genreArray);
-});
-
-watch(selectedGenres, () => {
-   filterArray(gameRowsArray, selectedGenres.value);
+   parseGamesData(rawGamesData, genreArray);
 });
 </script>
 
@@ -179,27 +183,50 @@ watch(selectedGenres, () => {
    <div class="mt-[10rem] w-[83%]">
       <!-- Games List Menu -->
       <div class="mb-15 flex flex-row justify-start gap-10">
-         <!-- Select genres button -->
+         <!-- Genre button -->
          <Select
             v-model="selectedGenres"
             :options="genresFilterList"
             optionLabel="name"
             placeholder="Genres..."
-            class="bg-secondary w-[17rem] border-2 text-xl text-[#ffffff]"
+            class="bg-secondary text-md w-[12rem] border-2 text-[#ffffff]"
             :maxSelectedLabels="1"
             showClear
             outlined
+            @change="onSelectGenreChange"
          >
+            <!-- Custom icons -->
+            <template #value="slotProps">
+               <div v-if="slotProps.value" class="flex items-center gap-2">
+                  <component :is="slotProps.value.icon" size="21" />
+                  <span>{{ slotProps.value.name }}</span>
+               </div>
+               <span v-else>{{ slotProps.placeholder }}</span>
+            </template>
+            <template #option="slotProps">
+               <div class="flex items-center gap-2">
+                  <component :is="slotProps.option.icon" size="18" />
+                  <span>{{ slotProps.option.name }}</span>
+               </div>
+            </template>
          </Select>
          <!-- Sort button -->
-         <!-- <MultiSelect
+         <Select
             v-model="selectedSortOptions"
             :options="sortOptionsList"
             optionLabel="name"
             placeholder="Sort..."
-            class="bg-secondary w-[10rem] border-2 text-xl text-white"
+            class="bg-secondary text-md w-[12rem] border-2 text-[#ffffff]"
+            showClear
+            outlined
          >
-         </MultiSelect> -->
+         </Select>
+      </div>
+
+      <!-- Title -->
+      <div class="mb-8 flex flex-row items-center">
+         <h1 class="text-3xl font-semibold">Trending</h1>
+         <ChevronRight size="32" strokeWidth="2.5" class="pt-[4px]" />
       </div>
 
       <!-- Games List -->
@@ -214,7 +241,7 @@ watch(selectedGenres, () => {
             <div
                v-for="obj in row"
                :key="obj.id"
-               class="z-0 col-span-1 h-[218px] w-[379px] shadow-2xl"
+               class="z-0 col-span-1 h-[218px] w-[379px] shadow-2xl transition hover:scale-105"
             >
                <div
                   class="relative flex h-[80%] flex-row items-start justify-end rounded-t-xl bg-cover p-2"
@@ -224,18 +251,26 @@ watch(selectedGenres, () => {
                      size="24"
                      color="white"
                      stroke-width="2.3"
-                     class="z-10 drop-shadow-2xl"
+                     class="z-10 drop-shadow-2xl hover:fill-white"
                   />
                </div>
                <div class="bg-bg3 flex h-[20%] flex-row items-center justify-between rounded-b-xl">
-                  <h1 class="text-md ml-3 font-semibold">{{ obj.name }}</h1>
+                  <h1 class="text-md ml-3 font-semibold">
+                     {{ obj.name }} <span class="text-primary pl-[4px]">|</span
+                     ><span class="text-primary pl-2 text-xs italic">Action</span>
+                  </h1>
+
                   <span class="mr-3 flex flex-row items-center gap-[5px]">
                      <Star
-                        size="19"
+                        size="15"
                         strokeWidth="0"
                         :fill="handleReviewIconColor(obj.reviewScore)"
+                        class=""
                      />
-                     <p class="text-md" :class="handleReviewScoreColor(obj.reviewScore)">
+                     <p
+                        class="text-md font-semibold"
+                        :class="handleReviewScoreColor(obj.reviewScore)"
+                     >
                         {{ obj.reviewScore }}
                      </p>
                   </span>
@@ -246,4 +281,12 @@ watch(selectedGenres, () => {
    </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* Custom colors for select buttons icons  */
+.p-select-clear-icon {
+   color: white !important;
+}
+.p-select-dropdown {
+   color: white !important;
+}
+</style>

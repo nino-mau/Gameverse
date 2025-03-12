@@ -87,8 +87,10 @@
 
    /* Overide default multiselect placeholder color text */
    --p-select-placeholder-color: none !important;
-   --p-select-color: none !important
-;
+   --p-select-color: none !important;
+   --p-select-option-selected-focus-color: none !important;
+   --p-select-clear-icon-color: none !important;
+   --p-select-dropdown-color: none !important;
 }
 /* This correspond to the text in the tiered menu dropdown */
 .p-tieredmenu-item-label {

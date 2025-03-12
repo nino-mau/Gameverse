@@ -14,8 +14,8 @@ import { v4 as uuidv4 } from 'uuid';
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
-   //    password: 'C0sezok?92', // Replace with your MySQL password
+   // password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   password: 'C0sezok?92', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
@@ -28,7 +28,7 @@ export const gamesNamesArr = [
    'header-12-1741682833647.webp',
    'header-13-1741682833648.webp',
    'header-14-1741682833648.webp',
-   'header-15',
+   'header-15.webp',
    'header-16-1741682833649.webp',
    'header-17-1741682833649.webp',
    'header-18-1741682833649.webp',
@@ -43,7 +43,7 @@ export const gamesNamesArr = [
    'header-26-1741682833652.webp',
    'header-27-1741682833652.webp',
    'header-28-1741682833653.webp',
-   'header-29',
+   'header-29.webp',
    'header-3.webp',
    'header-30-1741682833653.webp',
    'header-31-1741682833653.webp',
@@ -53,7 +53,7 @@ export const gamesNamesArr = [
    'header-35-1741682833655.webp',
    'header-36-1741682833655.webp',
    'header-37-1741682833655.webp',
-   'header-38',
+   'header-38.webp',
    'header-39-1741682833656.webp',
    'header-4.webp',
    'header-40-1741682833656.webp',
@@ -122,18 +122,21 @@ export async function insertGameGenres(gamesArr, initialId = 1) {
 export async function insertGameDevelopers(gamesArr, initialId = 1) {
    let namesDevelopersArr = [];
 
-   // Create an array of game -> genre objects to use for the sql query
+   // Create an array of game -> developer objects to use for the sql query
    gamesArr.forEach((game, id) => {
       const developers = game.developers;
-      developers.forEach((platform) => {
-         const Obj = new Object();
-         Obj[id + initialId] = platform;
-         namesDevelopersArr.push(Obj);
-         delete Obj.name;
+      developers.forEach((developer) => {
+         const obj = {};
+         obj[id + initialId] = developer;
+         namesDevelopersArr.push(obj);
       });
    });
 
-   const values = namesDevelopersArr.map((obj) => [Object.keys(obj), Object.values(obj)]);
+   const values = namesDevelopersArr.map((obj) => {
+      const key = Object.keys(obj)[0];
+      const value = obj[key];
+      return [parseInt(key), value];
+   });
    const sql = `INSERT INTO game_developers (game_id, developer) VALUES ?`;
    insertInDb(sql, [values]);
 }

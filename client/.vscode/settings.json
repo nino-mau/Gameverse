@@ -37,7 +37,8 @@
    "workbench.tree.indent": 10,
    "explorer.compactFolders": true,
    "git.decorations.enabled": false,
-   // "material-icon-theme.activeIconPack": "vue",
+   // " *** MATERIAL ICONS ***
+   "workbench.iconTheme": "material-icon-theme",
    "material-icon-theme.folders.associations": {
       "browse-games": "vue",
       "main": "vue",
