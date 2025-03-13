@@ -1,26 +1,30 @@
 <script setup>
-// **** IMPORTS ****
-import { onMounted, watch } from 'vue';
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
+
+// vue
+import { onMounted, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-// Import frameworks/libs
-import { useUserAuthStore } from '@/stores/authStore.js';
+// frameworks/libs
+import { useUserStore } from '@/stores/userStore.js';
 
-// Import PrimeVue Components
+// primeVue
 import Toast from 'primevue/toast';
 import { useToast } from 'primevue/usetoast';
 
-// Import Components
+// components
 import MainNavbar from '@/components/main/MainNavbar.vue';
 import MainFooter from '@/components/main/MainFooter.vue';
 
-// **** INIT ****
+/*==============================
+============  MAIN  ============
+===============================*/
 
-const userStore = useUserAuthStore();
+const userStore = useUserStore();
 const route = useRoute();
 const toast = useToast();
-
-// **** LOGICS ****
 
 onMounted(async () => {
    // Verify user token and get user infos
@@ -45,21 +49,30 @@ onMounted(async () => {
    console.log('ON MOUNT');
 });
 
-// Execute when page change
+// Take propreties of executed route
+const routeInfo = computed(() => ({
+   name: route.name,
+   path: route.path,
+   meta: route.meta,
+}));
+
+// Handle routing
 watch(
-   () => route.fullPath,
-   async () => {
+   routeInfo,
+   async (newRoute) => {
       await userStore.checkLoginStatus();
-      console.log('WATCH');
+      console.log('Route changed:', newRoute);
       await userStore.getUserData();
-      console.log('WATCH');
    },
+   { deep: true },
 );
 </script>
 
 <template>
+   <!-- Placeholder for popup waning -->
    <Toast />
-   <header class="site-header">
+   <!-- Dashboard has it's own custom header -->
+   <header v-if="!route.path.includes('/dashboard')" class="site-header">
       <MainNavbar />
    </header>
    <main class="page-main">

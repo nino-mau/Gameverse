@@ -8,9 +8,11 @@ import { reactive, onMounted, ref, markRaw } from 'vue';
 
 // Prime vue
 import { Select } from 'primevue';
+import { useToast } from 'primevue/usetoast';
 
 // Libs
 import lodash from 'lodash';
+import { useUserStore } from '@/stores/userStore.js';
 
 // Icons
 import {
@@ -38,7 +40,11 @@ import { denormalizeAssociativeTable } from '@/utils/general';
 ============  MAIN  ============
 ===============================*/
 
-// ** Sorting/Filtring ** //
+const toast = useToast(); // init toast
+
+const userStore = useUserStore(); // init userStore
+
+//***===== Sorting/Filtering =====***//
 
 const genresFilterList = ref([
    { name: 'Action', icon: markRaw(Swords) },
@@ -56,7 +62,7 @@ const genresFilterList = ref([
 
 const sortOptionsList = ref([{ name: 'Best reviews' }, { name: 'Worst reviews' }]);
 
-// ** Functions ** //
+//***===== Functions =====***//
 
 // Handle setting color depending on review score for text
 function handleReviewScoreColor(reviewScore) {
@@ -160,16 +166,35 @@ function onSelectGenreChange(event) {
    }
 }
 
+// Wrapper to trigger a toast popup on addFavoriteGame success
+function addFavoriteGameWrapper(gameId, gameName) {
+   const r = userStore.addFavoriteGame(gameId, gameName);
+
+   if (r) {
+      toast.add({
+         severity: 'success',
+         summary: 'Success',
+         detail: 'Added game to favorites !',
+         life: 2000,
+      });
+   }
+}
+
+//***===== Executable =====***//
+
 // Create the reactive object which will store games infos
 const gameRowsArray = reactive([]);
 const backupGameRowsArray = [];
 
 onMounted(async () => {
-   // Get games informations from the server
-   const r = await getGameInfos();
+   // Update user store with user favorite games
+   await userStore.getFavGames();
 
-   const rawGamesData = r.games;
-   const rawGenresData = r.genres;
+   // Get games informations from the server
+   const r2 = await getGameInfos();
+
+   const rawGamesData = r2.games;
+   const rawGenresData = r2.genres;
 
    // Parse the genre data into a separate array of arrays where each array correspond to one game
    const genreArray = denormalizeAssociativeTable(rawGenresData);
@@ -247,17 +272,32 @@ onMounted(async () => {
                   class="relative flex h-[80%] flex-row items-start justify-end rounded-t-xl bg-cover p-2"
                   :style="{ backgroundImage: `url(${obj.imageUrl})` }"
                >
-                  <Bookmark
-                     size="24"
-                     color="white"
-                     stroke-width="2.3"
-                     class="z-10 drop-shadow-2xl hover:fill-white"
-                  />
+                  <a
+                     @click="addFavoriteGameWrapper(obj.id, obj.name)"
+                     :class="
+                        userStore.userFavGames.includes(obj.id)
+                           ? 'pointer-events-none'
+                           : 'cursor-pointer'
+                     "
+                  >
+                     <Bookmark
+                        size="24"
+                        color="white"
+                        stroke-width="2.3"
+                        class="z-10 drop-shadow-2xl"
+                        :class="{
+                           'fill-white': userStore.userFavGames.includes(obj.id),
+                           'hover:fill-white': !userStore.userFavGames.includes(obj.id),
+                        }"
+                     />
+                  </a>
                </div>
                <div class="bg-bg3 flex h-[20%] flex-row items-center justify-between rounded-b-xl">
                   <h1 class="text-md ml-3 font-semibold">
                      {{ obj.name }} <span class="text-primary pl-[4px]">|</span
-                     ><span class="text-primary pl-2 text-xs italic">Action</span>
+                     ><span class="text-primary pl-2 text-xs italic">{{
+                        obj.genres[2] || obj.genres[1]
+                     }}</span>
                   </h1>
 
                   <span class="mr-3 flex flex-row items-center gap-[5px]">

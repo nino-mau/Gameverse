@@ -1,9 +1,17 @@
-// **** IMPORT ****
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
 
 // Functions
 import { deleteUserTokenDb } from '../db/mysql.js';
+import { insertFavoriteGame } from '../db/mysql.js';
+import { getUserFavoriteGames } from '../db/mysql.js';
 
-// **** FUNCTIONS ****
+/*==============================
+==========  FUNCTIONS  =========
+===============================*/
+
+//***===== AUTH =====***//
 
 // Respond to request on users/me by providing users data of user identified by token
 export async function userInfo(req, res) {
@@ -40,5 +48,42 @@ export async function logoutUser(req, res) {
    } catch (error) {
       console.error('logoutUser: Logout error: ', error);
       return res.status(500).json({ error: `Unexpected error during logout: ${error}` });
+   }
+}
+
+//***===== DATA =====***//
+
+// Add a game to the list of favorite games of a user
+export async function addFavoriteGame(req, res) {
+   const gameId = req.body.gameId;
+   const userId = req.userData.id;
+
+   const r = await insertFavoriteGame(gameId, userId);
+
+   if (r) {
+      console.log('/users/add-favorite-game: added favorite game (200 OK)');
+      return res.sendStatus(200);
+   } else {
+      return res
+         .status(500)
+         .json({ error: `insertFavoriteGame: failed to add favorite game to db` });
+   }
+}
+
+// Provide favorite games ressources to client
+export async function sendFavoriteGames(req, res) {
+   const userId = req.userData.id;
+
+   const r = await getUserFavoriteGames(userId);
+
+   if (!r.length) {
+      res.status(200).json([]);
+   } else {
+      const gamesArr = [];
+      r.forEach((obj) => {
+         gamesArr.push(obj.game_id);
+      });
+      console.log('/users/favorite_games: sent favorite games (200 OK)');
+      return res.status(200).json(gamesArr);
    }
 }

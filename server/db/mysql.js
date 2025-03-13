@@ -1,26 +1,28 @@
-// **** IMPORTS ****
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
 
-// Import dependencies
-import mysql from 'mysql2/promise';
+// dependencies
 import bcrypt from 'bcrypt';
+import mysql from 'mysql2/promise';
 import { v4 as uuidv4 } from 'uuid';
 // import { jsonToObject } from '../utils/utils.js';
 
-// Functions
-
-// **** FUNCTIONS ****
+/*==============================
+==========  FUNCTIONS  =========
+===============================*/
 
 // Connection pool
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   // password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
-   password: 'C0sezok?92', // Replace with your MySQL password
+   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   // password: 'C0sezok?92', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
 
-export const gamesNamesArr = [
+export const gameImgArr = [
    'header-0.webp',
    'header-1.webp',
    'header-10-1741682833647.webp',
@@ -72,7 +74,7 @@ export const gamesNamesArr = [
    'header-9-1741682833646.webp',
 ];
 
-// *** INSERTS ***
+//***===== INSERT =====***//
 
 // Take an insert query with values and execute it
 async function insertInDb(query, values) {
@@ -193,7 +195,33 @@ export async function createRefreshTokenDb(userData) {
    }
 }
 
-// *** SELECTS ***
+// Insert user id and game id in user_favorite_games table
+export async function insertFavoriteGame(gameId, userId) {
+   // Check if game isn't already in favorite
+   const sqlSelect = `SELECT * FROM user_favorite_games WHERE user_id = ? AND game_id = ?`;
+   const valuesSelect = [userId, gameId];
+   const r1 = await selectInDb(sqlSelect, valuesSelect);
+   console.log(r1);
+
+   if (!r1.length) {
+      const sqlInsert = `INSERT INTO user_favorite_games (user_id, game_id) VALUES (? , ?)`;
+      const valuesInsert = [userId, gameId];
+
+      const r2 = await insertInDb(sqlInsert, valuesInsert);
+
+      if (r2.affectedRows > 0) {
+         return true;
+      } else {
+         console.log('insertFavoriteGame: failed inserting favorite game');
+         return false;
+      }
+   } else {
+      console.log('insertFavoriteGame: game is already in favorite for this user');
+      return false;
+   }
+}
+
+//***===== SELECT =====***//
 
 // Take a select query and execute it
 async function selectInDb(query, value) {
@@ -280,7 +308,15 @@ export async function getGameGenres() {
    return r;
 }
 
-// *** DELETE ***
+export async function getUserFavoriteGames(userId) {
+   const sql = `SELECT game_id FROM user_favorite_games WHERE user_id = ?`;
+   const value = userId;
+
+   const r = await selectInDb(sql, value);
+   return r;
+}
+
+//***===== DELETE =====***//
 
 // Delete the refresh token corresponding to an user id in database
 export async function deleteUserTokenDb(userId) {
@@ -305,7 +341,7 @@ export async function deleteUserTokenDb(userId) {
    }
 }
 
-// *** AUTHENTIFICATION ***
+//***===== AUTH =====***//
 
 // Register user in db
 export async function registerUserDb(userData) {

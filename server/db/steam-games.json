@@ -254,7 +254,7 @@
       "description": "Baldur’s Gate 3 is a story-rich, party-based RPG set in the universe of Dungeons &amp; Dragons, where your choices shape a tale of fellowship and betrayal, survival and sacrifice, and the lure of absolute power.",
       "developers": ["Larian Studios"],
       "publishers": ["Larian Studios"],
-      "genres": ["Adventure", "RPG", "Strategy"],
+      "genres": ["Adventure", "Strategy", "RPG"],
       "release_date": "3 Aug, 2023",
       "metacritic_score": 96,
       "headerImg": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg?t=1740386911",
@@ -267,7 +267,7 @@
    },
    {
       "appId": "2183900",
-      "name": "Warhammer 40,000: Space Marine 2",
+      "name": "Space Marine 2",
       "price": "38,99€",
       "description": "Embody the superhuman skill and brutality of a Space Marine. Unleash deadly abilities and devastating weaponry to obliterate the relentless Tyranid swarms. Defend the Imperium in spectacular third-person action in solo or multiplayer modes.",
       "developers": ["Saber Interactive"],
@@ -339,7 +339,7 @@
    },
    {
       "appId": "814380",
-      "name": "Sekiro™: Shadows Die Twice - GOTY Edition",
+      "name": "Sekiro™: Shadows Die Twice",
       "price": "29,99€",
       "description": "Game of the Year - The Game Awards 2019 Best Action Game of 2019 - IGN Carve your own clever path to vengeance in the award winning adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series. Take Revenge. Restore Your Honor. Kill Ingeniously.",
       "developers": ["FromSoftware, Inc."],
@@ -361,7 +361,7 @@
    },
    {
       "appId": "2215430",
-      "name": "Ghost of Tsushima DIRECTOR'S CUT",
+      "name": "Ghost of Tsushima",
       "price": "40,19€",
       "description": "A storm is coming. Venture into the complete Ghost of Tsushima DIRECTOR’S CUT on PC; forge your own path through this open-world action adventure and uncover its hidden wonders. Brought to you by Sucker Punch Productions, Nixxes Software and PlayStation Studios.",
       "developers": ["Sucker Punch Productions", "Nixxes Software"],
@@ -451,7 +451,7 @@
    },
    {
       "appId": "3487990",
-      "name": "THRONE AND LIBERTY – Talandre Celebration Pack: Gold",
+      "name": "Talandre Celebration Pack: Gold",
       "price": "99,99€",
       "description": "Celebrate THRONE AND LIBERTY'S Wilds of Talandre launch with a Gold Talandre Celebration pack that includes 6,000 Lucent, lucky looking Clover Wolfertinger glide morph and a Black Swan outfit and headpiece. Lucent may be subject to a 3-day holding period for usage within the Auction House.",
       "developers": ["NCSOFT"],
@@ -820,7 +820,7 @@
    },
    {
       "appId": "3487980",
-      "name": "THRONE AND LIBERTY – Talandre Celebration Pack: Silver",
+      "name": " Talandre Celebration Pack: Silver",
       "price": "49,99€",
       "description": "Celebrate THRONE AND LIBERTY'S Wilds of Talandre launch with a Silver Talandre Celebration pack that includes 2,875 Lucent, a Dappled Lumicora dash and swim in style Steam Tsarca morph. Lucent may be subject to a 3-day holding period for usage within the Auction House.",
       "developers": ["NCSOFT"],

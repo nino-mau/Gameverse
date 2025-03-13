@@ -91,6 +91,13 @@
    --p-select-option-selected-focus-color: none !important;
    --p-select-clear-icon-color: none !important;
    --p-select-dropdown-color: none !important;
+   /* Overide default menu label colors */
+   --p-menu-submenu-label-color: none !important;
+   --p-menu-item-color: none !important;
+}
+/* This correspond to the end section of the side bar menu component of primevue */
+.p-menu-end {
+   margin-top: auto !important;
 }
 /* This correspond to the text in the tiered menu dropdown */
 .p-tieredmenu-item-label {

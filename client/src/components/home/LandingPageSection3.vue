@@ -1,14 +1,18 @@
 <script setup>
-// **** IMPORTS ****
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
+
+// vue
 import { onMounted, ref } from 'vue';
 
-// *** Import PrimeVue Components ***
+// primevue
 import Button from 'primevue/button';
 
-// *** Import Illustration ***
+// illustrations
 import IlluAllPlatforms1 from '@/components/illustrations/IlluAllPlatforms1.vue';
 
-// *** Import Icons ***
+// icons
 import IconSteam from '@/components/icons/brands/IconSteam.vue';
 import IconXbox from '@/components/icons/brands/IconXbox.vue';
 import IconSteamdeck from '@/components/icons/brands/IconSteamdeck.vue';
@@ -21,59 +25,62 @@ import IconGog from '@/components/icons/brands/IconGog.vue';
 import IconEpicGames from '@/components/icons/brands/IconEpicGames.vue';
 import IconAndroid from '@/components/icons/brands/IconAndroid.vue';
 
-// *** Import Frameworks ***
+// librairies
 import Swiper from 'swiper/bundle';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
 
-// *** Import Functions ***
+// functions
 import { animateElementOnScroll } from '@/utils/general';
 
-// **** LOGIC ****
+/*==============================
+============  MAIN  ============
+===============================*/
 
-// *** Select dom element using refs ***
+// Custom instructions is needed to make sure swiper is initialized after it become visible
+function animateSliderOnScroll(element, animation, duration, delay) {
+   const domSilderSection = element.value;
+   gsap.to(domSilderSection, {
+      scrollTrigger: {
+         trigger: domSilderSection,
+         once: true,
+         start: 'top 100%',
+         onEnter: () => {
+            gsap.delayedCall(delay, () => {
+               domSilderSection.classList.add(
+                  'animate__animated',
+                  animation,
+                  'animate_duration-' + duration + 's',
+               );
+               domSilderSection.classList.remove('invisible');
+
+               // Init swiper element
+               // eslint-disable-next-line no-unused-vars
+               const swiper = new Swiper('.brands-swiper', {
+                  loop: true,
+                  slidesPerView: '10',
+                  spaceBetween: 110,
+                  disableOnInteraction: false,
+                  autoplay: {
+                     delay: 0,
+                  },
+                  speed: 5000,
+               });
+            });
+         },
+      },
+   });
+}
+
+gsap.registerPlugin(ScrollTrigger); // Init gasp librairy
+
+// Select dom element using refs
 const titleSection = ref(null);
 const illuSection = ref(null);
 const sliderSection = ref(null);
 
 onMounted(() => {
-   // Custom instructions is needed to make sure swiper is initialized after it become visible
-   function animateSliderOnScroll(element, animation, duration, delay) {
-      const domSilderSection = element.value;
-      gsap.to(domSilderSection, {
-         scrollTrigger: {
-            trigger: domSilderSection,
-            once: true,
-            start: 'top 100%',
-            onEnter: () => {
-               gsap.delayedCall(delay, () => {
-                  domSilderSection.classList.add(
-                     'animate__animated',
-                     animation,
-                     'animate_duration-' + duration + 's',
-                  );
-                  domSilderSection.classList.remove('invisible');
-
-                  // Init swiper element
-                  // eslint-disable-next-line no-unused-vars
-                  const swiper = new Swiper('.brands-swiper', {
-                     loop: true,
-                     slidesPerView: '10',
-                     spaceBetween: 110,
-                     disableOnInteraction: false,
-                     autoplay: {
-                        delay: 0,
-                     },
-                     speed: 5000,
-                  });
-               });
-            },
-         },
-      });
-   }
-
-   // *** Trigger css animations from animate.css on scroll ***
+   // Trigger css animations from animate.css on scroll
    animateElementOnScroll(titleSection, 'animate__bounceInLeft', 1, 0);
    animateElementOnScroll(illuSection, 'animate__zoomInRight', 1, 0.5);
    animateSliderOnScroll(sliderSection, 'animate__fadeInUp', 1, 1.4);

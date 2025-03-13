@@ -5,13 +5,13 @@ import bcrypt from 'bcrypt';
 import ms from 'ms';
 
 // Functions
-import { isValidEmailFormat } from '../utils/utils.js';
 import { getAuthData } from '../db/mysql.js';
 import { getUserData } from '../db/mysql.js';
 import { registerUserDb } from '../db/mysql.js';
+import { createRefreshTokenDb } from '../db/mysql.js';
+import { isValidEmailFormat } from '../utils/utils.js';
 import { generateUserAccessToken } from '../utils/utils.js';
 import { generateUserRefreshToken } from '../utils/utils.js';
-import { createRefreshTokenDb } from '../db/mysql.js';
 
 // **** REGISTER ****
 

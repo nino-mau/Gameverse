@@ -5,9 +5,9 @@ import jwt from 'jsonwebtoken';
 import ms from 'ms';
 
 // Functions
-import { generateUserAccessToken } from '../utils/utils.js';
 import { getUserDataById } from '../db/mysql.js';
 import { verifyRefreshToken } from '../utils/utils.js';
+import { generateUserAccessToken } from '../utils/utils.js';
 
 // **** FUNCTIONS ****
 

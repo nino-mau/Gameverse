@@ -1,9 +1,9 @@
 // **** IMPORTS ****
 
 // Import Dependencies
-import jwt from 'jsonwebtoken';
-import ms from 'ms';
 import fs from 'fs';
+import ms from 'ms';
+import jwt from 'jsonwebtoken';
 
 // Functions
 import { getRefreshTokenInfo } from '../db/mysql.js';

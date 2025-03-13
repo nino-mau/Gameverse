@@ -1,32 +1,44 @@
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
+
+// js files
 import './assets/main.css';
 
-// *** Import Components ***
+// components
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
-// *** Import Frameworks/Librairies ***
-
-// Swiper JS Styles
+// swiper js style
 import 'swiper/css/bundle';
 
-// PrimeVue
+// swiper js
+import { register } from 'swiper/element/bundle';
+
+// primeVue
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
 import ToastService from 'primevue/toastservice';
 
-// Pinia
+// pinia
 import { createPinia } from 'pinia';
 
-// Gsap
+// gsap
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
-// Animate.css
+
+// Aaimate.css
 import 'animate.css';
 
-// *** Custom style for primevue ***
+/*==============================
+============  MAIN  ============
+===============================*/
+
+gsap.registerPlugin(ScrollTrigger); // init gsap
+
+register(); // init swiper js web elements
 
 const MyPreset = definePreset(Aura, {
    semantic: {
@@ -52,7 +64,7 @@ const MyPreset = definePreset(Aura, {
    },
 });
 
-// *** Setup App ***
+//***===== Setup App =====***//
 
 const pinia = createPinia();
 

@@ -1,13 +1,16 @@
 <script setup>
-// **** IMPORTS ****
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
+
 import { ref, defineAsyncComponent, markRaw } from 'vue';
 import { useRouter } from 'vue-router';
 
-// Import frameworks/libs
+// frameworks/libs
 import { storeToRefs } from 'pinia';
-import { useUserAuthStore } from '@/stores/authStore.js';
+import { useUserStore } from '@/stores/userStore.js';
 
-// Icons
+// icons
 import IconSite from '@/components/icons/IconSite.vue';
 import IconMedal from '@/components/icons/IconMedal.vue';
 import { ChevronDown } from 'lucide-vue-next';
@@ -15,30 +18,27 @@ import IconLibrary from '@/components/icons/IconLibrary.vue';
 import IconGameController from '@/components/icons/IconGameController.vue';
 import IconChevronDownFilledHover from '@/components/icons/IconChevronDownFilledHover.vue';
 
-// PrimeVue Components
+// primeVue
 import Button from 'primevue/button';
 import Popover from 'primevue/popover';
 import TieredMenu from 'primevue/tieredmenu';
 
-// Async
-const Avatar = defineAsyncComponent(() => import('primevue/avatar'));
-const IconCircleUserProfile = defineAsyncComponent(
-   () => import('@/components/icons/IconCircleUserProfile.vue'),
-);
+// async
+const CustomAvatar = defineAsyncComponent(() => import('../icons/CustomAvatar.vue'));
 const IconNotifBell = defineAsyncComponent(() => import('@/components/icons/IconNotifBell.vue'));
 const IconSearch = defineAsyncComponent(() => import('@/components/icons/IconSearch.vue'));
 
-// **** INIT ****
+/*==============================
+============  MAIN  ============
+===============================*/
 
 const router = useRouter();
 // Init pinia store
-const userStore = useUserAuthStore();
+const userStore = useUserStore();
 // Get reactive state from user Store
 const { isUserLoggedIn, userData } = storeToRefs(userStore);
 
-// **** LOGIC ****
-
-// *** Handle Dropdown Menu ***
+//***===== Dropdown Menu =====***//
 
 // Init dropdown menu
 const dropdownMenu = ref();
@@ -77,7 +77,7 @@ const onMenuHide = () => {
    isDropdownOpen.value = false;
 };
 
-// *** Handle Account Menu Popover ***
+//***===== Popover Menu =====***//
 
 // Init popover
 const accountPopover = ref();
@@ -94,7 +94,7 @@ const onPopoverHide = () => {
    isPopoverOpen.value = false;
 };
 
-// *** Handle Routing ***
+//***===== Router =====***//
 
 function goToHomePage() {
    router.push('/');
@@ -104,6 +104,9 @@ function goToLoginPage() {
 }
 function goToRegisterPage() {
    router.push('/register');
+}
+function goToDashboardPage() {
+   router.push('/dashboard');
 }
 </script>
 
@@ -152,8 +155,15 @@ function goToRegisterPage() {
                   </template>
                </TieredMenu>
             </li>
-            <li class="hover-effect-text-underline">About</li>
-            <li class="hover-effect-text-underline">Contact</li>
+            <li class="hover-effect-text-underline">Social</li>
+            <li
+               v-if="userStore.isUserLoggedIn"
+               @click="goToDashboardPage"
+               class="hover-effect-text-underline"
+            >
+               Dashboard
+            </li>
+            <li v-else class="hover-effect-text-underline">About</li>
          </ul>
       </div>
       <div v-if="isUserLoggedIn === true" class="account-menu-container">
@@ -167,18 +177,7 @@ function goToRegisterPage() {
             svg-color="#ffffff"
             svg-width="22px"
          />
-         <Avatar
-            icon="pi pi-user"
-            class="mr-0.5 ml-0.5 h-[2.5rem] w-[2.5rem] shadow-xl"
-            size="large"
-            shape="circle"
-         >
-            <IconCircleUserProfile
-               svg-class="hover-effect-svg-stroke"
-               svg-color="var(--color-secondary)"
-               svg-width="27px"
-            />
-         </Avatar>
+         <CustomAvatar />
          <a
             role="button"
             aria-label="Open account menu"

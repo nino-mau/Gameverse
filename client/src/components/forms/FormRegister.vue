@@ -10,7 +10,7 @@ import { postData } from '@/utils/api.js';
 import { z } from 'zod';
 import { Form } from '@primevue/forms';
 import { useToast } from 'primevue/usetoast';
-import { useUserAuthStore } from '@/stores/authStore.js';
+import { useUserStore } from '@/stores/userStore.js';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
 
 // Import Icons
@@ -31,7 +31,7 @@ import FloatLabel from 'primevue/floatlabel';
 
 const toast = useToast();
 const router = useRouter();
-const userStore = useUserAuthStore();
+const userStore = useUserStore();
 // Contains potential server errors
 const serverErrors = reactive({
    usernameErr: null,
