@@ -11,7 +11,7 @@ import { getGameGenres } from '../db/mysql.js';
 ===============================*/
 
 // Send infos about all games in the database
-export async function sendGamesInfo(req, res) {
+export async function sendGameInfos(req, res) {
    // Get data from database
    const gameGenres = await getGameGenres();
    const gameDetails = await getGameDetails();

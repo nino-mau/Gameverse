@@ -13,6 +13,7 @@ import { addFavoriteGame } from '../controllers/usersController.js';
 import { sendFavoriteGames } from '../controllers/usersController.js';
 import { authentificateAccessToken } from '../middlewares/middlewares.js';
 import { authentificateRefreshToken } from '../middlewares/middlewares.js';
+import { sendFavoriteGamesDetailed } from '../controllers/usersController.js';
 
 /*==============================
 ============  MAIN  ============
@@ -52,6 +53,13 @@ router.get('/users/me', authentificateAccessToken, userInfo);
 router.post('/users/add-favorite-game', authentificateAccessToken, addFavoriteGame);
 
 // Define ressource of the favorite games of current user
-router.get('/users/favorite-games', authentificateAccessToken, sendFavoriteGames);
+router.get('/users/favorite-games', authentificateAccessToken, (req, res) => {
+   const { details } = req.query;
+   if (details === 'true') {
+      sendFavoriteGamesDetailed(req, res);
+   } else {
+      sendFavoriteGames(req, res);
+   }
+});
 
 export default router;

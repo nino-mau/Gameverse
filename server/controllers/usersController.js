@@ -6,6 +6,7 @@
 import { deleteUserTokenDb } from '../db/mysql.js';
 import { insertFavoriteGame } from '../db/mysql.js';
 import { getUserFavoriteGames } from '../db/mysql.js';
+import { getUserFavGameDetails } from '../db/mysql.js';
 
 /*==============================
 ==========  FUNCTIONS  =========
@@ -86,4 +87,15 @@ export async function sendFavoriteGames(req, res) {
       console.log('/users/favorite_games: sent favorite games (200 OK)');
       return res.status(200).json(gamesArr);
    }
+}
+
+// Provide favorite games ressources to client
+export async function sendFavoriteGamesDetailed(req, res) {
+   const userId = req.userData.id;
+
+   console.log(userId);
+   const r = await getUserFavGameDetails(userId);
+
+   console.log('/users/favorite_games: sent favorite games (200 OK)');
+   return res.status(200).json({ data: r });
 }

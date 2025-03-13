@@ -229,6 +229,7 @@ export async function userLogin(req, res) {
 async function _verifyLoginInfo(username, password) {
    try {
       const dbUser = await getUserData(username);
+      console.log(dbUser);
       if (!dbUser) {
          console.log('_verifyLoginInfo: User not found in database');
          return false;

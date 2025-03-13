@@ -38,7 +38,10 @@ const slideMenuitems = ref([
       label: 'Documents',
       items: [
          {
-            label: 'New',
+            label: 'Home',
+            command: () => {
+               router.push('/');
+            },
          },
          {
             label: 'Search',
@@ -87,7 +90,7 @@ const slideMenuitems = ref([
 <template>
    <Menu
       :model="slideMenuitems"
-      class="bg-bg2 border-bg2 flex h-[100%] w-[18%] flex-col text-white"
+      class="bg-bg2 border-bg2 flex h-[100%] w-[18%] flex-col rounded-[0px] text-white"
    >
       <template #start>
          <div class="flex flex-row items-center justify-center">
@@ -112,8 +115,8 @@ const slideMenuitems = ref([
          <button class="mb-3 ml-[18px] flex w-full flex-row items-center gap-2">
             <CustomAvatar />
             <span class="inline-flex flex-col items-start">
-               <span class="font-bold">{{ userStore.userData.username }}</span>
-               <span class="text-sm">Admin</span>
+               <span class="text-md font-bold">@{{ userStore.userData.username }}</span>
+               <span class="text-xs">{{ userStore.userData.email }}</span>
             </span>
          </button>
       </template>

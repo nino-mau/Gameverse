@@ -1,16 +1,19 @@
-// **** IMPORTS ****
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
+
 import Express from 'express';
 
-// Functions
-import { sendGamesInfo } from '../controllers/gameController.js';
+// functions
+import { sendGameInfos } from '../controllers/gameController.js';
 
-// **** ROUTES ****
+/*==============================
+============  MAIN  ============
+===============================*/
 
-const router = Express.Router();
-
-// *** Games ***
+const router = Express.Router(); // init
 
 // Send games genre, names, images and review to frontend
-router.get('/games', sendGamesInfo);
+router.get('/games', sendGameInfos);
 
 export default router;

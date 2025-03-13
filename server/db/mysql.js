@@ -16,8 +16,8 @@ import { v4 as uuidv4 } from 'uuid';
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
-   // password: 'C0sezok?92', // Replace with your MySQL password
+   // password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   password: 'C0sezok?92', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
@@ -223,7 +223,7 @@ export async function insertFavoriteGame(gameId, userId) {
 
 //***===== SELECT =====***//
 
-// Take a select query and execute it
+// Take a select query, execute it, handle error and return result
 async function selectInDb(query, value) {
    let connection;
 
@@ -234,10 +234,6 @@ async function selectInDb(query, value) {
 
       const results = rows;
       console.log('Query results:', results);
-
-      if (results.length === 1) {
-         return results[0];
-      }
 
       return results;
    } catch (error) {
@@ -251,16 +247,22 @@ async function selectInDb(query, value) {
 // extract all usersnames and emails from the user table
 export async function getAuthData() {
    const sql = `SELECT user_name, user_email FROM users`;
-   const r = selectInDb(sql);
+   const r = await selectInDb(sql);
+   if (r.length === 1) {
+      return r[0];
+   }
    return r;
 }
 
 // Extract data of one user identified by username
 export async function getUserData(username) {
    const sql = `SELECT user_id, user_name, user_email, user_password FROM users WHERE user_name = ?`;
-   const r = selectInDb(sql, username);
-
+   const r = await selectInDb(sql, username);
+   console.log(r[0]);
    if (r) {
+      if (r.length === 1) {
+         return r[0];
+      }
       return r;
    } else {
       console.log('User not found in database');
@@ -271,9 +273,12 @@ export async function getUserData(username) {
 // Extract data of one user identified by id
 export async function getUserDataById(userId) {
    const sql = `SELECT user_id, user_name, user_email FROM users WHERE user_id = ?`;
-   const r = selectInDb(sql, userId);
+   const r = await selectInDb(sql, userId);
 
    if (r) {
+      if (r.length === 1) {
+         return r[0];
+      }
       return r;
    } else {
       console.log('User not found in database');
@@ -287,6 +292,9 @@ export async function getRefreshTokenInfo(userId) {
    const r = await selectInDb(sql, userId);
 
    if (r) {
+      if (r.length === 1) {
+         return r[0];
+      }
       return r;
    } else {
       console.log('getRefreshTokenInf: Refresh token not found in database');
@@ -294,17 +302,23 @@ export async function getRefreshTokenInfo(userId) {
    }
 }
 
-// Extract game_details table from database
+// Extract data about games stored in db
 export async function getGameDetails() {
    const sql = `SELECT g.game_id, g.name, gd.review_score, gd.image_name FROM games g, game_details gd WHERE g.game_id = gd.game_id`;
-   const r = selectInDb(sql);
+   const r = await selectInDb(sql);
+   if (r.length === 1) {
+      return r[0];
+   }
    return r;
 }
 
 // Extract game_genres table from database
 export async function getGameGenres() {
    const sql = `SELECT * FROM game_genres`;
-   const r = selectInDb(sql);
+   const r = await selectInDb(sql);
+   if (r.length === 1) {
+      return r[0];
+   }
    return r;
 }
 
@@ -313,6 +327,30 @@ export async function getUserFavoriteGames(userId) {
    const value = userId;
 
    const r = await selectInDb(sql, value);
+   return r;
+}
+
+// Extract basic data about games stored in db based on an id
+export async function getUserFavGameDetails(userId) {
+   const favGames = await getUserFavoriteGames(userId);
+
+   if (!favGames || favGames.length === 0) {
+      console.log('No favorite games found for this user');
+      return [];
+   }
+
+   // Extract game IDs from the result array
+   const gameIds = favGames.map((game) => game.game_id);
+
+   // get details for these games
+   const sql = `
+      SELECT g.name, gd.image_name 
+      FROM games g 
+      INNER JOIN game_details gd ON g.game_id = gd.game_id 
+      WHERE g.game_id IN (?)
+   `;
+
+   const r = await selectInDb(sql, [gameIds]);
    return r;
 }
 
@@ -344,6 +382,7 @@ export async function deleteUserTokenDb(userId) {
 //***===== AUTH =====***//
 
 // Register user in db
+
 export async function registerUserDb(userData) {
    try {
       // Encrypt password before storing

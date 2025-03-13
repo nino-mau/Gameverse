@@ -55,5 +55,6 @@
    "tailwind-fold.autoFold": true,
    "tailwind-fold.foldStyle": "ALL",
    "tailwind-fold.unfoldedTextOpacity": 0.9,
-   "tailwind-fold.foldLengthThreshold": 50
+   "tailwind-fold.foldLengthThreshold": 50,
+   "autofold.default": 0
 }

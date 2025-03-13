@@ -116,6 +116,26 @@ export const useUserStore = defineStore('userAuth', {
          }
       },
 
+      // Use getProtectedRessource to get user favorite games details
+      async getFavGamesDetails() {
+         try {
+            const favGames = await this.getProtectedRessource(
+               'https://gameverse.local/api/users/favorite-games?details=true',
+               'Favorite Games',
+            );
+            if (favGames) {
+               console.log('getFavGamesDetails: succesfully received data');
+               return favGames.data;
+            } else {
+               console.log('getFavGamesDetails: no users found');
+               return favGames.data;
+            }
+         } catch (error) {
+            console.log('getFavGamesDetails: Unexpected error', error);
+            return false;
+         }
+      },
+
       // Use to get new access token when last one expired
       async getNewAccessToken() {
          try {

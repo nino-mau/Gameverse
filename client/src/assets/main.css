@@ -85,6 +85,9 @@
    /* This correspond to the font-weight of the text in buttons label */
    --p-button-label-font-weight: 600 !important;
 
+   /* Custom swiper.js pagination color */
+   --swiper-pagination-color: white !important;
+
    /* Overide default multiselect placeholder color text */
    --p-select-placeholder-color: none !important;
    --p-select-color: none !important;
