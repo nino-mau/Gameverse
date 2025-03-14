@@ -16,8 +16,8 @@ import { v4 as uuidv4 } from 'uuid';
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   // password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
-   password: 'C0sezok?92', // Replace with your MySQL password
+   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   // password: 'C0sezok?92', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
@@ -221,6 +221,23 @@ export async function insertFavoriteGame(gameId, userId) {
    }
 }
 
+export async function insertFavGameSetting(gameId, userId, fieldName, fieldValue) {
+   const sql = `UPDATE user_favorite_games 
+         SET ${fieldName} = ?
+         WHERE game_id = ? AND user_id = ?`;
+   const values = [fieldValue, gameId, userId];
+
+   const r = await insertInDb(sql, values);
+
+   if (r.affectedRows > 0) {
+      console.log(`insertFavGameDetail: Successfully updated fav game detail`);
+      return true;
+   }
+
+   console.log(`insertFavGameDetail: Failed to update fav game detail`);
+   return false;
+}
+
 //***===== SELECT =====***//
 
 // Take a select query, execute it, handle error and return result
@@ -322,6 +339,7 @@ export async function getGameGenres() {
    return r;
 }
 
+// Extract basic informations about a user's favorites games
 export async function getUserFavoriteGames(userId) {
    const sql = `SELECT game_id FROM user_favorite_games WHERE user_id = ?`;
    const value = userId;
@@ -330,12 +348,12 @@ export async function getUserFavoriteGames(userId) {
    return r;
 }
 
-// Extract basic data about games stored in db based on an id
+// Extract detailed informations about a user's favorites games
 export async function getUserFavGameDetails(userId) {
    const favGames = await getUserFavoriteGames(userId);
 
    if (!favGames || favGames.length === 0) {
-      console.log('No favorite games found for this user');
+      console.log('getUserFavGameDetails: No favorite games found for this user');
       return [];
    }
 
@@ -344,13 +362,26 @@ export async function getUserFavGameDetails(userId) {
 
    // get details for these games
    const sql = `
-      SELECT g.name, gd.image_name 
+      SELECT g.name, g.game_id, gd.image_name 
       FROM games g 
       INNER JOIN game_details gd ON g.game_id = gd.game_id 
       WHERE g.game_id IN (?)
    `;
 
    const r = await selectInDb(sql, [gameIds]);
+   return r;
+}
+
+// Extract the settings of a user's favorite games
+export async function getUserFavGameSettings(userId) {
+   const sql = `SELECT * FROM user_favorite_games WHERE user_id = ?`;
+   const value = userId;
+
+   const r = await selectInDb(sql, value);
+   if (!r || r.length === 0) {
+      console.log('getUserFavGameSettings: No favorite games found for this user');
+      return [];
+   }
    return r;
 }
 
@@ -382,7 +413,6 @@ export async function deleteUserTokenDb(userId) {
 //***===== AUTH =====***//
 
 // Register user in db
-
 export async function registerUserDb(userData) {
    try {
       // Encrypt password before storing

@@ -136,7 +136,27 @@ export const useUserStore = defineStore('userAuth', {
          }
       },
 
-      // Use to get new access token when last one expired
+      // Use getProtectedRessource to get user favorite games settings
+      async getFavGamesSettings() {
+         try {
+            const favGamesSettings = await this.getProtectedRessource(
+               'https://gameverse.local/api/users/favorite-games-settings',
+               'Favorite Games Settings',
+            );
+            if (favGamesSettings) {
+               console.log('getFavGamesDetails: succesfully received data');
+               return favGamesSettings.data;
+            } else {
+               console.log('getFavGamesDetails: no users found');
+               return favGamesSettings.data;
+            }
+         } catch (error) {
+            console.log('getFavGamesDetails: Unexpected error', error);
+            return false;
+         }
+      },
+
+      // Get new access token when last one expired
       async getNewAccessToken() {
          try {
             const response = await fetch('https://gameverse.local/api/users/refresh-token', {
@@ -298,8 +318,25 @@ export const useUserStore = defineStore('userAuth', {
          }
       },
 
-      // Use to add favorite game to user
+      // Use to post data to end point which add favorite game to user
       async addFavoriteGame(gameId, gameName) {
+         const r = this.postToProtectedEndpoint(
+            'https://gameverse.local/api/users/add-favorite-game',
+            'addFavoriteGame',
+            { gameId: gameId },
+         );
+
+         if (r) {
+            this.userFavGames.push(gameName);
+            return true;
+         } else {
+            console.log('addFavoriteGame: Failed to add favorite game');
+            return false;
+         }
+      },
+
+      // Use to post data to end point which add favorite game details to user
+      async addFavoriteGameDetails(gameId, fieldName, fieldValue) {
          const r = this.postToProtectedEndpoint(
             'https://gameverse.local/api/users/add-favorite-game',
             'addFavoriteGame',

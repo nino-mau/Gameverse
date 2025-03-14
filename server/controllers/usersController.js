@@ -5,8 +5,10 @@
 // Functions
 import { deleteUserTokenDb } from '../db/mysql.js';
 import { insertFavoriteGame } from '../db/mysql.js';
+import { insertFavGameSetting } from '../db/mysql.js';
 import { getUserFavoriteGames } from '../db/mysql.js';
 import { getUserFavGameDetails } from '../db/mysql.js';
+import { getUserFavGameSettings } from '../db/mysql.js';
 
 /*==============================
 ==========  FUNCTIONS  =========
@@ -92,10 +94,51 @@ export async function sendFavoriteGames(req, res) {
 // Provide favorite games ressources to client
 export async function sendFavoriteGamesDetailed(req, res) {
    const userId = req.userData.id;
+   try {
+      const r = await getUserFavGameDetails(userId);
 
-   console.log(userId);
-   const r = await getUserFavGameDetails(userId);
+      console.log('/users/favorite_games: sent favorite games (200 OK)');
+      return res.status(200).json({ data: r });
+   } catch (err) {
+      console.error('/users/favorite_games: Unexpected error:', err);
+      return res.status(500).json({ error: err });
+   }
+}
 
-   console.log('/users/favorite_games: sent favorite games (200 OK)');
-   return res.status(200).json({ data: r });
+// Provide a user's favorite games settings
+export async function sendFavGamesSettings(req, res) {
+   const userId = req.userData.id;
+   try {
+      const r = await getUserFavGameSettings(userId);
+
+      console.log('/users/favorite_games_settings: sent favorite games settings (200 OK)');
+      return res.status(200).json({ data: r });
+   } catch (err) {
+      console.error('/users/favorite_games_settings: Unexpected error:', err);
+      return res.status(500).json({ error: err });
+   }
+}
+
+// Add a user's favorite games settings to database
+export async function addFavGameSetting(req, res) {
+   const gameId = req.body.gameId;
+   const userId = req.userData.id;
+   const fieldName = req.body.fieldName;
+   const fieldValue = req.body.fieldValue;
+
+   try {
+      const r = insertFavGameSetting(gameId, userId, fieldName, fieldValue);
+
+      if (r) {
+         console.log('/users/add-favorite-game-detail: added favorite game detail (200 OK)');
+         return res.sendStatus(200);
+      } else {
+         return res
+            .status(500)
+            .json({ error: `addFavGameDetail: failed to add favorite game to db` });
+      }
+   } catch (err) {
+      console.log('addFavGameDetail: Error when inserting game detail:', err);
+      return res.status(500).json({ error: err });
+   }
 }

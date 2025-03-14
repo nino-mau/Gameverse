@@ -1,17 +1,21 @@
-// **** IMPORT ****
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
 
-// Dependencies
+// dependencies
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
 
-// Functions
+// functions
 import { getUserDataById } from '../db/mysql.js';
 import { verifyRefreshToken } from '../utils/utils.js';
 import { generateUserAccessToken } from '../utils/utils.js';
 
-// **** FUNCTIONS ****
+/*==============================
+==========  FUNCTIONS  =========
+===============================*/
 
-// Validate user's access token
+// validate user's access token
 export async function authentificateAccessToken(req, res, next) {
    const token = req.cookies.accessToken;
 

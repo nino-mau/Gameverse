@@ -56,5 +56,8 @@
    "tailwind-fold.foldStyle": "ALL",
    "tailwind-fold.unfoldedTextOpacity": 0.9,
    "tailwind-fold.foldLengthThreshold": 50,
-   "autofold.default": 0
+   "autofold.default": 0,
+   "[snippets]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+   }
 }

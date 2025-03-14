@@ -10,7 +10,9 @@ import { userInfo } from '../controllers/usersController.js';
 import { logoutUser } from '../controllers/usersController.js';
 import { userRegistration } from '../controllers/authController.js';
 import { addFavoriteGame } from '../controllers/usersController.js';
+import { addFavGameSetting } from '../controllers/usersController.js';
 import { sendFavoriteGames } from '../controllers/usersController.js';
+import { sendFavGamesSettings } from '../controllers/usersController.js';
 import { authentificateAccessToken } from '../middlewares/middlewares.js';
 import { authentificateRefreshToken } from '../middlewares/middlewares.js';
 import { sendFavoriteGamesDetailed } from '../controllers/usersController.js';
@@ -61,5 +63,11 @@ router.get('/users/favorite-games', authentificateAccessToken, (req, res) => {
       sendFavoriteGames(req, res);
    }
 });
+
+// Define ressource of a user's favorite games settings
+router.get('/users/favorite-games-settings', authentificateAccessToken, sendFavGamesSettings);
+
+// Define endpoint to add favorite game settings to user
+router.post('/users/add-favorite-game-setting', authentificateAccessToken, addFavGameSetting);
 
 export default router;

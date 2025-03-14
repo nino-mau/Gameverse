@@ -97,6 +97,13 @@
    /* Overide default menu label colors */
    --p-menu-submenu-label-color: none !important;
    --p-menu-item-color: none !important;
+   /* Override default divider colors */
+   --p-divider-content-background: none !important;
+   --p-divider-border-color: white !important;
+   /* Override default multi button colors */
+   --p-togglebutton-background: none !important;
+   --p-togglebutton-color: none !important;
+   --p-togglebutton-padding: 15px !important;
 }
 /* This correspond to the end section of the side bar menu component of primevue */
 .p-menu-end {

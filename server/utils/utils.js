@@ -1,14 +1,18 @@
-// **** IMPORTS ****
+/*==============================
+===========  IMPORTS  ==========
+===============================*/
 
-// Import Dependencies
+// dependencies
 import fs from 'fs';
 import ms from 'ms';
 import jwt from 'jsonwebtoken';
 
-// Functions
+// functions
 import { getRefreshTokenInfo } from '../db/mysql.js';
 
-// **** FUNCTIONS ****
+/*==============================
+============  MAIN  ============
+===============================*/
 
 // Convert content of a json file to a javascript object
 export function jsonToObject(file) {
@@ -20,7 +24,7 @@ export function jsonToObject(file) {
    }
 }
 
-// *** Authentifications ***
+//***===== Authentification =====***//
 
 // Check if email syntax is valid
 export function isValidEmailFormat(email) {
