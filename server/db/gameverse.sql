@@ -4,7 +4,7 @@ CREATE TABLE `games` (
   `game_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`game_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- gameverse.users definition
@@ -15,7 +15,7 @@ CREATE TABLE `users` (
   `user_email` varchar(100) NOT NULL,
   `user_password` varchar(100) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- gameverse.game_details definition
@@ -26,6 +26,7 @@ CREATE TABLE `game_details` (
   `review_score` int NOT NULL,
   `price` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image_name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `ranks` json DEFAULT NULL,
   PRIMARY KEY (`game_id`),
   CONSTRAINT `games_details_games_FK` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -89,7 +90,7 @@ CREATE TABLE `user_favorite_games` (
   `hours_played` int DEFAULT '0',
   `completion` int DEFAULT '0',
   `skill_level` set('Casual','Intermediate','Good','Expert','Pro') DEFAULT NULL,
-  `comment` text,
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `rank` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_id`,`game_id`),
   KEY `users_favorites_games_games_FK` (`game_id`),
@@ -131,4 +132,17 @@ CREATE TABLE `user_messages` (
   KEY `users_messages_users_FK_1` (`sender_id`),
   CONSTRAINT `users_messages_users_FK` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `users_messages_users_FK_1` FOREIGN KEY (`sender_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- gameverse.user_ranks definition
+
+CREATE TABLE `user_ranks` (
+  `user_id` int NOT NULL,
+  `game_id` int NOT NULL,
+  `rank` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`user_id`,`game_id`),
+  KEY `users_ranks_games_FK` (`game_id`),
+  CONSTRAINT `users_ranks_games_FK` FOREIGN KEY (`game_id`) REFERENCES `games` (`game_id`),
+  CONSTRAINT `users_ranks_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
