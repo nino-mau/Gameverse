@@ -1,21 +1,22 @@
-/*==============================
-===========  IMPORTS  ==========
-===============================*/
-
 import Express from 'express';
 
 // functions
-import { userLogin } from '../controllers/authController.js';
-import { userInfo } from '../controllers/usersController.js';
-import { logoutUser } from '../controllers/usersController.js';
-import { userRegistration } from '../controllers/authController.js';
-import { addFavoriteGame } from '../controllers/usersController.js';
-import { addFavGameSetting } from '../controllers/usersController.js';
-import { sendFavoriteGames } from '../controllers/usersController.js';
-import { sendFavGamesSettings } from '../controllers/usersController.js';
-import { authentificateAccessToken } from '../middlewares/middlewares.js';
-import { authentificateRefreshToken } from '../middlewares/middlewares.js';
-import { sendFavoriteGamesDetailed } from '../controllers/usersController.js';
+import {
+   removeFavoriteGame,
+   userInfo,
+   logoutUser,
+   addFavoriteGame,
+   addFavGameSetting,
+   sendFavoriteGames,
+   sendFavGamesSettings,
+   sendFavoriteGamesDetailed,
+} from '../controllers/usersController.js';
+import { userLogin, userRegistration } from '../controllers/authController.js';
+import {
+   authentificateAccessToken,
+   authentificateRefreshToken,
+   typeCheckGameSetting,
+} from '../middlewares/middlewares.js';
 
 /*==============================
 ============  MAIN  ============
@@ -25,36 +26,39 @@ const router = Express.Router();
 
 //***===== AUTH =====***//
 
-// Define endpoint for receiving register form data
+// Handle user registration (unprotected)
 router.post('/users/register', userRegistration);
 
-// Define endpoint for receiving register form data
+// Handle user login (unprotected)
 router.post('/users/login', userLogin);
 
-// Define endpoint for client to logout
+// Handle logout
 router.post('/users/logout', authentificateAccessToken, logoutUser);
 
-// Define endpoint for client to verify JWT token validity
+// Verify access token
 router.post('/users/access-token', authentificateAccessToken, (req, res) => {
    res.sendStatus(200);
    console.log('/users/access-token: JWT token validity check successful (200 OK)');
 });
 
-// Define endpoint for client to get a new access token with refresh token
+// Handle sending refresh token
 router.post('/users/refresh-token', authentificateRefreshToken, (req, res) => {
    res.sendStatus(200);
    console.log('/users/refresh-token: New access token sent (200 OK)');
 });
 
-//***===== DATA =====***//
-
-// Define ressource of the infos of current user
+// Send users auth info
 router.get('/users/me', authentificateAccessToken, userInfo);
 
-// Define endpoint to add favorite game to user
+//***===== USER DATA =====***//
+
+// Add a game to favorite
 router.post('/users/add-favorite-game', authentificateAccessToken, addFavoriteGame);
 
-// Define ressource of the favorite games of current user
+// Remove a game from favorite
+router.post('/users/remove-favorite-game', authentificateAccessToken, removeFavoriteGame);
+
+// Send favorite games informations
 router.get('/users/favorite-games', authentificateAccessToken, (req, res) => {
    const { details } = req.query;
    if (details === 'true') {
@@ -64,10 +68,15 @@ router.get('/users/favorite-games', authentificateAccessToken, (req, res) => {
    }
 });
 
-// Define ressource of a user's favorite games settings
+// Send favorite games settings informations (hours played, completion, rank...)
 router.get('/users/favorite-games-settings', authentificateAccessToken, sendFavGamesSettings);
 
-// Define endpoint to add favorite game settings to user
-router.post('/users/add-favorite-game-setting', authentificateAccessToken, addFavGameSetting);
+// Add or modify a fav game setting
+router.post(
+   '/users/add-favorite-game-setting',
+   authentificateAccessToken,
+   typeCheckGameSetting,
+   addFavGameSetting,
+);
 
 export default router;

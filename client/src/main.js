@@ -10,6 +10,11 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
+// ** Librairies ** //
+
+import { plugin as vueTransitionsPlugin } from '@morev/vue-transitions';
+import '@morev/vue-transitions/styles';
+
 // swiper js style
 import 'swiper/css/bundle';
 
@@ -21,6 +26,7 @@ import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
 import ToastService from 'primevue/toastservice';
+import Ripple from 'primevue/ripple';
 
 // pinia
 import { createPinia } from 'pinia';
@@ -29,7 +35,7 @@ import { createPinia } from 'pinia';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Aaimate.css
+// Animate.css
 import 'animate.css';
 
 /*==============================
@@ -70,12 +76,12 @@ const pinia = createPinia();
 
 const app = createApp(App);
 
-// Set global variables
-app.config.globalProperties.$shortTermTokenKey = 'userToken';
-
 // Set plugins
+app.directive('ripple', Ripple);
+app.use(vueTransitionsPlugin);
 app.use(router);
 app.use(PrimeVue, {
+   ripple: true,
    theme: {
       preset: MyPreset,
       options: {

@@ -1,21 +1,28 @@
 @import './base.css';
 
-/* --- Import Tailwind --- */
+/* Tailwind */
 @import 'tailwindcss' important;
 
-/* --- Import PrimeVue Tailwind Plugin --- */
+/* PrimeVue Tailwind Plugin */
 @import 'tailwindcss-primeui';
 
-/* --- Import Hover.css --- */
+/* Hover.css */
 @import 'hover.css';
 
-/* --- Import PrimeVue Icons --- */
+/* PrimeVue Icons */
 @import 'primeicons/primeicons.css';
 
-/* --- Import Custom hover classes */
+/* Custom hover classes */
 @import './css/hover-effects.css';
 
-/* --- Custom Tailwind --- */
+/* Custom primevue style */
+@import './css/custom-primevue.css';
+
+/* Custom vue transitions animations */
+@import './css/transition-animations.css';
+
+/* ==== Custom Tailwind ==== */
+
 @theme {
    --color-*: initial;
    --color-white: #ffffff;
@@ -46,15 +53,13 @@
    --drop-shadow-3xl: 0 3px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* --- General --- */
-
-/* - Contains the entire site - */
+/* Site style */
 #app {
    width: 100%;
    max-width: 1450px;
 }
 
-/* --- Shadow Effects --- */
+/* ==== Custom Shadow Effects ==== */
 
 /* - Custom shadow effect for small size svg icons - */
 .shadow-effect-svg {
@@ -63,76 +68,4 @@
 /* - Custom shadow effect for text */
 .shadow-effect-txt {
    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.4));
-}
-
-/* --- Override PrimeVue styling --- */
-
-:root {
-   /* -- Buttons -- */
-
-   /* This correspond to the hover background color of outlined buttons */
-   --p-button-outlined-primary-hover-background: var(--primary-color) !important;
-
-   /* This correspond to the hover color of outlined buttons */
-   --p-button-primary-hover-color: var(--secondary-color) !important;
-
-   /* This correspond to the background color of buttons when clicked */
-   --p-button-outlined-primary-active-background: #f472b6 !important;
-
-   /* This correspond to the border color of outlined buttons */
-   --p-button-outlined-primary-border-color: var(--primary-color) !important;
-
-   /* This correspond to the font-weight of the text in buttons label */
-   --p-button-label-font-weight: 600 !important;
-
-   /* Custom swiper.js pagination color */
-   --swiper-pagination-color: white !important;
-
-   /* Overide default multiselect placeholder color text */
-   --p-select-placeholder-color: none !important;
-   --p-select-color: none !important;
-   --p-select-option-selected-focus-color: none !important;
-   --p-select-clear-icon-color: none !important;
-   --p-select-dropdown-color: none !important;
-   /* Overide default menu label colors */
-   --p-menu-submenu-label-color: none !important;
-   --p-menu-item-color: none !important;
-   /* Override default divider colors */
-   --p-divider-content-background: none !important;
-   --p-divider-border-color: white !important;
-   /* Override default multi button colors */
-   --p-togglebutton-background: none !important;
-   --p-togglebutton-color: none !important;
-   --p-togglebutton-padding: 15px !important;
-}
-/* This correspond to the end section of the side bar menu component of primevue */
-.p-menu-end {
-   margin-top: auto !important;
-}
-/* This correspond to the text in the tiered menu dropdown */
-.p-tieredmenu-item-label {
-   font-size: 16px !important;
-   color: #334155;
-}
-/* This allow to use custom icons with the iconfield component */
-.p-menuitem-text {
-   margin-left: 6px;
-}
-.p-iconfield {
-   display: flex !important;
-   align-items: center !important;
-}
-.p-inputicon {
-   top: unset !important;
-   margin-top: unset !important;
-   left: 4.1% !important;
-}
-
-/* This allow to use custom icons with the iconfield component and password component */
-.password-input-custom-spacing {
-   padding-left: calc((var(--p-form-field-padding-x) * 2) + var(--p-icon-size)) !important;
-}
-/* Insure error highlight overwrite the rest */
-.p-invalid {
-   border-color: var(--p-inputtext-invalid-border-color) !important;
 }

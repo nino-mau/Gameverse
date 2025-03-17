@@ -1,18 +1,19 @@
-// **** IMPORTS ****
 import Express from 'express';
 
-// Import dependencies
+// dependencies
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 
-// Import middlewares
+// middlewares
 import cors from 'cors';
 
-// Import routes
+// routes
 import usersRoutes from './routes/users.route.js';
 import gamesRoutes from './routes/games.route.js';
 
-// **** SETUP ****
+/*==============================
+============  MAIN  ============
+===============================*/
 
 const app = Express();
 
@@ -27,22 +28,19 @@ app.use(
    }),
 );
 
-// Allow express to parse json notably receiving data from post requests
+// To parse json
 app.use(Express.json());
 
-// Allow to parse and manipulate cookies more easily
+// To parse and manipulate cookie
 app.use(cookieParser());
 
-// *** Routes setup ***
+//***===== Routes =====***//
 
-// Use all the users related ressources and endpoints
-app.use('/api', usersRoutes);
+app.use('/api', usersRoutes); // Users ressources
 
-// Use all the games related ressources and endpoints
-app.use('/api', gamesRoutes);
+app.use('/api', gamesRoutes); // Games ressources
 
 // Test
-
 app.get('/', (req, res) => {
    res.send('Hello World!');
 });
@@ -52,5 +50,3 @@ const port = process.env.PORT;
 app.listen(port, () => {
    console.log(`Example app listening on port ${port}`);
 });
-
-// **** LOGIC ****

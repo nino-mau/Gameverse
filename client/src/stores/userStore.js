@@ -1,7 +1,12 @@
-// **** IMPORT ****
+// libs
 import { defineStore } from 'pinia';
 
-// **** STORE SETUP ****
+// functions
+import { removeFromArray } from '@/utils/general';
+
+/*==============================
+============  MAIN  ============
+===============================*/
 
 // Pinia store that handle user state (loggedin state, loggedout state, server authentification, user data...)
 export const useUserStore = defineStore('userAuth', {
@@ -199,8 +204,10 @@ export const useUserStore = defineStore('userAuth', {
                body: JSON.stringify(data),
             });
 
+            const rData = await r.json();
+
             if (r.status === 200) {
-               return true;
+               return { success: true };
             } else if (r.status === 401) {
                await this.getNewAccessToken();
 
@@ -212,19 +219,21 @@ export const useUserStore = defineStore('userAuth', {
                   },
                   body: JSON.stringify(data),
                });
+               const r2Data = await r2.json();
+
                if (r2.status === 200) {
-                  return true;
+                  return { success: true };
                } else {
-                  console.log(actionName + ': ', r2.error);
-                  return false;
+                  console.log(actionName + ': ', r2Data.error);
+                  return { success: false, error: r2Data.error };
                }
             } else {
-               console.log(actionName + ': ', r.error);
-               return false;
+               console.log(actionName + ': ', rData.error);
+               return { success: false, error: rData.error };
             }
          } catch (error) {
             console.error(actionName + ': Unexpected Fetch Error', error);
-            return false;
+            return { success: false, error: error };
          }
       },
 
@@ -320,13 +329,14 @@ export const useUserStore = defineStore('userAuth', {
 
       // Use to post data to end point which add favorite game to user
       async addFavoriteGame(gameId, gameName) {
-         const r = this.postToProtectedEndpoint(
+         const r = await this.postToProtectedEndpoint(
             'https://gameverse.local/api/users/add-favorite-game',
             'addFavoriteGame',
             { gameId: gameId },
          );
 
-         if (r) {
+         if (r.success) {
+            // Update the local fav games array
             this.userFavGames.push(gameName);
             return true;
          } else {
@@ -335,20 +345,41 @@ export const useUserStore = defineStore('userAuth', {
          }
       },
 
-      // Use to post data to end point which add favorite game details to user
-      async addFavoriteGameDetails(gameId, fieldName, fieldValue) {
-         const r = this.postToProtectedEndpoint(
-            'https://gameverse.local/api/users/add-favorite-game',
-            'addFavoriteGame',
+      async removeFavoriteGame(gameId, gameName) {
+         const r = await this.postToProtectedEndpoint(
+            'https://gameverse.local/api/users/remove-favorite-game',
+            'removeFavoriteGame',
             { gameId: gameId },
          );
 
-         if (r) {
-            this.userFavGames.push(gameName);
+         if (r.success) {
+            // Update the local fav games array
+            removeFromArray(gameName, this.userFavGames);
             return true;
          } else {
-            console.log('addFavoriteGame: Failed to add favorite game');
+            console.log('removeFavoriteGame: Failed to remove favorite game');
             return false;
+         }
+      },
+
+      // Use to post data to end point which add favorite game details to user
+      async addFavoriteGameSettings(gameId, fieldName, fieldValue) {
+         const r = await this.postToProtectedEndpoint(
+            'https://gameverse.local/api/users/add-favorite-game-setting',
+            'addFavoriteGame',
+            {
+               gameId: gameId,
+               fieldName: fieldName,
+               fieldValue: fieldValue,
+            },
+         );
+         console.log(r);
+         if (r.success) {
+            console.log('addFavoriteGameSettings: succesfully added game settings !');
+            return { success: true };
+         } else {
+            console.error('addFavoriteGameSettings: Failed to add game settings');
+            return { success: false, error: r.error };
          }
       },
    },

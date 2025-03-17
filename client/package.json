@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@morev/vue-transitions": "^3.0.5",
     "@primeuix/styles": "^1.0.0",
     "@primeuix/themes": "^1.0.0-rc.1",
     "@primevue/forms": "^4.3.1",

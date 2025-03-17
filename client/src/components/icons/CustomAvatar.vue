@@ -4,6 +4,19 @@ import { Avatar } from 'primevue';
 
 // icons
 import IconCircleUserProfile from './IconCircleUserProfile.vue';
+
+//***===== Props =====***//
+
+defineProps({
+   shape: {
+      type: String,
+      default: 'circle',
+   },
+   customClass: {
+      type: String,
+      required: false,
+   },
+});
 </script>
 
 <template>
@@ -11,7 +24,8 @@ import IconCircleUserProfile from './IconCircleUserProfile.vue';
       icon="pi pi-user"
       class="mr-0.5 ml-0.5 h-[2.5rem] w-[2.5rem] shadow-xl"
       size="large"
-      shape="circle"
+      :class="customClass"
+      :shape="shape"
    >
       <IconCircleUserProfile
          svg-class="hover-effect-svg-stroke"

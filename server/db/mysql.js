@@ -16,8 +16,8 @@ import { v4 as uuidv4 } from 'uuid';
 const pool = mysql.createPool({
    host: 'localhost', // Replace with your MySQL host
    user: 'nino', // Replace with your MySQL user
-   password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
-   // password: 'C0sezok?92', // Replace with your MySQL password
+   // password: 't9HZ9S4nPE5H9hx7kIKLv5B3la3MOdZk', // Replace with your MySQL password
+   password: 'C0sezok?92', // Replace with your MySQL password
    database: 'gameverse', // Replace with your database name
    connectionLimit: 10, // Adjust connection limit as needed (e.g., based on expected concurrency)
 });
@@ -221,20 +221,24 @@ export async function insertFavoriteGame(gameId, userId) {
    }
 }
 
+// Used to add value to favorite games table
 export async function insertFavGameSetting(gameId, userId, fieldName, fieldValue) {
+   // Escape the field name with backticks to handle reserved keywords
+   const escapedFieldName = `\`${fieldName}\``;
+
    const sql = `UPDATE user_favorite_games 
-         SET ${fieldName} = ?
+         SET ${escapedFieldName} = ?
          WHERE game_id = ? AND user_id = ?`;
    const values = [fieldValue, gameId, userId];
 
    const r = await insertInDb(sql, values);
 
    if (r.affectedRows > 0) {
-      console.log(`insertFavGameDetail: Successfully updated fav game detail`);
+      console.log(`insertFavGameSetting: Successfully updated fav game detail`);
       return true;
    }
 
-   console.log(`insertFavGameDetail: Failed to update fav game detail`);
+   console.log(`insertFavGameSetting: Failed to update fav game detail`);
    return false;
 }
 
@@ -362,7 +366,7 @@ export async function getUserFavGameDetails(userId) {
 
    // get details for these games
    const sql = `
-      SELECT g.name, g.game_id, gd.image_name 
+      SELECT g.name, g.game_id, gd.image_name, gd.ranks 
       FROM games g 
       INNER JOIN game_details gd ON g.game_id = gd.game_id 
       WHERE g.game_id IN (?)
@@ -387,6 +391,28 @@ export async function getUserFavGameSettings(userId) {
 
 //***===== DELETE =====***//
 
+// Reusable function to delete values from db
+async function deleteFromDb(sql, values) {
+   let connection;
+
+   try {
+      connection = await pool.getConnection();
+
+      const [result] = await connection.query(sql, values);
+
+      console.log('Delete Result:', result);
+      console.log('Affected rows:', result.affectedRows);
+      console.log('Inserted ID:', result.insertId);
+
+      return result;
+   } catch (error) {
+      console.error('deleteFromDb: Error deleting data:', error);
+      return false;
+   } finally {
+      if (connection) connection.release();
+   }
+}
+
 // Delete the refresh token corresponding to an user id in database
 export async function deleteUserTokenDb(userId) {
    let connection;
@@ -407,6 +433,21 @@ export async function deleteUserTokenDb(userId) {
       return false;
    } finally {
       if (connection) connection.release();
+   }
+}
+
+// Delete a favorite game from user_favorite_games
+export async function deleteFavoriteGame(gameId, userId) {
+   const sql = `DELETE FROM user_favorite_games WHERE user_id = ? AND game_id = ?`;
+   const values = [userId, gameId];
+
+   const r = await deleteFromDb(sql, values);
+
+   if (r.affectedRows > 0) {
+      return true;
+   } else {
+      console.error('deleteFavoriteGame: failed inserting favorite game');
+      return false;
    }
 }
 

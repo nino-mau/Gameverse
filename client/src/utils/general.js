@@ -77,3 +77,18 @@ export function denormalizeAssociativeTable(array) {
 
    return resultArray;
 }
+
+// Remove an item from array based on it's value
+export function removeFromArray(itemValue, arrayName) {
+   const indexToRemove = arrayName.findIndex((item) => item === itemValue);
+
+   // Check if the item was found
+   if (indexToRemove !== -1) {
+      // Remove the item at that index
+      arrayName.splice(indexToRemove, 1);
+      return true;
+   } else {
+      console.log('removeFromArray: Item to del was not found');
+      return false;
+   }
+}

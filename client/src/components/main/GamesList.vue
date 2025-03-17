@@ -1,20 +1,16 @@
 <script setup>
-/*==============================
-===========  IMPORTS  ==========
-===============================*/
-
-// Vue
+// vue
 import { reactive, onMounted, ref, markRaw } from 'vue';
 
-// Prime vue
+// prime vue
 import { Select } from 'primevue';
 import { useToast } from 'primevue/usetoast';
 
-// Libs
+// libs
 import lodash from 'lodash';
 import { useUserStore } from '@/stores/userStore.js';
 
-// Icons
+// icons
 import {
    Bookmark,
    Star,
@@ -30,9 +26,10 @@ import {
    GraduationCap,
    Car,
    ChevronRight,
+   Trophy,
 } from 'lucide-vue-next';
 
-// Functions
+// functions
 import { getData } from '@/utils/api';
 import { denormalizeAssociativeTable } from '@/utils/general';
 
@@ -40,17 +37,19 @@ import { denormalizeAssociativeTable } from '@/utils/general';
 ============  MAIN  ============
 ===============================*/
 
-const toast = useToast(); // init toast
+// init service and store
+const toast = useToast();
+const userStore = useUserStore();
 
-const userStore = useUserStore(); // init userStore
+//***===== State =====***//
 
-//***===== Sorting/Filtering =====***//
-
+// Store genre filter options
 const genresFilterList = ref([
    { name: 'Action', icon: markRaw(Swords) },
    { name: 'Adventure', icon: markRaw(Compass) },
    { name: 'RPG', icon: markRaw(Wand2) },
    { name: 'Free To Play', icon: markRaw(Coins) },
+   { name: 'Competitive', icon: markRaw(Trophy) },
    { name: 'MMO', icon: markRaw(Globe) },
    { name: 'Simulation', icon: markRaw(Monitor) },
    { name: 'Sports', icon: markRaw(Dumbbell) },
@@ -59,8 +58,11 @@ const genresFilterList = ref([
    { name: 'Strategy', icon: markRaw(GraduationCap) },
    { name: 'Racing', icon: markRaw(Car) },
 ]);
-
 const sortOptionsList = ref([{ name: 'Best reviews' }, { name: 'Worst reviews' }]);
+
+// Store games info data
+const gameRowsArray = reactive([]);
+const backupGameRowsArray = [];
 
 //***===== Functions =====***//
 
@@ -167,10 +169,13 @@ function onSelectGenreChange(event) {
 }
 
 // Wrapper to trigger a toast popup on addFavoriteGame success
-function addFavoriteGameWrapper(gameId, gameName) {
-   const r = userStore.addFavoriteGame(gameId, gameName);
+async function addFavoriteGameWrapper(gameId, gameName) {
+   const r = await userStore.addFavoriteGame(gameId, gameName);
 
    if (r) {
+      // Update user store with user favorite games
+      await userStore.getFavGames();
+
       toast.add({
          severity: 'success',
          summary: 'Success',
@@ -180,11 +185,30 @@ function addFavoriteGameWrapper(gameId, gameName) {
    }
 }
 
-//***===== Executable =====***//
+// Call the server endpoint to remove fav then update fav games data
+async function removeFavGameWrapper(gameId, gameName) {
+   // optimistically update the favorite games state
+   const index = userStore.userFavGames.indexOf(gameId);
+   if (index > -1) {
+      userStore.userFavGames.splice(index, 1);
+   }
 
-// Create the reactive object which will store games infos
-const gameRowsArray = reactive([]);
-const backupGameRowsArray = [];
+   const r = await userStore.removeFavoriteGame(gameId, gameName);
+
+   if (r) {
+      // Update user store with user favorite games
+      await userStore.getFavGames();
+
+      toast.add({
+         severity: 'success',
+         summary: 'Success',
+         detail: 'Removed game to favorites !',
+         life: 2000,
+      });
+   }
+}
+
+//***===== Lifecycle =====***//
 
 onMounted(async () => {
    // Update user store with user favorite games
@@ -208,13 +232,13 @@ onMounted(async () => {
    <div class="mt-[10rem] w-[83%]">
       <!-- Games List Menu -->
       <div class="mb-15 flex flex-row justify-start gap-10">
-         <!-- Genre button -->
+         <!-- Genre Select -->
          <Select
             v-model="selectedGenres"
             :options="genresFilterList"
             optionLabel="name"
             placeholder="Genres..."
-            class="bg-secondary text-md w-[12rem] border-2 text-[#ffffff]"
+            class="bg-secondary text-md w-[12.6rem] border-2 text-[#ffffff]"
             :maxSelectedLabels="1"
             showClear
             outlined
@@ -223,19 +247,19 @@ onMounted(async () => {
             <!-- Custom icons -->
             <template #value="slotProps">
                <div v-if="slotProps.value" class="flex items-center gap-2">
-                  <component :is="slotProps.value.icon" size="21" />
+                  <component :is="slotProps.value.icon" :width="20" :height="20" />
                   <span>{{ slotProps.value.name }}</span>
                </div>
                <span v-else>{{ slotProps.placeholder }}</span>
             </template>
             <template #option="slotProps">
                <div class="flex items-center gap-2">
-                  <component :is="slotProps.option.icon" size="18" />
+                  <component :is="slotProps.option.icon" :width="18" :height="18" />
                   <span>{{ slotProps.option.name }}</span>
                </div>
             </template>
          </Select>
-         <!-- Sort button -->
+         <!-- Sort Select -->
          <Select
             v-model="selectedSortOptions"
             :options="sortOptionsList"
@@ -248,7 +272,7 @@ onMounted(async () => {
          </Select>
       </div>
 
-      <!-- Title -->
+      <!-- Games List Title -->
       <div class="mb-8 flex flex-row items-center">
          <h1 class="text-3xl font-semibold">Trending</h1>
          <ChevronRight size="32" strokeWidth="2.5" class="pt-[4px]" />
@@ -273,12 +297,12 @@ onMounted(async () => {
                   :style="{ backgroundImage: `url(${obj.imageUrl})` }"
                >
                   <a
-                     @click="addFavoriteGameWrapper(obj.id, obj.name)"
-                     :class="
+                     @click="
                         userStore.userFavGames.includes(obj.id)
-                           ? 'pointer-events-none'
-                           : 'cursor-pointer'
+                           ? removeFavGameWrapper(obj.id, obj.name)
+                           : addFavoriteGameWrapper(obj.id, obj.name)
                      "
+                     class="cursor-pointer"
                   >
                      <Bookmark
                         size="24"

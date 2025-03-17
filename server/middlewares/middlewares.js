@@ -101,3 +101,32 @@ export async function authentificateRefreshToken(req, res, next) {
       return res.status(401).json({ error: 'No Refresh Token received.' });
    }
 }
+
+// Validate game setting value received from client
+export async function typeCheckGameSetting(req, res, next) {
+   const fieldName = req.body.fieldName;
+   const fieldValue = req.body.fieldValue;
+
+   console.log(fieldValue);
+
+   switch (fieldName) {
+      case 'hours_played':
+         if (!Number.isInteger(fieldValue) || fieldValue > 10000 || fieldValue < 0) {
+            return res.status(400).json({ error: 'Time played must be a positive number' });
+         }
+         break;
+      case 'completion':
+         if (!Number.isInteger(fieldValue) || fieldValue > 100 || fieldValue < 0) {
+            return res.status(400).json({ error: 'Completion must be percentage' });
+         }
+         break;
+      case 'comment':
+         if (typeof fieldValue !== 'string' || fieldValue.length > 150) {
+            return res.status(400).json({ error: 'Your comment is too long' });
+         }
+         break;
+      default:
+         break;
+   }
+   next();
+}

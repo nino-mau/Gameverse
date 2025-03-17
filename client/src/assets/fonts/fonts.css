@@ -1,5 +1,11 @@
 /** ---- STORE FONTS ---- */
 
+/* ---- RUBIK FONT ---- */
+@import url('./Rubik/stylesheet.css');
+
+/* ---- MOTIVA SANS FONT ---- */
+@import url('./Motiva-sans/stylesheet.css');
+
 /** ---- GEIST FONT ---- */
 @font-face {
    font-family: 'Geist';
