@@ -1,4 +1,4 @@
-/* --- Import Fonts --- */
+/* Import Fonts */
 @import url('./fonts/fonts.css');
 
 /* color palette from <https://github.com/vuejs/theme> */
@@ -64,8 +64,6 @@
 *::before,
 *::after {
    box-sizing: border-box;
-   /* margin: 0; */
-   /* font-weight: normal; */
 }
 
 body {
@@ -78,7 +76,7 @@ body {
       background-color 0.5s;
    line-height: 1.6;
    font-family:
-      Geist,
+      Rubik,
       Inter,
       -apple-system,
       BlinkMacSystemFont,

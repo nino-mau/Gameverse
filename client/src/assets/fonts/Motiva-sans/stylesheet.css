@@ -1,0 +1,69 @@
+@font-face {
+   font-family: 'MotivaSans';
+   src:
+      url('MotivaSans-Black.woff2') format('woff2'),
+      url('MotivaSans-Black.woff') format('woff');
+   font-weight: 900;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'MotivaSans';
+   src:
+      url('MotivaSans-ExtraBold.woff2') format('woff2'),
+      url('MotivaSans-ExtraBold.woff') format('woff');
+   font-weight: bold;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'MotivaSans';
+   src:
+      url('MotivaSans-Bold.woff2') format('woff2'),
+      url('MotivaSans-Bold.woff') format('woff');
+   font-weight: bold;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'MotivaSans';
+   src:
+      url('MotivaSans-Regular.woff2') format('woff2'),
+      url('MotivaSans-Regular.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'MotivaSans';
+   src:
+      url('MotivaSans-Thin.woff2') format('woff2'),
+      url('MotivaSans-Thin.woff') format('woff');
+   font-weight: 100;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'MotivaSans';
+   src:
+      url('MotivaSans-Light.woff2') format('woff2'),
+      url('MotivaSans-Light.woff') format('woff');
+   font-weight: 300;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'MotivaSans';
+   src:
+      url('MotivaSans-Medium.woff2') format('woff2'),
+      url('MotivaSans-Medium.woff') format('woff');
+   font-weight: 500;
+   font-style: normal;
+   font-display: swap;
+}
