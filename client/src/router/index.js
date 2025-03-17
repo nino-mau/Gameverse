@@ -5,6 +5,7 @@ import LandingPage from '@/views/LandingPage.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import RegisterPage from '@/views/RegisterPage.vue';
 import BrowseGames from '@/views/BrowseGames.vue';
+import ContactPage from '@/views/ContactPage.vue';
 import DashboardPage from '@/views/DashboardPage.vue';
 import DashboardProfileSettings from '@/components/main/DashboardProfileSettings.vue';
 import DashboardProfileGames from '@/components/main/DashboardProfileGames.vue';
@@ -50,6 +51,15 @@ const router = createRouter({
                name: 'dashboardProfileGames',
             },
          ],
+      },
+      {
+         path: '/contact',
+         component: ContactPage,
+         name: 'contact',
+         meta: {
+            componentName: 'ContactPage',
+            requiresAuth: false,
+         },
       },
       {
          path: '/login',
