@@ -61,6 +61,7 @@ router.post('/users/remove-favorite-game', authentificateAccessToken, removeFavo
 // Send favorite games informations
 router.get('/users/favorite-games', authentificateAccessToken, (req, res) => {
    const { details } = req.query;
+   console.log('details: ', details);
    if (details === 'true') {
       sendFavoriteGamesDetailed(req, res);
    } else {
