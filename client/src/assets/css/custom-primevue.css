@@ -23,6 +23,9 @@
    /* Custom swiper.js pagination color */
    --swiper-pagination-color: white !important;
 
+   /* Custom paginator buttons color */
+   --p-paginator-nav-button-color: white !important;
+
    /* Overide default multiselect placeholder color text */
    --p-select-placeholder-color: none !important;
    --p-select-color: none !important;

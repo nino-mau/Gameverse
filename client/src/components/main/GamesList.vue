@@ -290,8 +290,9 @@ onMounted(async () => {
             <div
                v-for="obj in row"
                :key="obj.id"
-               class="z-0 col-span-1 h-[218px] w-[379px] shadow-2xl transition hover:scale-105"
+               class="cell-scale z-0 col-span-1 h-[218px] w-[379px] shadow-2xl transition hover:scale-105"
             >
+               <!-- Image Section -->
                <div
                   class="relative flex h-[80%] flex-row items-start justify-end rounded-t-xl bg-cover p-2"
                   :style="{ backgroundImage: `url(${obj.imageUrl})` }"
@@ -316,23 +317,28 @@ onMounted(async () => {
                      />
                   </a>
                </div>
-               <div class="bg-bg3 flex h-[20%] flex-row items-center justify-between rounded-b-xl">
-                  <h1 class="text-md ml-3 font-semibold">
-                     {{ obj.name }} <span class="text-primary pl-[4px]">|</span
-                     ><span class="text-primary pl-2 text-xs italic">{{
+               <!-- Text Section -->
+               <div class="bg-bg4 flex h-[20%] flex-row items-center justify-between rounded-b-xl">
+                  <!-- Game Title -->
+                  <h1 class="text-md ml-3 align-baseline font-semibold">
+                     {{ obj.name }} <span class="pl-[4px] text-white">|</span
+                     ><span class="pl-2 text-xs text-white">{{
                         obj.genres[2] || obj.genres[1]
                      }}</span>
                   </h1>
 
-                  <span class="mr-3 flex flex-row items-center gap-[5px]">
+                  <!-- Review -->
+                  <span
+                     class="game-review-container mr-3 grid grid-cols-2 place-content-center place-items-center"
+                  >
                      <Star
-                        size="15"
+                        size="18"
                         strokeWidth="0"
                         :fill="handleReviewIconColor(obj.reviewScore)"
-                        class=""
+                        class="p-auto col-span-1"
                      />
                      <p
-                        class="text-md font-semibold"
+                        class="col-span-1 text-xl font-semibold"
                         :class="handleReviewScoreColor(obj.reviewScore)"
                      >
                         {{ obj.reviewScore }}

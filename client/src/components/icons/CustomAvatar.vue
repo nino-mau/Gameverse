@@ -16,6 +16,11 @@ defineProps({
       type: String,
       required: false,
    },
+   iconSize: {
+      type: String,
+      required: false,
+      default: '27px',
+   },
 });
 </script>
 
@@ -30,7 +35,7 @@ defineProps({
       <IconCircleUserProfile
          svg-class="hover-effect-svg-stroke"
          svg-color="var(--color-secondary)"
-         svg-width="27px"
+         :svg-width="iconSize"
       />
    </Avatar>
 </template>

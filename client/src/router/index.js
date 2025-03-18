@@ -9,6 +9,7 @@ import ContactPage from '@/views/ContactPage.vue';
 import DashboardPage from '@/views/DashboardPage.vue';
 import DashboardProfileSettings from '@/components/main/DashboardProfileSettings.vue';
 import DashboardProfileGames from '@/components/main/DashboardProfileGames.vue';
+import DashboardProfileFriends from '@/components/main/DashboardProfileFriends.vue';
 
 const router = createRouter({
    history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,12 +44,17 @@ const router = createRouter({
             {
                path: 'profileSettings',
                component: DashboardProfileSettings,
-               name: 'dashboardProfileSettings',
+               name: 'Settings',
             },
             {
                path: 'profileGames',
                component: DashboardProfileGames,
-               name: 'dashboardProfileGames',
+               name: 'Games',
+            },
+            {
+               path: 'profileFriends',
+               component: DashboardProfileFriends,
+               name: 'Friends',
             },
          ],
       },

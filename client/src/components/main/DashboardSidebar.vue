@@ -98,6 +98,9 @@ const sideMenuItems = ref([
       label: 'Friends',
       icon: markRaw(Users),
       iconProps: { color: '#334155', size: '20' },
+      command: () => {
+         router.push('/dashboard/profileFriends');
+      },
    },
    {
       label: 'Games',
