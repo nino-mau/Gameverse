@@ -6,6 +6,7 @@
 import bcrypt from 'bcrypt';
 import mysql from 'mysql2/promise';
 import { v4 as uuidv4 } from 'uuid';
+import { jsonToObject } from '../utils/utils';
 // import { jsonToObject } from '../utils/utils.js';
 
 /*==============================
@@ -72,6 +73,10 @@ export const gameImgArr = [
    'header-8.webp',
    'header-9-1741682833646.webp',
 ];
+
+const gamesArr = jsonToObject('steam-games.json');
+
+await insertGameGenres(gamesArr);
 
 //***===== INSERT =====***//
 
@@ -143,8 +148,8 @@ export async function insertGameDevelopers(gamesArr, initialId = 1) {
 }
 
 // Insert desc, price and review and image names in the games_details table
-export async function insertGameDetails(gamesArr, arr, initialId = 1) {
-   const sortedArr = arr.sort((a, b) => {
+export async function insertGameDetails(gamesArr, gameImgArr, initialId = 1) {
+   const sortedArr = gameImgArr.sort((a, b) => {
       const numA = parseInt(a.match(/header-(\d+)/)[1]);
       const numB = parseInt(b.match(/header-(\d+)/)[1]);
       return numA - numB;

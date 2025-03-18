@@ -83,12 +83,10 @@ export async function removeFavoriteGame(req, res) {
       console.log('/users/remove-favorite-game: removed favorite game (200 OK)');
       return res.status(200).json({ success: true });
    } else {
-      return res
-         .status(500)
-         .json({
-            success: false,
-            error: `removeFavoriteGame: failed to remove favorite game to db`,
-         });
+      return res.status(500).json({
+         success: false,
+         error: `removeFavoriteGame: failed to remove favorite game to db`,
+      });
    }
 }
 
@@ -143,6 +141,8 @@ export async function sendFavoriteGamesDetailed(req, res) {
    const userId = req.userData.id;
    try {
       const r = await getUserFavGameDetails(userId);
+
+      console.log(r);
 
       console.log('/users/favorite_games: sent favorite games (200 OK)');
       return res.status(200).json({ data: r });
