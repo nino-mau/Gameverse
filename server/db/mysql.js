@@ -1,13 +1,8 @@
-/*==============================
-===========  IMPORTS  ==========
-===============================*/
-
 // dependencies
 import bcrypt from 'bcrypt';
 import mysql from 'mysql2/promise';
 import { v4 as uuidv4 } from 'uuid';
-import { jsonToObject } from '../utils/utils';
-// import { jsonToObject } from '../utils/utils.js';
+import { jsonToObject } from '../utils/utils.js';
 
 /*==============================
 ==========  FUNCTIONS  =========
@@ -73,10 +68,6 @@ export const gameImgArr = [
    'header-8.webp',
    'header-9-1741682833646.webp',
 ];
-
-const gamesArr = jsonToObject('steam-games.json');
-
-await insertGameGenres(gamesArr);
 
 //***===== INSERT =====***//
 

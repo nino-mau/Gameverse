@@ -27,7 +27,7 @@ defineProps({
 <template>
    <Avatar
       icon="pi pi-user"
-      class="mr-0.5 ml-0.5 h-[2.5rem] w-[2.5rem] shadow-xl"
+      class="avatar shadow-xl"
       size="large"
       :class="customClass"
       :shape="shape"
@@ -40,4 +40,11 @@ defineProps({
    </Avatar>
 </template>
 
-<style scoped></style>
+<style scoped>
+.avatar {
+   margin-right: calc(var(--spacing) * 0.5);
+   margin-left: calc(var(--spacing) * 0.5);
+   height: 2.5rem;
+   width: 2.5rem;
+}
+</style>
