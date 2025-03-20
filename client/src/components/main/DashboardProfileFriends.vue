@@ -3,10 +3,10 @@
 import { ref } from 'vue';
 
 // primevue
-import { DataView, Select } from 'primevue';
+import { DataView, Select, Button } from 'primevue';
 
 // icons
-import { SquarePlus, X } from 'lucide-vue-next';
+import { SquarePlus, X, Plus } from 'lucide-vue-next';
 import CustomAvatar from '../icons/CustomAvatar.vue';
 
 /*==============================
@@ -74,57 +74,65 @@ const friendsData = ref([
             </div>
             <!-- Suggested Friends List -->
             <div class="suggested-friends-list grid flex-1 grid-rows-4" role="list">
-               <div class="row-span-1 flex flex-row items-center justify-center">
+               <div class="hover:bg-secondary row-span-1 flex flex-row items-center rounded-md p-3">
                   <CustomAvatar shape="square" custom-class="avatar " icon-size="2.5rem" />
-                  <div class="ml-2 flex max-w-[13rem] flex-col">
+                  <div class="ml-2 flex max-w-[11rem] flex-col">
                      <h3 class="text-xl font-semibold">Username</h3>
                      <p class="text-xs italic opacity-85">
                         "Veniam veniam ex incididunt reprehenderit"
                      </p>
                   </div>
-                  <div class="flex flex-col">
-                     <SquarePlus size="30" stroke-width="1.5" />
-                     <X size="30" />
-                  </div>
+                  <Button
+                     class="hover:text-secondary ml-auto h-[100%] border-white text-white hover:bg-white"
+                     variant="outlined"
+                  >
+                     <Plus size="20px" />
+                  </Button>
                </div>
-               <div class="row-span-1 flex flex-row items-center justify-center">
+               <div class="hover:bg-secondary row-span-1 flex flex-row items-center rounded-md p-3">
                   <CustomAvatar shape="square" custom-class="avatar " icon-size="2.5rem" />
-                  <div class="ml-2 flex max-w-[13rem] flex-col">
+                  <div class="ml-2 flex max-w-[11rem] flex-col">
                      <h3 class="text-xl font-semibold">Username</h3>
                      <p class="text-xs italic opacity-85">
                         "Veniam veniam ex incididunt reprehenderit"
                      </p>
                   </div>
-                  <div class="flex flex-col">
-                     <SquarePlus size="30" stroke-width="1.5" />
-                     <X size="30" />
-                  </div>
+                  <Button
+                     class="hover:text-secondary ml-auto h-[100%] border-white text-white hover:bg-white"
+                     variant="outlined"
+                  >
+                     <Plus size="20px" />
+                  </Button>
                </div>
-               <div class="row-span-1 flex flex-row items-center justify-center">
+               <div class="hover:bg-secondary row-span-1 flex flex-row items-center rounded-md p-3">
                   <CustomAvatar shape="square" custom-class="avatar " icon-size="2.5rem" />
-                  <div class="ml-2 flex max-w-[13rem] flex-col">
+                  <div class="ml-2 flex max-w-[11rem] flex-col">
                      <h3 class="text-xl font-semibold">Username</h3>
                      <p class="text-xs italic opacity-85">
                         "Veniam veniam ex incididunt reprehenderit"
                      </p>
                   </div>
-                  <div class="flex flex-col">
-                     <SquarePlus size="30" stroke-width="1.5" />
-                     <X size="30" />
-                  </div>
+                  <Button
+                     class="hover:text-secondary ml-auto h-[100%] border-white text-white hover:bg-white"
+                     variant="outlined"
+                  >
+                     <Plus size="20px" />
+                  </Button>
                </div>
-               <div class="row-span-1 flex flex-row items-center justify-center">
+               <div class="hover:bg-secondary row-span-1 flex flex-row items-center rounded-md p-3">
                   <CustomAvatar shape="square" custom-class="avatar " icon-size="2.5rem" />
-                  <div class="ml-2 flex max-w-[13rem] flex-col">
+                  <div class="ml-2 flex max-w-[11rem] flex-col">
                      <h3 class="text-xl font-semibold">Username</h3>
                      <p class="text-xs italic opacity-85">
                         "Veniam veniam ex incididunt reprehenderit"
                      </p>
                   </div>
-                  <div class="flex flex-col">
-                     <SquarePlus size="30" stroke-width="1.5" />
-                     <X size="30" />
-                  </div>
+                  <Button
+                     class="hover:text-secondary ml-auto h-[100%] border-white text-white hover:bg-white"
+                     variant="outlined"
+                  >
+                     <Plus size="20px" />
+                  </Button>
                </div>
             </div>
          </div>

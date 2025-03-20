@@ -2,7 +2,7 @@
 import bcrypt from 'bcrypt';
 import mysql from 'mysql2/promise';
 import { v4 as uuidv4 } from 'uuid';
-import { jsonToObject } from '../utils/utils.js';
+// import { jsonToObject } from '../utils/utils.js';
 
 /*==============================
 ==========  FUNCTIONS  =========
