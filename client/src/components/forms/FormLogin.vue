@@ -75,7 +75,7 @@ const onFormSubmit = async (e) => {
             password: e.values.password,
             staySignedIn: staySignedInValue.value,
          };
-         const result = await postData('https://gameverse.local/api/users/login', data);
+         const result = await postData('https://gameverse.local/api/auth/login', data);
 
          // Handle failure and success
          if (result.status === 200) {

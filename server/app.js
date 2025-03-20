@@ -10,6 +10,7 @@ import cors from 'cors';
 // routes
 import usersRoutes from './routes/users.route.js';
 import gamesRoutes from './routes/games.route.js';
+import authRoutes from './routes/auth.route.js';
 
 /*==============================
 ============  MAIN  ============
@@ -38,7 +39,9 @@ app.use(cookieParser());
 
 app.use('/api', usersRoutes); // Users ressources
 
-app.use('/api', gamesRoutes); // Games ressources
+app.use('/api', gamesRoutes); // Users Games ressources
+
+app.use('/api', authRoutes); // Auth ressources
 
 // Test
 app.get('/', (req, res) => {

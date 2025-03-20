@@ -237,6 +237,32 @@ export async function insertFavGameSetting(gameId, userId, fieldName, fieldValue
    return false;
 }
 
+// Used to add friend to user_friends table
+export async function insertFriend(userId, friendId) {
+   // Check if game isn't already in favorite
+   const sqlSelect = `SELECT * FROM user_favorite_games WHERE user_id = ? AND game_id = ?`;
+   const valuesSelect = [userId, gameId];
+   const r1 = await selectInDb(sqlSelect, valuesSelect);
+   console.log(r1);
+
+   if (!r1.length) {
+      const sqlInsert = `INSERT INTO user_favorite_games (user_id, game_id) VALUES (? , ?)`;
+      const valuesInsert = [userId, gameId];
+
+      const r2 = await insertInDb(sqlInsert, valuesInsert);
+
+      if (r2.affectedRows > 0) {
+         return true;
+      } else {
+         console.log('insertFavoriteGame: failed inserting favorite game');
+         return false;
+      }
+   } else {
+      console.log('insertFavoriteGame: game is already in favorite for this user');
+      return false;
+   }
+}
+
 //***===== SELECT =====***//
 
 // Take a select query, execute it, handle error and return result

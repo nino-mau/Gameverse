@@ -1,14 +1,6 @@
-/*==============================
-===========  IMPORTS  ==========
-===============================*/
-
 // Functions
 import { getGameDetails } from '../db/mysql.js';
 import { getGameGenres } from '../db/mysql.js';
-
-/*==============================
-==========  FUNCTIONS  =========
-===============================*/
 
 // Send infos about all games in the database
 export async function sendGameInfos(req, res) {

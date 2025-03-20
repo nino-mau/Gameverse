@@ -88,10 +88,10 @@ function handleReviewIconColor(reviewScore) {
    }
 }
 
-// Make get request to server for specific games info needed on this page
+// Make get request to server for all games info needed on this page
 async function getGameInfos() {
    try {
-      const gamesData = await getData('https://gameverse.local/api/games/');
+      const gamesData = await getData('https://gameverse.local/api/games');
       return { games: gamesData.games, genres: gamesData.genres };
    } catch (err) {
       console.log('GetGameInfos: error fetching games data:', err);

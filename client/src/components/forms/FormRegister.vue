@@ -117,7 +117,7 @@ const onFormSubmit = async (e) => {
    if (e.valid) {
       // Post register data to the register endpoint triggering register process
       try {
-         const result = await postData('https://gameverse.local/api/users/register', e.values);
+         const result = await postData('https://gameverse.local/api/auth/register', e.values);
 
          console.log(result.status);
          // Handle failure and success

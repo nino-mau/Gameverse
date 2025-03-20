@@ -1,5 +1,3 @@
-// **** IMPORTS ****
-
 // Dependencies
 import bcrypt from 'bcrypt';
 import ms from 'ms';
@@ -8,12 +6,41 @@ import ms from 'ms';
 import { getAuthData } from '../db/mysql.js';
 import { getUserData } from '../db/mysql.js';
 import { registerUserDb } from '../db/mysql.js';
+import { deleteUserTokenDb } from '../db/mysql.js';
 import { createRefreshTokenDb } from '../db/mysql.js';
 import { isValidEmailFormat } from '../utils/utils.js';
 import { generateUserAccessToken } from '../utils/utils.js';
 import { generateUserRefreshToken } from '../utils/utils.js';
 
-// **** REGISTER ****
+// Logout user by deleting tokens in cookies and token in db
+export async function logoutUser(req, res) {
+   try {
+      // Delete refresh token from db
+      await deleteUserTokenDb(req.userData.id);
+
+      // Delete refresh and access tokens from client
+      res.clearCookie('accessToken', {
+         httpOnly: true,
+         secure: true,
+         sameSite: 'none',
+         domain: 'gameverse.local',
+      });
+      res.clearCookie('refreshToken', {
+         httpOnly: true,
+         secure: true,
+         sameSite: 'none',
+         domain: 'gameverse.local',
+      });
+
+      res.sendStatus(200);
+      console.log('/auth/refresh-token: New access token sent (200 OK)');
+   } catch (error) {
+      console.error('logoutUser: Logout error: ', error);
+      return res.status(500).json({ error: `Unexpected error during logout: ${error}` });
+   }
+}
+
+//***===== Register =====***//
 
 // Handle receiving posted register data, validating it and registering user in db
 export async function userRegistration(req, res) {
@@ -78,7 +105,7 @@ export async function userRegistration(req, res) {
                },
                message: 'User registration successful',
             });
-            console.log('userRegistration: User registration successful');
+            console.log('/auth/register: User registration successful (200 OK)');
          } else {
             res.status(500).json({
                error: 'User registration unsuccessful',
@@ -158,7 +185,7 @@ async function _isUserInfoValid(data) {
    }
 }
 
-// **** LOGIN ****
+//***===== Login =====***//
 
 // Handle loging in the user with a access/refresh token method
 export async function userLogin(req, res) {
@@ -214,7 +241,7 @@ export async function userLogin(req, res) {
             },
             message: 'User login successful',
          });
-         console.log('userLogin: User login successful');
+         console.log('/auth/login: User login successful (200 OK)');
       } else {
          console.log('userLogin: Login informations are invalid');
          res.status(401).json({ error: 'Username or password invalid' });

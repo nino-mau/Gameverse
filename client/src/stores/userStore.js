@@ -106,7 +106,7 @@ export const useUserStore = defineStore('userAuth', {
       async getFavGames() {
          try {
             const favGames = await this.getProtectedRessource(
-               'https://gameverse.local/api/users/favorite-games',
+               'https://gameverse.local/api/users/games',
                'Favorite Games',
             );
             if (favGames) {
@@ -125,7 +125,7 @@ export const useUserStore = defineStore('userAuth', {
       async getFavGamesDetails() {
          try {
             const favGames = await this.getProtectedRessource(
-               'https://gameverse.local/api/users/favorite-games?details=true',
+               'https://gameverse.local/api/users/games?details=true',
                'Favorite Games',
             );
             if (favGames) {
@@ -145,7 +145,7 @@ export const useUserStore = defineStore('userAuth', {
       async getFavGamesSettings() {
          try {
             const favGamesSettings = await this.getProtectedRessource(
-               'https://gameverse.local/api/users/favorite-games-settings',
+               'https://gameverse.local/api/users/games/settings',
                'Favorite Games Settings',
             );
             if (favGamesSettings) {
@@ -164,7 +164,7 @@ export const useUserStore = defineStore('userAuth', {
       // Get new access token when last one expired
       async getNewAccessToken() {
          try {
-            const response = await fetch('https://gameverse.local/api/users/refresh-token', {
+            const response = await fetch('https://gameverse.local/api/auth/refresh-token', {
                method: 'POST',
                credentials: 'include',
                headers: {
@@ -240,7 +240,7 @@ export const useUserStore = defineStore('userAuth', {
       // Call ressource to logout user with post request
       async logoutUser() {
          try {
-            const r = await fetch('https://gameverse.local/api/users/logout', {
+            const r = await fetch('https://gameverse.local/api/auth/logout', {
                method: 'POST',
                credentials: 'include',
                headers: {
@@ -256,7 +256,7 @@ export const useUserStore = defineStore('userAuth', {
             } else if (r.status === 401) {
                await this.getNewAccessToken();
 
-               const r2 = await fetch('https://gameverse.local/api/users/logout', {
+               const r2 = await fetch('https://gameverse.local/api/auth/logout', {
                   method: 'POST',
                   credentials: 'include',
                   headers: {
@@ -282,7 +282,7 @@ export const useUserStore = defineStore('userAuth', {
       // Use to update isUserLoggedIn boolean by making post request to a ressource that validate access token
       async checkLoginStatus() {
          try {
-            const r = await fetch('https://gameverse.local/api/users/access-token', {
+            const r = await fetch('https://gameverse.local/api/auth/access-token', {
                method: 'POST',
                credentials: 'include',
                headers: {
@@ -298,7 +298,7 @@ export const useUserStore = defineStore('userAuth', {
             } else if (r.status === 401) {
                await this.getNewAccessToken();
 
-               const r2 = await fetch('https://gameverse.local/api/users/access-token', {
+               const r2 = await fetch('https://gameverse.local/api/auth/access-token', {
                   method: 'POST',
                   credentials: 'include',
                   headers: {
@@ -330,7 +330,7 @@ export const useUserStore = defineStore('userAuth', {
       // Use to post data to end point which add favorite game to user
       async addFavoriteGame(gameId, gameName) {
          const r = await this.postToProtectedEndpoint(
-            'https://gameverse.local/api/users/add-favorite-game',
+            'https://gameverse.local/api/users/games/add',
             'addFavoriteGame',
             { gameId: gameId },
          );
@@ -347,7 +347,7 @@ export const useUserStore = defineStore('userAuth', {
 
       async removeFavoriteGame(gameId, gameName) {
          const r = await this.postToProtectedEndpoint(
-            'https://gameverse.local/api/users/remove-favorite-game',
+            'https://gameverse.local/api/users/games/remove',
             'removeFavoriteGame',
             { gameId: gameId },
          );
@@ -365,7 +365,7 @@ export const useUserStore = defineStore('userAuth', {
       // Use to post data to end point which add favorite game details to user
       async addFavoriteGameSettings(gameId, fieldName, fieldValue) {
          const r = await this.postToProtectedEndpoint(
-            'https://gameverse.local/api/users/add-favorite-game-setting',
+            'https://gameverse.local/api/users/games/settings/add',
             'addFavoriteGame',
             {
                gameId: gameId,
