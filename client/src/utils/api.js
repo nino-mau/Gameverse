@@ -1,8 +1,52 @@
-// **** IMPORT ****
+const apiUrl = import.meta.env.VITE_API_URL;
 
-// **** FUNCTIONS ****
+console.log(apiUrl);
 
-// *** General ***
+//***===== Functions =====***//
+
+// Reusable function to call unprotected api endpoints
+export async function callApi(
+   endpoint,
+   data = null,
+   method = 'GET',
+   credentials = 'include',
+   caller,
+   headers = { 'Content-Type': 'application/json' },
+) {
+   const options = {
+      method: method,
+      credentials: credentials,
+      headers: headers,
+      body: null,
+   };
+
+   const url = apiUrl + endpoint;
+
+   if (data && method !== 'GET') {
+      if (options.body && typeof options.body === 'object') {
+         options.body = JSON.stringify(options.body);
+      }
+   }
+
+   try {
+      const response = await fetch(url, options);
+
+      const parsedResponse = await response.json();
+
+      if (parsedResponse.success !== true) {
+         console.error(
+            caller + ': Call to endpoint ' + endpoint + ' failed with status:' + response.status,
+         );
+         console.error(parsedResponse.error);
+         return false;
+      }
+
+      return parsedResponse;
+   } catch (err) {
+      console.error('Call to endpoint ' + endpoint + 'failed with error:' + err);
+      return false;
+   }
+}
 
 // Reusable fetch function for all post requests to the server
 export async function postData(url, data) {
