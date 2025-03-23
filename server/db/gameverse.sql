@@ -17,6 +17,34 @@
 /*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
 
 --
+-- Table structure for table `friend_requests`
+--
+
+DROP TABLE IF EXISTS `friend_requests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `friend_requests` (
+  `user_id1` int(11) NOT NULL,
+  `user_id2` int(11) NOT NULL,
+  `requestor` enum('user_id1','user_id2') NOT NULL,
+  PRIMARY KEY (`user_id1`,`user_id2`),
+  KEY `users_friends_users_FK_1` (`user_id2`),
+  CONSTRAINT `users_friend_requests_FK_friend` FOREIGN KEY (`user_id1`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `users_friend_requests_FK_user` FOREIGN KEY (`user_id2`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `friend_requests_check` CHECK (`user_id1` < `user_id2`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `friend_requests`
+--
+
+LOCK TABLES `friend_requests` WRITE;
+/*!40000 ALTER TABLE `friend_requests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `friend_requests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `game_details`
 --
 
@@ -379,7 +407,7 @@ CREATE TABLE `games` (
   `game_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`game_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -546,6 +574,8 @@ CREATE TABLE `user_favorite_games` (
 
 LOCK TABLES `user_favorite_games` WRITE;
 /*!40000 ALTER TABLE `user_favorite_games` DISABLE KEYS */;
+INSERT INTO `user_favorite_games` VALUES
+(34,3,0,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user_favorite_games` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -640,7 +670,7 @@ CREATE TABLE `users` (
   `user_email` varchar(100) NOT NULL,
   `user_password` varchar(100) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1005 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -651,7 +681,11 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES
 (33,'nino','nino@n.com','$2b$10$q8gPWD9/AxB5rEUzzsf2i.vkED4/AUWBbocin4oSvtfUKx1VUUsdO'),
-(34,'nino2','nino@testtest.com','$2b$10$.1rnBrQeFno0G/UEPDT5qu8RDHowI8mXA5ACJerlo1a02MZ2qsk3C');
+(34,'nino2','nino@testtest.com','$2b$10$.1rnBrQeFno0G/UEPDT5qu8RDHowI8mXA5ACJerlo1a02MZ2qsk3C'),
+(1001,'UserTest1','userTest1@t.com','sdfsdfsdfsdf'),
+(1002,'UserTEst2','userTest2@t.com','jkljkljklkhjkl'),
+(1003,'UserTest3','userTest3@t.com','srtysrtyrstysrtyrty'),
+(1004,'UserTest4','userTest4@t.com','ftiutyurtyurtsy');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -664,4 +698,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-03-21  0:07:08
+-- Dump completed on 2025-03-24  0:38:31
