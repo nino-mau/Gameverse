@@ -1,11 +1,12 @@
-// **** IMPORTS ****
+// vue
+import { isRef } from 'vue';
 
-// Import Frameworks/Libs
+// librairies
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-// **** FUNCTIONS ****
+//***===== Functions =====***//
 
 // Use Gsap to detect when element is in viewport and trigger a css animation.
 export function animateElementOnScroll(element, animation, duration, delay) {
@@ -90,5 +91,18 @@ export function removeFromArray(itemValue, arrayName) {
    } else {
       console.log('removeFromArray: Item to del was not found');
       return false;
+   }
+}
+
+// Overide array with new content using splice
+export function overideArray(targetArray, dataArray) {
+   if (isRef(targetArray) && isRef(dataArray)) {
+      targetArray.value.splice(0, targetArray.value.length, ...dataArray.value);
+   } else if (isRef(targetArray)) {
+      targetArray.value.splice(0, targetArray.value.length, ...dataArray);
+   } else if (isRef(dataArray)) {
+      targetArray.splice(0, targetArray.length, ...dataArray.value);
+   } else {
+      targetArray.splice(0, targetArray.length, ...dataArray);
    }
 }

@@ -1,6 +1,8 @@
+// vue
 import { createRouter, createWebHistory } from 'vue-router';
 
-// *** Import View Components ***
+// pages/components
+import TestPage from '@/views/TestPage.vue';
 import LandingPage from '@/views/LandingPage.vue';
 import LoginPage from '@/views/LoginPage.vue';
 import RegisterPage from '@/views/RegisterPage.vue';
@@ -11,6 +13,7 @@ import DashboardProfileSettings from '@/components/main/DashboardProfileSettings
 import DashboardProfileGames from '@/components/main/DashboardProfileGames.vue';
 import DashboardProfileFriends from '@/components/main/DashboardProfileFriends.vue';
 
+// init routes
 const router = createRouter({
    history: createWebHistory(import.meta.env.BASE_URL),
    routes: [
@@ -20,6 +23,15 @@ const router = createRouter({
          name: 'landing',
          meta: {
             componentName: 'landingView',
+            requiresAuth: false,
+         },
+      },
+      {
+         path: '/test',
+         component: TestPage,
+         name: 'test',
+         meta: {
+            componentName: 'TestPage',
             requiresAuth: false,
          },
       },

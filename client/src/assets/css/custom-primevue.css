@@ -5,9 +5,6 @@
 
    /* -- Buttons -- */
 
-   /* This correspond to the hover background color of outlined buttons */
-   --p-button-outlined-primary-hover-background: var(--primary-color) !important;
-
    /* This correspond to the hover color of outlined buttons */
    --p-button-primary-hover-color: var(--secondary-color) !important;
 

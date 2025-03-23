@@ -1,35 +1,47 @@
-const apiUrl = import.meta.env.VITE_API_URL;
+// dependencies
+import { useUserStore } from '@/stores/userStore';
 
-console.log(apiUrl);
+const apiUrl = import.meta.env.VITE_API_URL;
 
 //***===== Functions =====***//
 
 // Reusable function to call unprotected api endpoints
 export async function callApi(
    endpoint,
-   data = null,
-   method = 'GET',
-   credentials = 'include',
-   caller,
-   headers = { 'Content-Type': 'application/json' },
+   {
+      data = null,
+      method = 'GET',
+      credentials = 'include',
+      caller = '',
+      isProtected = false,
+      headers = { 'Content-Type': 'application/json' },
+   } = {},
 ) {
    const options = {
       method: method,
       credentials: credentials,
       headers: headers,
-      body: null,
    };
 
    const url = apiUrl + endpoint;
 
    if (data && method !== 'GET') {
-      if (options.body && typeof options.body === 'object') {
-         options.body = JSON.stringify(options.body);
-      }
+      options.body = JSON.stringify(data);
    }
 
    try {
-      const response = await fetch(url, options);
+      let response = await fetch(url, options);
+
+      // When endpoint is protected retry request after getting new token
+      if (isProtected && response.status === 401) {
+         const userStore = useUserStore();
+         const refreshedResponse = await userStore.getNewAccessToken(); // get new access token
+         if (refreshedResponse) {
+            response = await fetch(url, options); // Retry request
+         } else {
+            console.log('callApi: failed to get new access token on request by ', caller);
+         }
+      }
 
       const parsedResponse = await response.json();
 

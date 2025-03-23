@@ -108,6 +108,9 @@ function goToRegisterPage() {
 function goToDashboardPage() {
    router.push('/dashboard');
 }
+function goToTestPage() {
+   router.push('/test');
+}
 </script>
 
 <template>
@@ -164,6 +167,7 @@ function goToDashboardPage() {
                Dashboard
             </li>
             <li v-else class="hover-effect-text-underline">About</li>
+            <li class="hover-effect-text-underline" @click="goToTestPage">Test</li>
          </ul>
       </div>
       <div v-if="isUserLoggedIn === true" class="account-menu-container">

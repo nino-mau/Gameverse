@@ -55,3 +55,19 @@
 .hover-icon-spin:hover .hover-icon {
    transform: rotate(90deg);
 }
+
+/* Icon 270deg spin hover effect */
+.hover-icon-spin270 {
+   display: inline-block;
+   vertical-align: middle;
+   transform: perspective(1px) translateZ(0);
+   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hover-icon-spin270 .hover-icon {
+   transition-duration: 0.4s;
+   transition-property: transform;
+   transition-timing-function: ease-in-out;
+}
+.hover-icon-spin270:hover .hover-icon {
+   transform: rotate(270deg);
+}

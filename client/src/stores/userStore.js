@@ -1,12 +1,15 @@
+/**
+ * TODO:
+ * - Fix duplication by creating dedicated and configurable API service
+ */
+
 // libs
 import { defineStore } from 'pinia';
 
 // functions
 import { removeFromArray } from '@/utils/general';
 
-/*==============================
-============  MAIN  ============
-===============================*/
+//***===== STORE =====***//
 
 // Pinia store that handle user state (loggedin state, loggedout state, server authentification, user data...)
 export const useUserStore = defineStore('userAuth', {
