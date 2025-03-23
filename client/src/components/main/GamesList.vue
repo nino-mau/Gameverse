@@ -4,11 +4,12 @@ import { reactive, onMounted, ref, markRaw } from 'vue';
 
 // prime vue
 import { Select } from 'primevue';
-import { useToast } from 'primevue/usetoast';
 
-// libs
+// librairies
 import lodash from 'lodash';
 import { useUserStore } from '@/stores/userStore.js';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 // icons
 import {
@@ -33,12 +34,7 @@ import {
 import { getData } from '@/utils/api';
 import { denormalizeAssociativeTable } from '@/utils/general';
 
-/*==============================
-============  MAIN  ============
-===============================*/
-
 // init service and store
-const toast = useToast();
 const userStore = useUserStore();
 
 //***===== State =====***//
@@ -175,12 +171,10 @@ async function addFavoriteGameWrapper(gameId, gameName) {
    if (r) {
       // Update user store with user favorite games
       await userStore.getFavGames();
-
-      toast.add({
-         severity: 'success',
-         summary: 'Success',
-         detail: 'Added game to favorites !',
-         life: 2000,
+      toast('Added game to favorites', {
+         theme: 'colored',
+         type: 'success',
+         autoClose: 3000,
       });
    }
 }
@@ -199,11 +193,10 @@ async function removeFavGameWrapper(gameId, gameName) {
       // Update user store with user favorite games
       await userStore.getFavGames();
 
-      toast.add({
-         severity: 'success',
-         summary: 'Success',
-         detail: 'Removed game to favorites !',
-         life: 2000,
+      toast('Removed game from favorites', {
+         theme: 'colored',
+         type: 'success',
+         autoClose: 3000,
       });
    }
 }

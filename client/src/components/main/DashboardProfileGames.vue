@@ -5,10 +5,11 @@ import { useRouter } from 'vue-router';
 
 // primevue
 import { Divider, Slider, SelectButton, Button, Select, Textarea, InputNumber } from 'primevue';
-import { useToast } from 'primevue/usetoast';
 
-// libs
+// librairies
 import { useUserStore } from '@/stores/userStore.js';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 // icons
 import { SquareX, ArrowBigUp, Check } from 'lucide-vue-next';
@@ -21,7 +22,6 @@ import { getImageUrlDeep, getImageUrl } from '@/composable/general';
 ===============================*/
 
 // Init services and store
-const toast = useToast();
 const router = useRouter();
 const userStore = useUserStore();
 
@@ -144,18 +144,16 @@ async function addGameSettingWrapper(gameId, fieldName, fieldValue) {
 
    if (!r.success) {
       console.log('addGameSettingWrapper: Error adding game setting:', r.error);
-      toast.add({
-         severity: 'error',
-         summary: 'Error',
-         detail: r.error,
-         life: 3000,
+      toast('Unexpected error', {
+         theme: 'colored',
+         type: 'error',
+         autoClose: 3000, // Close after 3 seconds
       });
    } else if (r.success) {
-      toast.add({
-         severity: 'success',
-         summary: 'Success',
-         detail: 'Setting succesfuly saved',
-         life: 3000,
+      toast('Setting succesfuly saved', {
+         theme: 'colored',
+         type: 'success',
+         autoClose: 3000, // Close after 3 seconds
       });
    }
 }

@@ -1,0 +1,4 @@
+/* Increase toast icon size */
+.Toastify__toast-icon {
+   width: 24px !important;
+}

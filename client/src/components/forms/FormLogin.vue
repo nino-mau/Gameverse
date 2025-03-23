@@ -1,23 +1,23 @@
 <script setup>
-// **** IMPORTS ****
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-// *** Import Functions ***
+// functions
 import { postData } from '@/utils/api.js';
 
-// *** Import Libs/Frameworks ***
+// librairies
 import { z } from 'zod';
 import { Form } from '@primevue/forms';
-import { useToast } from 'primevue/usetoast';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import { useUserStore } from '@/stores/userStore.js';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
 
-// *** Import Icons ***
+// icons
 import IconLock from '@/components/icons/IconLock.vue';
 import IconCircleUserProfile from '@/components/icons/IconCircleUserProfile.vue';
 
-// *** Import PrimeVue Components ***
+// primevue
 import Button from 'primevue/button';
 import Message from 'primevue/message';
 import Checkbox from 'primevue/checkbox';
@@ -27,18 +27,16 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import FloatLabel from 'primevue/floatlabel';
 
-// **** INIT ****
-
-const toast = useToast();
+// Init service and store
 const router = useRouter();
+
+//***===== State =====***//
+
 const serverError = ref(null);
 const userStore = useUserStore();
-// Store bool of the stay signed in checkbox
-const staySignedInValue = ref();
+const staySignedInValue = ref(); // Store bool of the stay signed in checkbox
 
-// **** LOGIC ****
-
-// *** Handle Form-Validation ***
+// Handle Form-Validation
 
 // Define initial values for form input
 const initialValues = ref({
@@ -54,16 +52,8 @@ const resolver = zodResolver(
    }),
 );
 
-// *** Handle Submit Actions ***
-
+// Handle Submit Actions
 const onFormSubmit = async (e) => {
-   // e.originalEvent: Represents the native form submit event.
-   // e.valid: A boolean that indicates whether the form is valid or not.
-   // e.states: Contains the current state of each form field, including validity status.
-   // e.errors: An object that holds any validation errors for the invalid fields in the form.
-   // e.values: An object containing the current values of all form fields.
-   // e.reset: A function that resets the form to its initial state.
-
    if (e.valid) {
       try {
          if (staySignedInValue.value === undefined) {
@@ -91,20 +81,18 @@ const onFormSubmit = async (e) => {
             console.error('LOGIN: ', result.error);
          } else {
             console.error('LOGIN: ', result.error);
-            toast.add({
-               severity: 'error',
-               summary: 'Error',
-               detail: 'Loging in failed due to unexpected error',
-               life: 3000,
+            toast('Unexpected error', {
+               theme: 'colored',
+               type: 'error',
+               autoClose: 3000,
             });
          }
       } catch (error) {
          console.error('Unexpected error loging in user:', error);
-         toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Loging in failed due to unexpected error',
-            life: 3000,
+         toast('Unexpected error', {
+            theme: 'colored',
+            type: 'error',
+            autoClose: 3000,
          });
       }
    }

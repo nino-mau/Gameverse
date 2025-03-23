@@ -1,53 +1,22 @@
 <script setup>
-/*==============================
-===========  IMPORTS  ==========
-===============================*/
-
 // vue
 import { onMounted, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 // frameworks/libs
 import { useUserStore } from '@/stores/userStore.js';
-
-// primeVue
-import Toast from 'primevue/toast';
-import { useToast } from 'primevue/usetoast';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 // components
 import MainNavbar from '@/components/main/MainNavbar.vue';
 import MainFooter from '@/components/main/MainFooter.vue';
 
-/*==============================
-============  MAIN  ============
-===============================*/
-
+// Init service and store
 const userStore = useUserStore();
 const route = useRoute();
-const toast = useToast();
 
-onMounted(async () => {
-   // Verify user token and get user infos
-   console.log('ON MOUNT');
-   const r = await userStore.checkLoginStatus();
-   if (r === true) {
-      toast.add({
-         severity: 'success',
-         summary: 'Succesful login',
-         detail: 'You succesfuly connected to your account.',
-         life: 3000,
-      });
-   } else if (r === false) {
-      toast.add({
-         severity: 'warn',
-         summary: 'Session expired',
-         detail: 'Your were disconnected after your session ended, please reconnect',
-         life: 3000,
-      });
-   }
-   await userStore.getUserData();
-   console.log('ON MOUNT');
-});
+//***===== State =====***//
 
 // Take propreties of executed route
 const routeInfo = computed(() => ({
@@ -55,6 +24,8 @@ const routeInfo = computed(() => ({
    path: route.path,
    meta: route.meta,
 }));
+
+//***===== Lifecycle =====***//
 
 // Handle routing
 watch(
@@ -66,11 +37,28 @@ watch(
    },
    { deep: true },
 );
+
+onMounted(async () => {
+   // Verify user token and get user infos
+   const r = await userStore.checkLoginStatus();
+   if (r === true) {
+      toast('Login successful', {
+         theme: 'colored',
+         type: 'success',
+         autoClose: 3000, // Close after 3 seconds
+      });
+   } else if (r === false) {
+      toast('Session expired', {
+         theme: 'colored',
+         type: 'warning',
+         autoClose: 3000, // Close after 3 seconds
+      });
+   }
+   await userStore.getUserData();
+});
 </script>
 
 <template>
-   <!-- Placeholder for popup waning -->
-   <Toast />
    <!-- Dashboard has it's own custom header -->
    <header v-if="!route.path.includes('/dashboard')" class="site-header">
       <MainNavbar />

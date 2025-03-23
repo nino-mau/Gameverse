@@ -1,24 +1,25 @@
 <script setup>
-// **** IMPORTS ****
+// vue
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 
-// Import Functions
+// functions
 import { postData } from '@/utils/api.js';
 
-// Import Libs/frameworks
+// librairies
 import { z } from 'zod';
 import { Form } from '@primevue/forms';
-import { useToast } from 'primevue/usetoast';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import { useUserStore } from '@/stores/userStore.js';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
 
-// Import Icons
+// icons
 import IconLock from '@/components/icons/IconLock.vue';
 import IconEmail from '@/components/icons/IconEmail.vue';
 import IconCircleUserProfile from '@/components/icons/IconCircleUserProfile.vue';
 
-// Import PrimeVue Components
+// primevue
 import Button from 'primevue/button';
 import Message from 'primevue/message';
 import Password from 'primevue/password';
@@ -27,11 +28,12 @@ import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import FloatLabel from 'primevue/floatlabel';
 
-// **** INIT ****
-
-const toast = useToast();
+// init service and store
 const router = useRouter();
 const userStore = useUserStore();
+
+//***===== State =====***//
+
 // Contains potential server errors
 const serverErrors = reactive({
    usernameErr: null,
@@ -40,35 +42,7 @@ const serverErrors = reactive({
    emailValue: null,
 });
 
-// **** FUNCTIONS ****
-
-// Handle triggering erros events depending on errors received from server.
-function registrationErrorHandling(errors) {
-   if (errors.duplicate !== null && errors.syntax === null) {
-      if (errors.duplicate.type === 'both') {
-         serverErrors.usernameErr = errors.duplicate.errorUsername;
-         serverErrors.usernameValue = errors.duplicate.usernameValue;
-         serverErrors.emailErr = errors.duplicate.errorEmail;
-         serverErrors.emailValue = errors.duplicate.emailValue;
-      } else if (errors.duplicate.type === 'username') {
-         serverErrors.usernameErr = errors.duplicate.errorUsername;
-         serverErrors.usernameValue = errors.duplicate.usernameValue;
-      } else {
-         serverErrors.emailErr = errors.duplicate.errorEmail;
-         serverErrors.emailValue = errors.duplicate.emailValue;
-      }
-   } else if (errors.syntax) {
-      toast.add({
-         severity: 'error',
-         summary: 'Registration failed cause of a syntax error in the data you submitted',
-         life: 6000,
-      });
-   }
-}
-
-// **** LOGIC ****
-
-// *** Handle Form-Validation ***
+// Handle Form-Validation
 
 // Define initial values for form input
 const initialValues = ref({
@@ -104,16 +78,34 @@ const resolver = zodResolver(
       }),
 );
 
-// *** Handle Submit ***
+//***===== Functions =====***//
 
+// Handle triggering erros events depending on errors received from server.
+function registrationErrorHandling(errors) {
+   if (errors.duplicate !== null && errors.syntax === null) {
+      if (errors.duplicate.type === 'both') {
+         serverErrors.usernameErr = errors.duplicate.errorUsername;
+         serverErrors.usernameValue = errors.duplicate.usernameValue;
+         serverErrors.emailErr = errors.duplicate.errorEmail;
+         serverErrors.emailValue = errors.duplicate.emailValue;
+      } else if (errors.duplicate.type === 'username') {
+         serverErrors.usernameErr = errors.duplicate.errorUsername;
+         serverErrors.usernameValue = errors.duplicate.usernameValue;
+      } else {
+         serverErrors.emailErr = errors.duplicate.errorEmail;
+         serverErrors.emailValue = errors.duplicate.emailValue;
+      }
+   } else if (errors.syntax) {
+      toast('Syntax error', {
+         theme: 'colored',
+         type: 'error',
+         autoClose: 3000,
+      });
+   }
+}
+
+// Handle Submit
 const onFormSubmit = async (e) => {
-   // e.originalEvent: Represents the native form submit event.
-   // e.reset: A function that resets the form to its initial state.
-   // e.valid: A boolean that indicates whether the form is valid or not.
-   // e.values: An object containing the current values of all form fields.
-   // e.states: Contains the current state of each form field, including validity status.
-   // e.errors: An object that holds any validation errors for the invalid fields in the form.
-
    if (e.valid) {
       // Post register data to the register endpoint triggering register process
       try {
@@ -138,11 +130,10 @@ const onFormSubmit = async (e) => {
          }
       } catch (error) {
          console.error('REGISTER: ', error);
-         toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Registration failed due to unexpected error',
-            life: 3000,
+         toast('Unexpected error', {
+            theme: 'colored',
+            type: 'error',
+            autoClose: 3000,
          });
       }
    }
